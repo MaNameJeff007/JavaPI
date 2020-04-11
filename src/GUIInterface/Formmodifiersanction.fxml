@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="302.0" prefWidth="521.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="GUIController.FormmodifiersanctionController">
+   <children>
+      <Label layoutX="113.0" layoutY="39.0" text="Modifier Sanction" />
+      <Label layoutX="75.0" layoutY="186.0" text="Punition" />
+      <ComboBox fx:id="punition" layoutX="166.0" layoutY="181.0" prefHeight="31.0" prefWidth="283.0" />
+      <ComboBox fx:id="justification" layoutX="166.0" layoutY="117.0" prefHeight="31.0" prefWidth="283.0" />
+      <Label layoutX="64.0" layoutY="122.0" text="Justification" />
+      <Button fx:id="boutton_ajout" layoutX="210.0" layoutY="239.0" mnemonicParsing="false" onAction="#modifiersanction" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: green;" text="Modifier" textFill="WHITE" />
+      <Button fx:id="boutton_retour" layoutX="437.0" layoutY="12.0" mnemonicParsing="false" onAction="#retour" prefHeight="31.0" prefWidth="70.0" style="-fx-background-color: orange;" text="Retour" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.SanctionsparentController">
+   <children>
+      <TableView fx:id="tableau_sanctions" prefHeight="351.0" prefWidth="877.0">
+         <columns>
+            <TableColumn fx:id="col_date_sanction" prefWidth="192.0" text="Date" />
+            <TableColumn fx:id="col_raisonsanction_sanction" prefWidth="205.0" text="Raison_sanction" />
+            <TableColumn fx:id="col_punition_sanction" prefWidth="261.0" text="Punition" />
+            <TableColumn fx:id="col_etat_sanction" prefWidth="218.0" text="etat" />
+            <TableColumn fx:id="col_eleveid_sanction" minWidth="0.0" prefWidth="0.0" text="eleve_id" />
+            <TableColumn fx:id="col_enseignantid_sanction" minWidth="0.0" prefWidth="0.0" text="enseignant_id" />
+            <TableColumn fx:id="col_id_sanction" minWidth="0.0" prefWidth="0.0" text="ID" />
+         </columns>
+      </TableView>
+      <Button fx:id="boutton_retour" layoutX="59.0" layoutY="361.0" mnemonicParsing="false" onAction="#retour" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: orange;" text="Retour" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.ParentnotesController">
+   <children>
+      <TableView fx:id="table" layoutX="-1.0" layoutY="-1.0" prefHeight="341.0" prefWidth="736.0">
+        <columns>
+          <TableColumn fx:id="col_type" prefWidth="221.0" text="Type" />
+            <TableColumn fx:id="col_trimestre" prefWidth="150.0" text="Trimestre" />
+            <TableColumn fx:id="col_matiere_id" prefWidth="200.0" text="Matiere" />
+            <TableColumn fx:id="col_valeur" prefWidth="164.0" text="Valeur" />
+            <TableColumn fx:id="col_eleve_id" minWidth="0.0" prefWidth="0.0" text="Eleve_ID" visible="false" />
+            <TableColumn fx:id="col_enseignant_id" minWidth="0.0" prefWidth="0.0" text="Enseignant_ID" visible="false" />
+          <TableColumn fx:id="col_Id" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
+        </columns>
+      </TableView>
+      <Button fx:id="boutton_retour" layoutX="47.0" layoutY="355.0" mnemonicParsing="false" onAction="#retour" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: orange;" text="Retour" />
+   </children>
+</AnchorPane>
