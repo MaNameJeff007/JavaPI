@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.AfficherCoeffController">
+   <children>
+      <TableView fx:id="ListeCoeff" layoutX="51.0" layoutY="98.0" onKeyReleased="#testAff" prefHeight="269.0" prefWidth="381.0">
+        <columns>
+          <TableColumn fx:id="niveau" prefWidth="67.0" text="Niveau " />
+            <TableColumn fx:id="matiere" prefWidth="103.0" text="NomMatiere" />
+            <TableColumn fx:id="valeur" prefWidth="54.0" text="Valeur" />
+        </columns>
+      </TableView>
+      <Button fx:id="AjouterCoeff" layoutX="467.0" layoutY="305.0" mnemonicParsing="false" onAction="#redirectionAjC" text="Ajouter Coefficient" />
+      <Button fx:id="Retour" layoutX="34.0" layoutY="30.0" mnemonicParsing="false" onAction="#retourMenuA" text="Retour" />
+      <Text fx:id="TitreCoeffs" layoutX="148.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTE DES COEFFICIENTS MATIERES" textAlignment="CENTER" wrappingWidth="318.775390625">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Line endX="166.775390625" endY="-1.482421875" layoutX="300.0" layoutY="55.0" startX="-152.0" startY="-1.482421875" />
+   </children>
+</AnchorPane>

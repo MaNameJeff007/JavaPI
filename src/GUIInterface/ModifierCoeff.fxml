@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="359.0" prefWidth="537.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.ModifierCoeffController">
+   <children>
+      <Text fx:id="Title" layoutX="151.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFIER COFFICIENT" textAlignment="CENTER" wrappingWidth="251.36328125">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Line endX="110.0" layoutX="276.0" layoutY="72.0" startX="-110.0" />
+      <ComboBox fx:id="niveau" layoutX="202.0" layoutY="124.0" prefWidth="150.0" />
+      <ComboBox fx:id="matiere" layoutX="202.0" layoutY="199.0" prefWidth="150.0" />
+      <TextField fx:id="valeur" layoutX="203.0" layoutY="267.0" />
+      <Text fx:id="nivLabel" layoutX="85.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Niveau d'étude:" wrappingWidth="101.9921875" />
+      <Text fx:id="matiereLabel" layoutX="85.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matière:" wrappingWidth="74.177734375" />
+      <Text fx:id="valeurLabel" layoutX="85.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valeur : " wrappingWidth="101.99218390882015" />
+      <Button fx:id="Valider" layoutX="442.0" layoutY="307.0" mnemonicParsing="false" onAction="#validerModifCoeff" text="Valider" />
+   </children>
+</AnchorPane>
