@@ -5,9 +5,9 @@
  */
 package GUIController;
 
-import Entities.Attestation;
-import java.awt.Button;
-import java.awt.event.ActionEvent;
+
+import Entities.Reclamation;
+import Services.ReclamationService;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,43 +18,43 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import Services.AttestationService;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author Selim Chikh Zaouali
  */
-public class AfficherAttestationAdminController implements Initializable {
+public class AfficherReclamationAdminController implements Initializable {
 
     
     
     
-   /* @FXML
-    private TableColumn<Attestation, String> nom;
     @FXML
-    private TableColumn<Attestation, String> prenom;*/
+    private TableView<?> tableview;
+
     @FXML
-    private TableColumn<Attestation, String> date;
+    private TableColumn<?, ?> date;
+
     @FXML
-    private TableColumn<Attestation, String> etat;
+    private TableColumn<?, ?> etat;
+
     @FXML
-    private TableColumn<Attestation, String> parent;
+    private TableColumn<?, ?> note;
+
     @FXML
-    private TableView<Attestation> tableview;
-    
-    
+    private TableColumn<?, ?> parent;
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        AttestationService as = new AttestationService();
+        ReclamationService rs = new ReclamationService();
         try {
-            ArrayList<Attestation> arrayList = (ArrayList<Attestation>) as.getAllAttestations();
+            ArrayList<Reclamation> arrayList = (ArrayList<Reclamation>) rs.getAllReclamations();
             ObservableList obs = FXCollections.observableArrayList(arrayList);
             tableview.setItems(obs);
             //System.out.println(as.getPrenom(101));
@@ -62,15 +62,11 @@ public class AfficherAttestationAdminController implements Initializable {
             //prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            note.setCellValueFactory(new PropertyValueFactory<>("note"));
             parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
         } catch (SQLException ex) {
-            Logger.getLogger(AfficherAttestationAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
-
-    
-    
-    
+    }    
     
 }

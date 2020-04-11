@@ -18,6 +18,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import BD.DbConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -39,7 +41,7 @@ public class AttestationService {
         pstm.executeUpdate();
     }
     
-    public void supprimerAttestation(int id) throws SQLException
+    public void deleteAttestation(int id) throws SQLException
     {
         String req = "DELETE FROM `attestation` WHERE id = ?";
         PreparedStatement pstm = connexion.prepareStatement(req);
@@ -77,6 +79,23 @@ public class AttestationService {
       .toLocalDate();
     }
     
+    public String getNom(int id) throws SQLException{
+        String req = "select * from user where id="+id;
+        Statement stm = connexion.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        
+        return(rst.getString("nom"));
+    }
+    public String getPrenom(int id) throws SQLException{
+        String req = "select * from user where id="+id;
+        Statement stm = connexion.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+        String prenom="";
+        while(rst.next()) {
+            prenom = rst.getString("prenom");
+        }
+        return(prenom);
+    }
     public List<Attestation> getAllAttestations() throws SQLException {
 
         List<Attestation> attestations = new ArrayList<>();
@@ -84,28 +103,28 @@ public class AttestationService {
         String req = "select * from attestation";
         Statement stm = connexion.createStatement();
         ResultSet rst = stm.executeQuery(req);
-        //System.out.println("requete executée");
        while (rst.next()) {
-           // LocalDateTime date = rst.getObject(LocalDateTime.class);
-           // rst.getTimestamp(4).toLocalDateTime()
-           //LocalDateTime da=LocalDateTime.now();
-           
-            //Date date = rst.getDate("date"); //4 ken requete lowla
           LocalDateTime ldt= rst.getTimestamp("date").toLocalDateTime();
-           // System.out.println(ldt);
            
-           //System.out.println("right before new attestation");
-            Attestation a = new Attestation(ldt
-                    , rst.getString("etat") //5 ken requete lowla
-                    //,rst.getDate("date")
-                    , rst.getInt("parent")); //1 ken requete lowla
-        //System.out.println("new attestation created");
+            Attestation a = new Attestation(ldt, rst.getString("etat"), rst.getInt("parent"));
             attestations.add(a);
-            //System.out.println("juste après add");
         }
         return attestations;
     }
     
-    
+    public ObservableList<Attestation> getOwner(int u) throws SQLException {
+        ObservableList<Attestation> Attestation = FXCollections.observableArrayList();
+
+        String req = "select date,etat,parent from attestation where parent=" + u;
+        Statement stm = connexion.createStatement();
+        ResultSet rst = stm.executeQuery(req);
+
+        while (rst.next()) {
+            Attestation p = new Attestation(rst.getTimestamp("date").toLocalDateTime(), rst.getString("etat"), rst.getInt("parent"));
+            Attestation.add(p);
+        }
+
+        return Attestation;
+    }
     
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="GUIController.AfficherAttestationController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="504.0" prefWidth="850.0">
+         <children>
+            <TableView fx:id="tableview" layoutX="35.0" layoutY="116.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="796.0">
+               <columns>
+                  <TableColumn fx:id="date" prefWidth="213.0" text="Date" />
+                  <TableColumn fx:id="etat" minWidth="0.0" prefWidth="145.0" text="Etat" />
+                  <TableColumn fx:id="parent" prefWidth="226.0" text="Parent" />
+               </columns>
+            </TableView>
+            <Button fx:id="ajouter" layoutX="132.0" layoutY="428.0" mnemonicParsing="false" onAction="#ajouterAttestation" text="Envoyer une attestation" />
+            <Button fx:id="supprimer" layoutX="314.0" layoutY="428.0" mnemonicParsing="false" onAction="#supprimerAttestation" text="Supprimer une attestation" />
+            <Button layoutX="27.0" layoutY="24.0" mnemonicParsing="false" onAction="#retour" text="Retour à l'accueil" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
