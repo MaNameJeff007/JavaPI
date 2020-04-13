@@ -25,6 +25,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import Entities.Note;
 import Services.NoteService;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -54,6 +57,15 @@ public class ParentnotesController implements Initializable {
     private Button boutton_retour;
     
     private ObservableList<Note> data;
+    
+    @FXML
+    private LineChart<Number, Number> Line_Chart;
+    @FXML
+    private ComboBox<String> Type_List;
+    @FXML
+    private ComboBox<String> matiere;
+    @FXML
+    private Button Stats;
         
     static private int id;
     
@@ -64,7 +76,6 @@ public class ParentnotesController implements Initializable {
     static public void setId(int ideleve) {
         id = ideleve;
     }
-
    
     public void showNotes()
     {
@@ -106,7 +117,15 @@ public class ParentnotesController implements Initializable {
         col_valeur.setCellValueFactory(new PropertyValueFactory<>("valeur"));
         
         table.setItems(null);
-        table.setItems(data);     
+        table.setItems(data);
+        
+        ObservableList<String> types = FXCollections.observableArrayList("CC","Devoir de controle", "Devoir de synthese");
+        Type_List.setItems(types);
+        Type_List.setValue(types.get(0));
+        ObservableList<String> matieres = FXCollections.observableArrayList();
+        fillMatieres(matieres);
+        matiere.setItems(matieres);
+        matiere.setValue(matieres.get(0));    
     }    
 
     @FXML
@@ -114,7 +133,7 @@ public class ParentnotesController implements Initializable {
     {
       try
       {  
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard-parent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIInterface/dashboard-parent.fxml"));
         Parent root = loader.load();
         //fermer current stage //
         Stage s = (Stage) boutton_retour.getScene().getWindow();
@@ -130,5 +149,46 @@ public class ParentnotesController implements Initializable {
                   
       }  
     }
-    
+      
+    private void fillMatieres(ObservableList<String> matieres)
+    {
+      NoteService NS=new NoteService();
+        
+      try
+      {
+        ResultSet resultsmatieres=NS.afficherMatieres();     
+        
+        while(resultsmatieres.next())
+        {
+            int id = resultsmatieres.getInt("id"); 
+            String nom=resultsmatieres.getString("nom"); 
+            String id_matiere = String.valueOf(id); 
+            matieres.add(nom);
+        }
+      }
+      catch(SQLException e){}
+    }
+
+    @FXML
+    private void showLineChart(ActionEvent event) 
+    {    
+        Line_Chart.getData().clear();
+        NoteService NS=new NoteService();
+        XYChart.Series dataSeries = new XYChart.Series();
+        try
+        {
+            ResultSet rs=NS.fetchNotesTypeMatiereEleve(Type_List.getValue(), matiere.getValue(), id);
+   
+            while(rs.next())
+            {
+              int trimestre=rs.getInt(2);
+              Double valeur=rs.getDouble(3);
+              dataSeries.getData().add(new XYChart.Data(trimestre, valeur));  
+            }
+            
+            dataSeries.setName(Type_List.getValue()+"-"+matiere.getValue());
+            Line_Chart.getData().add(dataSeries);          
+        }
+        catch(SQLException e){}  
+    }   
 }

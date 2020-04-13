@@ -29,7 +29,7 @@ public class AbsenceService
     public boolean verifierAbsence(Absence a) throws SQLException
     {
         Date abs = Date.valueOf(a.getDateAbsence());
-        String req  = "SELECT * FROM absences WHERE dateabs = '" + abs + "' AND heuredebut = '" + a.getHeureDebut() + "' AND heurefin = '" + a.getHeureFin() + "' AND eleve_id ='" + a.getEleve_id() + "' "; 
+        String req  = "SELECT * FROM absences WHERE dateabs = '" + abs + "' AND heuredebut = '" + a.getHeureDebut() + "' AND heurefin = '" + a.getHeureFin() + "' AND dateabs = '" +a.getDateAbsence()+ "' AND eleve_id ='" + a.getEleve_id() + "' "; 
         PreparedStatement pstm = connexion.prepareStatement(req);
         ResultSet rs = pstm.executeQuery(req);
         
@@ -99,7 +99,7 @@ public class AbsenceService
     
     public ResultSet fetchAbsences() throws SQLException
     {
-       String req = "SELECT * FROM absences ORDER BY eleve_id ASC";
+       String req = "SELECT absences.id, absences.dateabs, absences.justification, absences.heuredebut, absences.heurefin, absences.etat, absences.enseignant_id, absences.eleve_id, user.prenom, user.nom FROM `absences` INNER JOIN user ON absences.eleve_id=user.id ORDER BY absences.eleve_id ASC";
        PreparedStatement pstm = connexion.prepareStatement(req);
        ResultSet rs = pstm.executeQuery(req); 
        return rs;

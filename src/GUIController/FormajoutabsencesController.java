@@ -28,6 +28,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import Services.UserService;
+import javafx.scene.control.DateCell;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -56,7 +58,7 @@ public class FormajoutabsencesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) 
-    {
+    {          
         ObservableList<String> eleves = FXCollections.observableArrayList();
         ObservableList<String> justifications = FXCollections.observableArrayList("A Ajouter");
         

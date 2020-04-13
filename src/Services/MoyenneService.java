@@ -180,6 +180,14 @@ public class MoyenneService
       return rs;
   }
   
+  public ResultSet fetchMoyennes2() throws SQLException
+  {
+      String req = "SELECT moyennes.id, moyennes.trimestre, moyennes.eleve_id, moyennes.matiere, user.prenom, user.nom, matiere.nom, moyennes.moyenne FROM `moyennes` INNER JOIN user ON moyennes.eleve_id=user.id INNER JOIN matiere ON moyennes.matiere=matiere.id ORDER BY eleve_id ASC";
+      PreparedStatement pstm = connexion.prepareStatement(req);
+      ResultSet rs = pstm.executeQuery(req);
+      return rs;
+  }
+  
   public ResultSet fetchMoyennesEleve(int ideleve) throws SQLException
   {
       String req = "SELECT moyennes.id, moyennes.trimestre, moyennes.moyenne, moyennes.eleve_id, matiere.nom FROM moyennes INNER JOIN matiere ON moyennes.matiere=matiere.id WHERE moyennes.eleve_id='" + ideleve + "' ORDER BY matiere.nom ASC";
@@ -187,6 +195,16 @@ public class MoyenneService
       ResultSet rs = pstm.executeQuery(req);
       return rs;
   }
+  
+  public ResultSet fetchMoyennesEleveMatiere(int ideleve, String matiere) throws SQLException
+  {
+      String req = "SELECT moyennes.id, moyennes.trimestre, moyennes.moyenne, moyennes.eleve_id, matiere.nom FROM moyennes INNER JOIN matiere ON moyennes.matiere=matiere.id WHERE moyennes.eleve_id='" + ideleve + "' AND matiere.nom='" + matiere + "' ORDER BY moyennes.trimestre ASC";
+      PreparedStatement pstm = connexion.prepareStatement(req);
+      ResultSet rs = pstm.executeQuery(req);
+      return rs;
+  }
+  
+  
   
   
 }

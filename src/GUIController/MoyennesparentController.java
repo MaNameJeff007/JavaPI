@@ -25,6 +25,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import Entities.Moyenne;
 import Services.MoyenneService;
+import Services.NoteService;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -45,9 +53,18 @@ public class MoyennesparentController implements Initializable {
     private TableColumn<Moyenne, Integer> col_matiere_moyenne;
     @FXML
     private TableColumn<Moyenne, Double> col_moyenne_moyenne;
-    
     @FXML
     private Button boutton_retour;
+    @FXML
+    private ComboBox<String> liste_matiere;
+    @FXML
+    private BorderPane box_stats;
+    @FXML
+    private LineChart<Integer, Double> linechart_moyennes;
+    @FXML
+    private NumberAxis y;
+    @FXML
+    private NumberAxis x;
     
     
     private ObservableList<Moyenne> data_moyennes;
@@ -62,8 +79,7 @@ public class MoyennesparentController implements Initializable {
         MoyennesparentController.ideleve = ideleve;
     }
 
-    
-    
+
     
     public void showMoyennes()
     {
@@ -103,9 +119,34 @@ public class MoyennesparentController implements Initializable {
         
         tableau_moyennes.setItems(null);
         tableau_moyennes.setItems(data_moyennes);
+                
+        ObservableList<String> matieres = FXCollections.observableArrayList();
+        fillMatieres(matieres);
+        liste_matiere.setItems(matieres);
+        liste_matiere.setValue(matieres.get(0));              
+    }
+    
+    
+    private void fillMatieres(ObservableList<String> matieres)
+    {
+      NoteService NS=new NoteService();
         
-    }    
-
+      try
+      {
+        ResultSet resultsmatieres=NS.afficherMatieres();     
+        
+        while(resultsmatieres.next())
+        {
+            int id = resultsmatieres.getInt("id"); 
+            String nom=resultsmatieres.getString("nom"); 
+            String id_matiere = String.valueOf(id); 
+            //String insert=id_matiere+"-"+nom;
+            matieres.add(nom);
+        }
+      }
+      catch(SQLException e){}
+    }
+    
     @FXML
     private void retour(ActionEvent event) 
     {
@@ -126,6 +167,27 @@ public class MoyennesparentController implements Initializable {
       {
                   
       }  
+    }
+
+    @FXML
+    private void afficherLineChart(ActionEvent event) 
+    {
+        linechart_moyennes.getData().clear();
+        MoyenneService MS=new MoyenneService();
+        XYChart.Series dataSeries = new XYChart.Series();
+        try
+        {
+           ResultSet rs=MS.fetchMoyennesEleveMatiere(ideleve, liste_matiere.getValue());
+           while(rs.next())
+           {
+            int trimestre=rs.getInt(2);
+            Double moyenne=rs.getDouble(3);
+            dataSeries.getData().add(new XYChart.Data(trimestre, moyenne));  
+           }
+           dataSeries.setName(liste_matiere.getValue());
+           linechart_moyennes.getData().add(dataSeries);
+        }
+        catch(SQLException e){}     
     }
     
 }
