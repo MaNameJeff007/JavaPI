@@ -237,16 +237,19 @@ public class DashboardEnseignantController implements Initializable {
        ResultSet rs= AS.fetchAbsences();
        while(rs.next())
        {
-          int identifiant = rs.getInt("id");
-          Date dte = rs.getDate("dateabs");
-          String j = rs.getString("justification");
-          int heured = rs.getInt("heuredebut");
-          int heuref = rs.getInt("heurefin");
-          boolean e = rs.getBoolean("etat");
-          String ens_id = rs.getString("enseignant_id");
-          String elv_id = rs.getString("eleve_id");
+          int identifiant = rs.getInt(1);
+          Date dte = rs.getDate(2);
+          String j = rs.getString(3);
+          int heured = rs.getInt(4);
+          int heuref = rs.getInt(5);
+          boolean e = rs.getBoolean(6);
+          String ens_id = rs.getString(7);
+          String elv_id = rs.getString(8);
+          String prenom=rs.getString(9);
+          String nom=rs.getString(10);
+          String eleve=elv_id+"-"+prenom+" "+nom;
           LocalDate d=dte.toLocalDate();
-          data_abs.add(new Absence(identifiant, j, d, heured, heuref, e, ens_id, elv_id));
+          data_abs.add(new Absence(identifiant, j, d, heured, heuref, e, ens_id, eleve));
        }    
       }
       catch(SQLException e)
@@ -263,15 +266,20 @@ public class DashboardEnseignantController implements Initializable {
           ResultSet rs=SS.afficherSanctions();
           while (rs.next())
           {
-           int id = rs.getInt("id");
-           String enseignant_id = rs.getString("enseignant_id");
-           String eleve_id = rs.getString("eleve_id");
-           Date date = rs.getDate("date_sanction");
-           String raisonsanction = rs.getString("raisonsanction");
-           boolean etat = rs.getBoolean("etat");
-           String punition = rs.getString("punition");
+           int id = rs.getInt("sanctions.id");
+           String enseignant_id = rs.getString("sanctions.enseignant_id");
+           String eleve_id = rs.getString("sanctions.eleve_id");
+           Date date = rs.getDate("sanctions.date_sanction");
+           String raisonsanction = rs.getString("sanctions.raisonsanction");
+           boolean etat = rs.getBoolean("sanctions.etat");
+           String punition = rs.getString("sanctions.punition");
+           String prenom=rs.getString("user.prenom");
+           String nom=rs.getString("user.nom");
+           
+           String eleve=eleve_id+"-"+prenom+" "+nom;
+           
            LocalDate d=date.toLocalDate();
-           data_sanctions.add(new Sanction(id, raisonsanction, d, punition, etat, enseignant_id, eleve_id));
+           data_sanctions.add(new Sanction(id, raisonsanction, d, punition, etat, enseignant_id, eleve));
           }
       }
       catch(SQLException e){}                
@@ -302,22 +310,6 @@ public class DashboardEnseignantController implements Initializable {
            String matiere=matiere_id+"-"+matiere_nom;
            data_notes.add(new Note(id, type, trimestre, enseignant_id, eleve, matiere, valeur));
        }
-          
-       /*
-       ResultSet rs= NS.fetchNotes();
-       while(rs.next())
-       {
-          int id = rs.getInt("id");
-          int idtrimestre = rs.getInt("id_trimestre");
-          String type=rs.getString("type");
-          String eleve_id = rs.getString("eleve_id");
-          String enseignant_id = rs.getString("enseignant_id");
-          String matiere = rs.getString("matiere");
-          double valeur = rs.getDouble("valeur");
-          String v=String.valueOf(valeur);
-          data_notes.add(new Note(id, type, idtrimestre, enseignant_id, eleve_id, matiere, valeur));
-       }
-      */
       }
       catch(SQLException e)
       {
@@ -331,16 +323,20 @@ public class DashboardEnseignantController implements Initializable {
       
       try
       {
-       ResultSet rs= MS.fetchMoyennes();
+       ResultSet rs= MS.fetchMoyennes2();
        while(rs.next())
        {
-          int id = rs.getInt("id");
-          int idtrimestre = rs.getInt("trimestre");
-          String eleve_id = rs.getString("eleve_id");
-          String matiere = rs.getString("matiere");
-          double valeur = rs.getDouble("moyenne");
-          String v=String.valueOf(valeur);
-          data_moyennes.add(new Moyenne(id, idtrimestre, valeur, eleve_id, matiere));
+          int id = rs.getInt(1);
+          int idtrimestre = rs.getInt(2);
+          String eleve_id = rs.getString(3);
+          String matiere_id = rs.getString(4);
+          String prenom=rs.getString(5);
+          String nom=rs.getString(6);
+          String matiere_nom=rs.getString(7);
+          double valeur = rs.getDouble(8);
+          String matiere=matiere_id+"-"+matiere_nom;
+          String eleve=eleve_id+"-"+prenom+" "+nom;
+          data_moyennes.add(new Moyenne(id, idtrimestre, valeur, eleve, matiere));
        }    
       }
       catch(SQLException e)
@@ -407,7 +403,19 @@ public class DashboardEnseignantController implements Initializable {
     {
         NoteService NS=new NoteService();
         MoyenneService MS=new MoyenneService();
-        Note N=new Note(tableau_notes.getSelectionModel().getSelectedItem());  
+        Note N=new Note(tableau_notes.getSelectionModel().getSelectedItem());
+        String eleve_id=N.getEleve_id();
+        String matiere_id=N.getMatiere();
+        
+        for(int i=0;i<eleve_id.length();i++)
+        {
+            if(eleve_id.charAt(i)=='-'){N.setEleve_id(eleve_id.substring(i-1, i));}
+        }
+        
+        for(int i=0;i<matiere_id.length();i++)
+        {
+            if(matiere_id.charAt(i)=='-'){N.setMatiere(matiere_id.substring(i-1, i));}
+        }
         
         try
         {
@@ -447,7 +455,13 @@ public class DashboardEnseignantController implements Initializable {
       try
       {    
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIInterface/formmodifierabsence.fxml"));
-        Absence A=(tableau_abs.getSelectionModel().getSelectedItem());  
+        Absence A=(tableau_abs.getSelectionModel().getSelectedItem());
+        String eleve_id=A.getEleve_id();
+        for(int i=0;i<eleve_id.length();i++)
+        {
+            if(eleve_id.charAt(i)=='-'){A.setEleve_id(eleve_id.substring(i-1, i));}
+        }
+        
         Parent root = loader.load();
         FormmodifierabsenceController Controller = loader.getController();
         //fermer current stage //
@@ -617,6 +631,12 @@ public class DashboardEnseignantController implements Initializable {
         {
           SanctionService SS=new SanctionService();
           Sanction S=new Sanction(tableau_sanctions.getSelectionModel().getSelectedItem());
+          
+          String eleve_id=S.getEleve_id();
+          for(int i=0;i<eleve_id.length();i++)
+          {
+            if(eleve_id.charAt(i)=='-'){S.setEleve_id(eleve_id.substring(i-1, i));}
+          }
       
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIInterface/Formmodifiersanction.fxml"));
           Parent root = loader.load();

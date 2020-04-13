@@ -60,7 +60,7 @@ public class SanctionService
     
      public ResultSet afficherSanctions() throws SQLException
     {
-       String req = "SELECT * FROM sanctions";
+       String req = "SELECT sanctions.id, sanctions.enseignant_id, sanctions.eleve_id, sanctions.date_sanction, sanctions.raisonsanction, sanctions.etat, sanctions.punition, user.prenom, user.nom FROM `sanctions` INNER JOIN user ON user.id=sanctions.eleve_id ORDER BY sanctions.eleve_id ASC";
        PreparedStatement pstm = connexion.prepareStatement(req);
        ResultSet rs = pstm.executeQuery(req);
        return rs;
@@ -72,5 +72,13 @@ public class SanctionService
        PreparedStatement pstm = connexion.prepareStatement(req);
        ResultSet rs = pstm.executeQuery(req); 
        return rs;
+    }
+    
+    public ResultSet getcountSanctioneleve(int ideleve) throws SQLException
+    {
+      String req="SELECT punition, COUNT(`punition`) AS nombre_punition FROM sanctions WHERE eleve_id='"+ideleve+"' GROUP BY punition";
+      PreparedStatement pstm = connexion.prepareStatement(req);
+      ResultSet rs = pstm.executeQuery(req); 
+      return rs;     
     }
 }

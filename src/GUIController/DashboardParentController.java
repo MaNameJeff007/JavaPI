@@ -109,7 +109,7 @@ public class DashboardParentController implements Initializable {
         
         try
         {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("sanctionsparent.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIInterface/sanctionsparent.fxml"));
             Parent root=loader.load();
             SanctionsparentController Controller = loader.getController();
 

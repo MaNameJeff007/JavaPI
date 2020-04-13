@@ -13,7 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -22,6 +24,9 @@ import javafx.stage.Stage;
  * @author admin
  */
 public class StartController implements Initializable {
+
+    @FXML
+    private Pane back;
 
     /**
      * Initializes the controller class.
@@ -39,9 +44,22 @@ public class StartController implements Initializable {
 
     }
 
+    void affichage(String x) {
+        Parent fxml;
+
+        try {
+            fxml = FXMLLoader.load(getClass().getResource(x));
+            back.getChildren().removeAll();
+            back.getChildren().setAll(fxml);
+
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         affichage("/GUIInterface/Forum.fxml");
     }
 
 }

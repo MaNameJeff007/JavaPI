@@ -159,4 +159,12 @@ public class NoteService
       ResultSet rs=pstm.executeQuery(req);
       return rs;   
     }
+    
+    public ResultSet fetchNotesTypeMatiereEleve(String type, String matiere, int eleve) throws SQLException
+    {
+        String req="SELECT notes.type, notes.id_trimestre, notes.valeur, matiere.nom FROM `notes` INNER JOIN matiere ON notes.matiere=matiere.id WHERE notes.type='"+type+"' AND matiere.nom='"+matiere+"' AND notes.eleve_id= '"+eleve+"' ORDER BY notes.id_trimestre ASC";
+        PreparedStatement pstm = connexion.prepareStatement(req);
+        ResultSet rs=pstm.executeQuery(req);
+        return rs;  
+    }
 }
