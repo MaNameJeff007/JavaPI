@@ -7,6 +7,8 @@ package GUIController;
 
 import Entities.Commentaire;
 import Services.CommentaireC;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,8 +29,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -57,6 +63,10 @@ public class CommentaireBackController implements Initializable {
 
     @FXML
     private Button supprimer;
+    @FXML
+    private Button left;
+
+    int size = 25;
 
     /**
      * Initializes the controller class.
@@ -108,12 +118,29 @@ public class CommentaireBackController implements Initializable {
         }
     }
 
+    public ImageView image(String s, int w) {
+        BufferedImage b = null;
+        try {
+            b = ImageIO.read(new File(s));
+        } catch (IOException ex) {
+            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        WritableImage i = SwingFXUtils.toFXImage(b, null);
+        ImageView v = new ImageView(i);
+        v.setPreserveRatio(true);
+        v.setFitWidth(w);
+        return v;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         supprimer.setVisible(false);
         titre.setText(System.getProperty("sujet_titre"));
         description.setText(System.getProperty("sujet_description"));
         date.setText(System.getProperty("sujet_date"));
+
+        supprimer.setGraphic(image("src//images//delete.png", size));
+        left.setGraphic(image("src//images//left.png", size));
 
         CommentaireC comme = new CommentaireC();
         datecomm.setCellValueFactory(new PropertyValueFactory<>("date"));

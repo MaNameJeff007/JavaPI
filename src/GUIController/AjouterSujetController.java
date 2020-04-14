@@ -57,7 +57,7 @@ public class AjouterSujetController implements Initializable {
         info.show();
         sujet.ajouterSujet(s);
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Forum.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
@@ -80,7 +80,7 @@ public class AjouterSujetController implements Initializable {
         System.clearProperty("sujet_titre");
         System.clearProperty("sujet_description");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Forum.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
@@ -93,7 +93,7 @@ public class AjouterSujetController implements Initializable {
     @FXML
     void cancel(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Forum.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         System.clearProperty("sujet_id");

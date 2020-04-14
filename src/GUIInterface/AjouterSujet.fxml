@@ -9,11 +9,11 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AjouterSujetController">
    <children>
       <Label layoutX="124.0" layoutY="79.0" text="titre" />
-      <TextField fx:id="titre" layoutX="209.0" layoutY="75.0" />
-      <TextArea fx:id="description" layoutX="209.0" layoutY="127.0" prefHeight="147.0" prefWidth="160.0" />
+      <TextField fx:id="titre" layoutX="209.0" layoutY="75.0" prefHeight="25.0" prefWidth="160.0" />
+      <TextArea fx:id="description" layoutX="209.0" layoutY="127.0" prefHeight="147.0" prefWidth="160.0" stylesheets="@../CSS/StyleForum.css" />
       <Label layoutX="117.0" layoutY="154.0" text="description" />
-      <Button cancelButton="true" layoutX="209.0" layoutY="330.0" mnemonicParsing="false" onAction="#cancel" text="cancel" />
+      <Button cancelButton="true" layoutX="209.0" layoutY="330.0" mnemonicParsing="false" onAction="#cancel" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="cancel" />
       <Button fx:id="ajouter" layoutX="274.0" layoutY="330.0" mnemonicParsing="false" onAction="#ajouterSujet" text="oki" />
-      <Button fx:id="modifier" layoutX="274.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifierSujet" text="modifier" />
+      <Button fx:id="modifier" layoutX="274.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifierSujet" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="modifier" />
    </children>
 </AnchorPane>

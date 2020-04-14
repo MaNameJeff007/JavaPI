@@ -8,8 +8,8 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.ModifierCommentaireController">
    <children>
-      <Button layoutX="363.0" layoutY="297.0" mnemonicParsing="false" onAction="#modifier" text="oki" />
-      <TextArea fx:id="text" layoutX="99.0" layoutY="79.0" prefHeight="200.0" prefWidth="429.0" />
-      <Button layoutX="263.0" layoutY="297.0" mnemonicParsing="false" onAction="#cancel" text="cancel" />
+      <Button fx:id="oki" layoutX="339.0" layoutY="297.0" mnemonicParsing="false" onAction="#modifier" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="oki" />
+      <TextArea fx:id="text" layoutX="54.0" layoutY="79.0" prefHeight="200.0" prefWidth="474.0" stylesheets="@../CSS/StyleForum.css" />
+      <Button fx:id="no" layoutX="211.0" layoutY="297.0" mnemonicParsing="false" onAction="#cancel" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="cancel" />
    </children>
 </AnchorPane>

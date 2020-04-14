@@ -6,179 +6,230 @@
 package Entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import org.mindrot.jbcrypt.BCrypt;
 
-/**
- *
- * @author Neifos
- */
 public class User {
-    
-    protected String idUser;
-    protected int cinUser;
-    protected String Username;
-    protected String nomUser;
-    protected String prenomUser;
-    protected String emailUser;
-    protected String adresseUser;
-    protected int numTelUser;
-    protected Date dateNaissanceUser;
-    protected String sexeUser;
-    protected String motDePasseUser;
-    protected String roleUser;
-    protected String picUser;
-    public static User user=null;
-    public static int code;
+
+    private int identifiant;
+    private String username;
+    private String email;
+    private int enabled;
+    private String password;
+    private Timestamp last_login;
+    private String roles;
+    private String nom;
+    private String prenom;
+    private String Date_Embauche;
+    private String Date_Inscription;
+    private String parent_id;
+    private String classeeleve_id;
+    private String classeenseignant_id;
+    private float MoyG;
+    private static int workload = 5;
 
     public User() {
+
     }
 
-    public User(int cinUser, String nomUser, String prenomUser) {
-        this.cinUser = cinUser;
-        this.nomUser = nomUser;
-        this.prenomUser = prenomUser;
+    public User(int identifiant, String prenom, String nom, String id_classe) {
+        this.identifiant = identifiant;
+        this.prenom = prenom;
+        this.nom = nom;
+        this.classeeleve_id = id_classe;
     }
 
-    
-    
-    public User(String idUser,int cinUser,String nomUser,String prenomUser,String emailUser,String adresseUser,int numTelUser,Date dateNaissanceUser,String sexeUser,String motDePasseUser,String roleUser,String picUser){
-        this.cinUser = cinUser;
-        this.idUser = idUser;
-        this.nomUser = nomUser;
-        this.prenomUser = prenomUser;
-        this.emailUser = emailUser;
-        this.adresseUser = adresseUser;
-        this.numTelUser = numTelUser;
-        this.dateNaissanceUser = dateNaissanceUser;
-        this.sexeUser = sexeUser;
-        this.motDePasseUser = motDePasseUser;
-        this.roleUser = roleUser;
-        this.picUser = picUser;
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    public User(String username, String email, int enabled, String password, Timestamp last_login, String roles, String nom, String prenom, String Date_Embauche, String Date_Inscription, String parent_id, String classeeleve_id, String classeenseignant_id) {
+        this.username = username;
+        this.email = email;
+        this.enabled = enabled;
+        this.password = password;
+        this.last_login = last_login;
+        this.roles = roles;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.Date_Embauche = Date_Embauche;
+        this.Date_Inscription = Date_Inscription;
+        this.parent_id = parent_id;
+        this.classeeleve_id = classeeleve_id;
+        this.classeenseignant_id = classeenseignant_id;
+    }
+
+    public User(int id, String nom, String prenom, String classeeleve_id, String classeenseignant_id, int parent, String username, String password, String email, String dateInscription, String dateEmbauche, String roles) {
+        this.identifiant = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.classeeleve_id = classeeleve_id;
+        this.classeenseignant_id = classeenseignant_id;
+        this.parent_id = Integer.toString(parent);
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.Date_Inscription = dateInscription;
+        this.Date_Embauche = dateEmbauche;
+        this.roles = roles;
+    }
+
+    public User(User U) {
+        this.identifiant = U.identifiant;
+        this.username = null;
+        this.email = null;
+        this.enabled = 0;
+        this.password = null;
+        this.last_login = null;
+        this.roles = null;
+        this.nom = null;
+        this.prenom = null;
+        this.Date_Embauche = null;
+        this.Date_Inscription = null;
+        this.parent_id = null;
+        this.classeeleve_id = null;
+        this.classeenseignant_id = null;
+    }
+
+    public int getIdentifiant() {
+        return identifiant;
+    }
+
+    public void setIdentifiant(int identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public float getMoyG() {
+        return MoyG;
+    }
+
+    public void setMoyG(float MoyG) {
+        this.MoyG = MoyG;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public User(String Username, String motDePasseUser) {
-        this.Username = Username;
-        this.motDePasseUser = motDePasseUser;
+    public String getEmail() {
+        return email;
     }
 
-    public User(String idUser, String nomUser, String prenomUser, String roleUser) {
-        this.idUser = idUser;
-        this.nomUser = nomUser;
-        this.prenomUser = prenomUser;
-        this.roleUser = roleUser;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public User(String idUser, String nomUser, String prenomUser) {
-        this.idUser = idUser;
-        this.nomUser = nomUser;
-        this.prenomUser = prenomUser;
+    public int getEnabled() {
+        return enabled;
     }
 
-    public String getPicUser() {
-        return picUser;
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 
-    public void setPicUser(String picUser) {
-        this.picUser = picUser;
-    }
-    
-    public String getMotDePasseUser() {
-        return motDePasseUser;
-    }
-    public String getIdUser() {
-        return idUser;
+    public String getPassword() {
+        return password;
     }
 
-    public int getCinUser() {
-        return cinUser;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getNomUser() {
-        return nomUser;
+    public Timestamp getLast_login() {
+        return last_login;
     }
 
-    public String getPrenomUser() {
-        return prenomUser;
+    public void setLast_login(Timestamp last_login) {
+        this.last_login = last_login;
     }
 
-    public String getEmailUser() {
-        return emailUser;
+    public String getRoles() {
+        return roles;
     }
 
-    public String getAdresseUser() {
-        return adresseUser;
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
-    public int getNumTelUser() {
-        return numTelUser;
+    public String getNom() {
+        return nom;
     }
 
-    public Date getDateNaissanceUser() {
-        return dateNaissanceUser;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public String getSexeUser() {
-        return sexeUser;
-    }
-     public void setMotDePasseUser(String motDePasseUser) {
-        this.motDePasseUser = motDePasseUser;
+    public String getPrenom() {
+        return prenom;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
-    public void setCinUser(int cinUser) {
-        this.cinUser = cinUser;
+    public String getDate_Embauche() {
+        return Date_Embauche;
     }
 
-    public void setNomUser(String nomUser) {
-        this.nomUser = nomUser;
+    public void setDate_Embauche(String Date_Embauche) {
+        this.Date_Embauche = Date_Embauche;
     }
 
-    public void setPrenomUser(String prenomUser) {
-        this.prenomUser = prenomUser;
+    public String getDate_Inscription() {
+        return Date_Inscription;
     }
 
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
+    public void setDate_Inscription(String Date_Inscription) {
+        this.Date_Inscription = Date_Inscription;
     }
 
-    public void setAdresseUser(String adresseUser) {
-        this.adresseUser = adresseUser;
+    public String getParent_id() {
+        return parent_id;
     }
 
-    public void setNumTelUser(int numTelUser) {
-        this.numTelUser = numTelUser;
+    public void setParent_id(String parent_id) {
+        this.parent_id = parent_id;
     }
 
-    public void setDateNaissanceUser(Date dateNaissanceUser) {
-        this.dateNaissanceUser = dateNaissanceUser;
+    public String getClasseeleve_id() {
+        return classeeleve_id;
     }
 
-    public void setSexeUser(String sexeUser) {
-        this.sexeUser = sexeUser;
+    public void setClasseeleve_id(String classeeleve_id) {
+        this.classeeleve_id = classeeleve_id;
     }
 
-    public String getRoleUser() {
-        return roleUser;
+    public String getClasseenseignant_id() {
+        return classeenseignant_id;
     }
 
-    public void setRoleUser(String roleUser) {
-        this.roleUser = roleUser;
+    public void setClasseenseignant_id(String classeenseignant_id) {
+        this.classeenseignant_id = classeenseignant_id;
     }
 
-    @Override
-    public String toString() {
-       return this.nomUser;
-    }
-    
+    public static boolean checkPassword(String password_plaintext, String stored_hash) {
+        boolean password_verified = false;
 
+        stored_hash = "$2a" + stored_hash.substring(3);
+        if (null == stored_hash || !stored_hash.startsWith("$2a$")) {
+            throw new java.lang.IllegalArgumentException("Invalid hash provided for comparison");
+        }
+
+        password_verified = BCrypt.checkpw(password_plaintext, stored_hash);
+
+        return (password_verified);
+    }
+
+    public static String hashPassword(String password_plaintext) {
+        String salt = BCrypt.gensalt(workload);
+        String hashed_password = BCrypt.hashpw(password_plaintext, salt);
+
+        return (hashed_password);
+    }
 }

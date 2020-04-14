@@ -133,4 +133,17 @@ public class SujetC {
 
         return Sujet;
     }
+
+    public ArrayList<String> getList() throws SQLException {
+        ObservableList<Sujet> Sujet = FXCollections.observableArrayList();
+        ArrayList<String> sujet = new ArrayList<String>();
+        String req = "select * from sujet";
+        Statement stm = connexion.createStatement();
+        ResultSet result = stm.executeQuery(req);
+
+        while (result.next()) {
+            sujet.add(result.getString("titre"));
+        }
+        return sujet;
+    }
 }

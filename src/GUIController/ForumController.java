@@ -11,6 +11,9 @@ import Services.SujetC;
 import Entities.Sujet;
 import Services.LikesC;
 import Services.SignalerC;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,9 +39,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -69,7 +77,15 @@ public class ForumController implements Initializable {
     @FXML
     private Button report;
     @FXML
+    private Button neww;
+    @FXML
+    private Button mine;
+    @FXML
+    private Button home;
+    @FXML
     private TextField recherche;
+
+    int size = 25;
 
     /**
      * Initializes the controller class.
@@ -192,8 +208,10 @@ public class ForumController implements Initializable {
                 like.setVisible(true);
                 if (!lc.rechercheLikeSujet(listesujet.getSelectionModel().getSelectedItem().getSujet_id())) {
                     like.setStyle("-fx-background-color: #77B5FE");
+                    like.setGraphic(image("src//images//dislike.png", size));
                 } else {
-                    like.setStyle(null);
+                    like.getStyleClass().add("round-red");
+                    like.setGraphic(image("src//images//like.png", size));
                 }
             } else {
                 supprimer.setVisible(true);
@@ -202,8 +220,10 @@ public class ForumController implements Initializable {
                 report.setVisible(false);
                 if (!lc.rechercheLikeSujet(listesujet.getSelectionModel().getSelectedItem().getSujet_id())) {
                     like.setStyle("-fx-background-color: #77B5FE");
+                    like.setGraphic(image("src//images//dislike.png", size));
                 } else {
                     like.setStyle(null);
+                    like.setGraphic(image("src//images//like.png", size));
                 }
             }
         }
@@ -271,13 +291,43 @@ public class ForumController implements Initializable {
         }
     }
 
+    public ImageView image(String s, int w) {
+        BufferedImage b = null;
+        try {
+            b = ImageIO.read(new File(s));
+        } catch (IOException ex) {
+            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        WritableImage i = SwingFXUtils.toFXImage(b, null);
+        ImageView v = new ImageView(i);
+        v.setPreserveRatio(true);
+        v.setFitWidth(w);
+        return v;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        SujetC sc = new SujetC();
+        try {
+            TextFields.bindAutoCompletion(recherche, sc.getList());
+        } catch (SQLException ex) {
+            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         titre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         score.setCellValueFactory(new PropertyValueFactory<>("score"));
         vues.setCellValueFactory(new PropertyValueFactory<>("vues"));
+
+        supprimer.setGraphic(image("src//images//delete.png", size));
+        modifier.setGraphic(image("src//images//edit.png", size));
+        comment.setGraphic(image("src//images//comment.png", size));
+        report.setGraphic(image("src//images//report.png", size));
+        like.setGraphic(image("src//images//like.png", size));
+        neww.setGraphic(image("src//images//new.png", size));
+        mine.setGraphic(image("src//images//mine.png", size));
+        home.setGraphic(image("src//images//home.png", size));
+
         supprimer.setVisible(false);
         modifier.setVisible(false);
         comment.setVisible(false);
