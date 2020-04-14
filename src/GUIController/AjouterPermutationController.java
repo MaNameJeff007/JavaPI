@@ -5,8 +5,8 @@
  */
 package GUIController;
 
-import Entities.Reclamation;
-import Services.ReclamationService;
+import Entities.Permutation;
+import Services.PermutationService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -26,51 +26,53 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author Selim Chikh Zaouali
  */
-public class AjouterReclamationController implements Initializable {
+public class AjouterPermutationController implements Initializable {
 
     @FXML
     private Button btn_ajout;
 
     @FXML
-    private ComboBox<String> matiere;
+    private TextField raison;
+
+    @FXML
+    private ComboBox<String> classe;
+
     @FXML
     private ComboBox<String> enfant;
 
     @FXML
     void onClick(ActionEvent event) throws SQLException {
-
-        ObservableList<String> matieres = FXCollections.observableArrayList();
-        ReclamationService rs = new ReclamationService();
+        ObservableList<String> classes = FXCollections.observableArrayList();
+        PermutationService ps = new PermutationService();
         String val = enfant.getSelectionModel().getSelectedItem();
         //String val="Selim Zaouali";
         int indexEspace = val.indexOf(" ");
         String nomenf = val.substring(0, indexEspace);
         String prenomenf = val.substring(indexEspace + 1);
-        String idk2 = rs.getMatiere(nomenf, prenomenf);
-        matieres.add(idk2);
-        matiere.setItems(matieres);
+        int niveau = ps.getNiveau(nomenf, prenomenf);
+        ResultSet libelle=ps.getClasse(niveau);
+        
+        while (libelle.next()) {
+                String libelle1 = libelle.getString("libelle");
+                classes.add(libelle1);
+            }
+        
+        classe.setItems(classes);
     }
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        ReclamationService rs = new ReclamationService();
+        PermutationService ps = new PermutationService();
         Integer UserConnecte = Integer.parseInt(System.getProperty("id"));
-
         ObservableList<String> enfants = FXCollections.observableArrayList();
-
-        try {
-            ResultSet res = rs.getEnfants(UserConnecte);
+         try {
+            ResultSet res = ps.getEnfants(UserConnecte);
 
             while (res.next()) {
                 String nom = res.getString("nom");
@@ -80,32 +82,33 @@ public class AjouterReclamationController implements Initializable {
             }
             enfant.setItems(enfants);
         } catch (SQLException ex) {
-            Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AjouterPermutationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //matiere.setItems(matieres);
-
-        btn_ajout.setOnAction(new EventHandler<ActionEvent>() {
+         
+         btn_ajout.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                String det = matiere.getSelectionModel().getSelectedItem();
+                String classe_s = classe.getSelectionModel().getSelectedItem();
+                
                 try {
-                    rs.ajouterReclamation(new Reclamation(LocalDateTime.now(), "non traitee", 25, UserConnecte, det));
+                    int ideleve=ps.getIDeleve(UserConnecte);
+                    String vvv = enfant.getSelectionModel().getSelectedItem();
+                    ps.ajouterPermutation(new Permutation(classe_s,raison.getText(),LocalDateTime.now(), "non traitee", ideleve, UserConnecte, vvv));
                 } catch (SQLException ex) {
-                    Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AjouterPermutationController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIInterface/AfficherReclamation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIInterface/AfficherPermutation.fxml"));
                 Parent root;
                 try {
                     root = loader.load();
                     btn_ajout.getScene().setRoot(root);
                 } catch (IOException ex) {
-                    Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AjouterPermutationController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
         });
-
     }
 
 }

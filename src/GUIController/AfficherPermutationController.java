@@ -5,17 +5,16 @@
  */
 package GUIController;
 
-import Entities.Attestation;
+import Entities.Permutation;
 import Services.AttestationService;
+import Services.PermutationService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,34 +30,38 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import zzzzzzzzz.ForumController;
 
 /**
  * FXML Controller class
  *
  * @author Selim Chikh Zaouali
  */
-public class AfficherAttestationController implements Initializable {
+public class AfficherPermutationController implements Initializable {
 
     @FXML
-    private TableView<Attestation> tableview;
+    private TableView<Permutation> tableview;
 
     @FXML
-    private TableColumn<Attestation, LocalDateTime> date;
+    private TableColumn<Permutation, String> nomprenom;
 
     @FXML
-    private TableColumn<Attestation, String> etat;
+    private TableColumn<Permutation, String> classe_s;
 
     @FXML
-    private TableColumn<Attestation, String> enfant;
+    private TableColumn<Permutation, LocalDateTime> date;
+
+    @FXML
+    private TableColumn<Permutation, String> etat;
 
     @FXML
     private Button ajouter;
 
     @FXML
-    private Button retour;
+    private Button supprimer;
 
     @FXML
-    private Button supprimer;
+    private Button retour;
 
     @FXML
     public void clickItem(MouseEvent event) {
@@ -84,57 +87,54 @@ public class AfficherAttestationController implements Initializable {
 
     }
 
-    @FXML
-    void supprimerAttestation(ActionEvent event) throws SQLException {
-        AttestationService as = new AttestationService();
-        try {
-            as.deleteAttestation(tableview.getSelectionModel().getSelectedItem().getId());
-            Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("Attestation supprimée");
-            info.setContentText("Terminé !");
-            info.show();
-        } catch (SQLException e) {
-        }
-
-        refresh();
-    }
-
     void refresh() {
         supprimer.setVisible(false);
-        AttestationService as = new AttestationService();
+        PermutationService ps = new PermutationService();
         try {
-            ObservableList obs = as.getOwner(Integer.parseInt(System.getProperty("id")));
+            ObservableList obs = ps.getOwner(Integer.parseInt(System.getProperty("id")));
             tableview.setItems(obs);
         } catch (SQLException ex) {
-            Logger.getLogger(AfficherAttestationController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    public void ajouterAttestation(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIInterface/AjouterAttestation.fxml"));
+    void ajouterPermutation(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIInterface/AjouterPermutation.fxml"));
         Parent root;
         try {
             root = loader.load();
             ajouter.getScene().setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(AjouterAttestationController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AjouterPermutationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    void supprimerPermutation(ActionEvent event) throws SQLException {
+        PermutationService ps = new PermutationService();
+        try {
+            ps.deletePermutation(tableview.getSelectionModel().getSelectedItem().getId());
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Permutation supprimée");
+            info.setContentText("Terminé !");
+            info.show();
+        } catch (SQLException e) {
+        }
+        refresh();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AttestationService as = new AttestationService();
+        PermutationService ps = new PermutationService();
         supprimer.setVisible(false);
         try {
-            ObservableList obs = as.getOwner(Integer.parseInt(System.getProperty("id")));
+            ObservableList obs = ps.getOwner(Integer.parseInt(System.getProperty("id")));
             tableview.setItems(obs);
+            classe_s.setCellValueFactory(new PropertyValueFactory<>("classe_s"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
-            enfant.setCellValueFactory(new PropertyValueFactory<>("enfant"));
+            nomprenom.setCellValueFactory(new PropertyValueFactory<>("enfant"));
         } catch (SQLException ex) {
             Logger.getLogger(AfficherAttestationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }

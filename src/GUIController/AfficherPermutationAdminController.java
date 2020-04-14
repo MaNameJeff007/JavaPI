@@ -5,8 +5,9 @@
  */
 package GUIController;
 
-import Entities.Reclamation;
-import Services.ReclamationService;
+import com.teknikindustries.bulksms.SMS;
+import Entities.Permutation;
+import Services.PermutationService;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -40,25 +41,29 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Selim Chikh Zaouali
  */
-public class AfficherReclamationAdminController implements Initializable {
+public class AfficherPermutationAdminController implements Initializable {
 
     @FXML
-    private TableView<Reclamation> tableview;
+    private TableView<Permutation> tableview;
 
     @FXML
-    private TableColumn<Reclamation, LocalDateTime> date;
+    private TableColumn<Permutation, String> parent;
 
     @FXML
-    private TableColumn<Reclamation, String> etat;
+    private TableColumn<Permutation, String> nomprenom;
 
     @FXML
-    private TableColumn<Reclamation, String> details;
+    private TableColumn<Permutation, String> classe_s;
 
     @FXML
-    private TableColumn<Reclamation, String> parent;
+    private TableColumn<Permutation, LocalDateTime> date;
+
+    @FXML
+    private TableColumn<Permutation, String> etat;
 
     @FXML
     private Button traiter;
+
     @FXML
     private Button supprimer;
 
@@ -76,26 +81,28 @@ public class AfficherReclamationAdminController implements Initializable {
     }
 
     @FXML
-    void supprimerReclamation(ActionEvent event) {
-        ReclamationService rs = new ReclamationService();
+    void supprimerPermutation(ActionEvent event) throws SQLException {
+        PermutationService ps = new PermutationService();
         try {
-            rs.deleteReclamation(tableview.getSelectionModel().getSelectedItem().getId());
+            ps.deletePermutation(tableview.getSelectionModel().getSelectedItem().getId());
             Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("Reclamation supprimée");
+            info.setTitle("Permutation supprimée");
             info.setContentText("Terminé !");
             info.show();
         } catch (SQLException e) {
         }
         refresh();
     }
-
+    
     @FXML
-    void traiterReclamation(ActionEvent event) throws SQLException, MessagingException {
-        ReclamationService rs = new ReclamationService();
-        rs.changerEtat(tableview.getSelectionModel().getSelectedItem().getId());
-        sendMail("mohamedyassine.ghadhoune@esprit.tn", "Reclamation traitée", "Votre réclamation a bien été traitée !");
+    void traiterPermutation(ActionEvent event) throws SQLException, MessagingException {
+        PermutationService ps = new PermutationService();
+        sendMail("mohamedyassine.ghadhoune@esprit.tn", "Permutation traitée", "Votre permutation a bien été traitée !");
+        ps.permuter(tableview.getSelectionModel().getSelectedItem().getClasse_s(), tableview.getSelectionModel().getSelectedItem().getEleve_id());
+        ps.changerEtat(tableview.getSelectionModel().getSelectedItem().getId());
         refresh();
-
+        //SMS sms = new SMS();
+        //sms.SendSMS("selimczaouali", "CCitsjinzu1","Votre permutation a été traitée", "93425430", "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
     }
 
     private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
@@ -137,43 +144,44 @@ public class AfficherReclamationAdminController implements Initializable {
         }
         System.out.println("Mail envoyé");
     }
-
+    
     void refresh() {
         supprimer.setVisible(false);
         traiter.setVisible(false);
-        ReclamationService rs = new ReclamationService();
+        PermutationService rs = new PermutationService();
         try {
-            ArrayList<Reclamation> arrayList = (ArrayList<Reclamation>) rs.getAllReclamations();
+            ArrayList<Permutation> arrayList = (ArrayList<Permutation>) rs.getAllPermutations();
             ObservableList obs = FXCollections.observableArrayList(arrayList);
             tableview.setItems(obs);
+            nomprenom.setCellValueFactory(new PropertyValueFactory<>("enfant"));
+            classe_s.setCellValueFactory(new PropertyValueFactory<>("classe_s"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
-            details.setCellValueFactory(new PropertyValueFactory<>("details"));
             parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
         } catch (SQLException ex) {
             Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ReclamationService rs = new ReclamationService();
+        PermutationService ps = new PermutationService();
         traiter.setVisible(false);
         supprimer.setVisible(false);
         try {
-            ArrayList<Reclamation> arrayList = (ArrayList<Reclamation>) rs.getAllReclamations();
+            ArrayList<Permutation> arrayList = (ArrayList<Permutation>) ps.getAllPermutations();
             ObservableList obs = FXCollections.observableArrayList(arrayList);
             tableview.setItems(obs);
+            nomprenom.setCellValueFactory(new PropertyValueFactory<>("enfant"));
+            classe_s.setCellValueFactory(new PropertyValueFactory<>("classe_s"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
-            details.setCellValueFactory(new PropertyValueFactory<>("details"));
             parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
         } catch (SQLException ex) {
-            Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherPermutationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -23,17 +23,21 @@ import javafx.scene.control.TextField;
 import Entities.Attestation;
 import Services.AttestationService;
 import Services.AttestationService;
+import Services.ReclamationService;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 public class AjouterAttestationController implements Initializable {
 
     @FXML
     private Button btn_ajout;
+
     @FXML
-    private TextField nomprenom;
-    @FXML
-    private TextField parent;
+    private ComboBox<String> enfant;
 
     /**
      * Initializes the controller class.
@@ -41,32 +45,48 @@ public class AjouterAttestationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        Integer UserConnecte = Integer.parseInt(System.getProperty("id"));
         AttestationService as = new AttestationService();
+        ObservableList<String> enfants = FXCollections.observableArrayList();
 
+        try {
+            ResultSet res = as.getEnfants(UserConnecte);
+
+            while (res.next()) {
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
+                String idk = nom + " " + prenom;
+                enfants.add(idk);
+            }
+            enfant.setItems(enfants);
+        } catch (SQLException ex) {
+            Logger.getLogger(AjouterAttestationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         btn_ajout.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 try {
-                     //LocalDate date = LocalDate.now(); 
-                     int int1 = Integer.parseInt(parent.getText());
-                     //LocalDateTime ldt= rst.getTimestamp("date").toLocalDateTime();
-                     System.out.println("1");
-                    as.ajouterAttestation(new Attestation(LocalDateTime.now(),"non traitee",int1 ));
+                    String val = enfant.getSelectionModel().getSelectedItem();
+                    //String val="Selim Zaouali";
+                    int indexEspace = val.indexOf(" ");
+                    String nomenf = val.substring(0, indexEspace);
+                    String prenomenf = val.substring(indexEspace + 1);
+                    String nomcomplet=prenomenf+" "+nomenf;
+                    //int idk2 = as.getId(nomenf, prenomenf);
+                    as.ajouterAttestation(new Attestation(LocalDateTime.now(), "non traitee", UserConnecte, nomcomplet));
                 } catch (SQLException ex) {
                     Logger.getLogger(AjouterAttestationController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                FXMLLoader loader =new FXMLLoader(getClass().getResource("../GUIInterface/AfficherAttestation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIInterface/AfficherAttestation.fxml"));
                 Parent root;
                 try {
-                    root=loader.load();
+                    root = loader.load();
                     btn_ajout.getScene().setRoot(root);
                 } catch (IOException ex) {
                     Logger.getLogger(AjouterAttestationController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-        
 
             }
         });

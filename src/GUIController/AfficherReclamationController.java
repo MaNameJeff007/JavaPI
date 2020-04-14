@@ -5,11 +5,13 @@
  */
 package GUIController;
 
+import Entities.Reclamation;
 import zzzzzzzzz.ForumController;
 import Services.ReclamationService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,21 +38,17 @@ import javafx.stage.Stage;
  */
 public class AfficherReclamationController implements Initializable {
 
-    
     @FXML
-    private TableView<?> tableview;
+    private TableView<Reclamation> tableview;
 
     @FXML
-    private TableColumn<?, ?> date;
+    private TableColumn<Reclamation, LocalDateTime> date;
 
     @FXML
-    private TableColumn<?, ?> etat;
+    private TableColumn<Reclamation, String> etat;
 
     @FXML
-    private TableColumn<?, ?> note;
-
-    @FXML
-    private TableColumn<?, ?> parent;
+    private TableColumn<Reclamation, String> details;
 
     @FXML
     private Button ajouter;
@@ -60,20 +58,21 @@ public class AfficherReclamationController implements Initializable {
 
     @FXML
     void ajouterReclamation(ActionEvent event) {
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("../GUIInterface/AjouterReclamation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUIInterface/AjouterReclamation.fxml"));
         Parent root;
-            try {
-                root=loader.load();
-                ajouter.getScene().setRoot(root);
-            } catch (IOException ex) {
-                Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            root = loader.load();
+            ajouter.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     void clickItem(MouseEvent event) {
-        if (event.getClickCount() == 1)
-        {
+        if (tableview.getSelectionModel().getSelectedItem().getEtat().equals("non traitee")) {
+            supprimer.setVisible(false);
+        } else {
             supprimer.setVisible(true);
         }
     }
@@ -81,7 +80,7 @@ public class AfficherReclamationController implements Initializable {
     @FXML
     void retour(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Accueil.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle("Accueil");
@@ -92,18 +91,21 @@ public class AfficherReclamationController implements Initializable {
 
     @FXML
     void supprimerReclamation(ActionEvent event) {
-        ReclamationService rs=new ReclamationService();
-        //as.deleteReclamation(tableview.getSelectionModel().getSelectedItem().getId());
-        Alert info = new Alert(Alert.AlertType.INFORMATION);
-        info.setTitle("Reclamation supprimée");
-        info.setContentText(" Done");
-        info.show();
+        ReclamationService rs = new ReclamationService();
+        try {
+            rs.deleteReclamation(tableview.getSelectionModel().getSelectedItem().getId());
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Reclamation supprimée");
+            info.setContentText("Terminé !");
+            info.show();
+        } catch (SQLException e) {
+        }
         refresh();
     }
-    
+
     void refresh() {
         supprimer.setVisible(false);
-        ReclamationService as= new ReclamationService();
+        ReclamationService as = new ReclamationService();
         try {
             ObservableList obs = as.getOwner(Integer.parseInt(System.getProperty("id")));
             tableview.setItems(obs);
@@ -111,7 +113,7 @@ public class AfficherReclamationController implements Initializable {
             Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Initializes the controller class.
      */
@@ -123,16 +125,12 @@ public class AfficherReclamationController implements Initializable {
         try {
             ObservableList obs = rs.getOwner(Integer.parseInt(System.getProperty("id")));
             tableview.setItems(obs);
-            //System.out.println(as.getPrenom(101));
-            //nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            //prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
-            note.setCellValueFactory(new PropertyValueFactory<>("note"));
-            parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
+            details.setCellValueFactory(new PropertyValueFactory<>("details"));
         } catch (SQLException ex) {
             Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    
+    }
+
 }
