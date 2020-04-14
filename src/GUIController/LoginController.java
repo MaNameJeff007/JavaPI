@@ -6,7 +6,7 @@
 
 package GUIController;
 
-import Services.UserC;
+import Services.UserService;
 import Entities.User;
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -41,12 +42,11 @@ public class LoginController implements Initializable {
     
     @FXML
     void Login(ActionEvent event) throws IOException, SQLException {
-        try {
-            UserC ser = new UserC();
-            User u=ser.login(username.getText(), mdp.getText());
-            if(u!=null){
+       // try {
+            UserService ser = new UserService();
+           if(ser.login(username.getText(), mdp.getText())){
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                if(u.getRoleUser().contains("CLIENT")){
+                if(System.getProperty("role").contains("ELEVE")){
                 fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
                 }
                 else{
@@ -59,11 +59,12 @@ public class LoginController implements Initializable {
                 stage.show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             } else {
+               Alert info = new Alert(Alert.AlertType.INFORMATION);
+        info.setTitle("mdp");
+        info.setContentText("ghalet");
+        info.show();
             }
-        }catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        
+
     }
     
     

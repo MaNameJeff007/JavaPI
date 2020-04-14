@@ -42,69 +42,31 @@ public class UserService {
         connexion = Database.getInstance().getConnexion();
     }
 
-    public User login(String username, String mdp) throws SQLException {
-
-        User u = null;
-        ste = connexion.createStatement();
-        ResultSet rs = ste.executeQuery("select * from fos_user where  username='" + username + "' and password='" + mdp + "'");
-        while (rs.next()) {
-            String emailUser = rs.getString("email");
-            int id = rs.getInt("id");
-            String Id = Integer.toString(id);
-            System.setProperty("id", Integer.toString(rs.getInt("id")));
-            System.setProperty("role", rs.getString("roles"));
-            u = new User(username, emailUser);
-            u.setRoles(rs.getString("roles"));
-        }
-        return u;
-    }
-
     public String login(int username) throws SQLException {
 
         String emailUser = null;
         ste = connexion.createStatement();
-        ResultSet rs = ste.executeQuery("select * from fos_user where id=" + username);
+        ResultSet rs = ste.executeQuery("select * from user where id=" + username);
         while (rs.next()) {
             emailUser = rs.getString("email");
         }
         return emailUser;
     }
 
-    /*   public User Login(String username, String password) throws SQLException {
-     String value = "";
-     boolean result = false;
-     User u=new User();
-     String query = "Select password from fos_user where username=?";
-     PreparedStatement prd = connexion.prepareStatement(query);
-     prd.setString(1, username);
-     ResultSet res = prd.executeQuery();
-     if (res == null) {
-     System.out.println("user does not exist");
-     return false;
-     }
-     while (res.next()) {
-     value = res.getString(1);
-     System.out.println("value : "+ value);
+    public String getRole(String username) throws SQLException {
+        String Query = "Select roles from fos_user where username=?";
+        PreparedStatement prd = connexion.prepareStatement(Query);
+        prd.setString(1, username);
+        ResultSet res = prd.executeQuery();
+        String value = "";
+        while (res.next()) {
+            value = res.getString(1);
+            System.out.println(value);
 
-     }
-     User u=new User();
-     result = checkPassword(password, value);
-     return result;
-     }
-    
-     public String getRole(String username) throws SQLException{
-     String Query ="Select roles from fos_user where username=?";
-     PreparedStatement prd = connexion.prepareStatement(Query);
-     prd.setString(1, username);
-     ResultSet res = prd.executeQuery();
-     String value = "";
-     while(res.next()){
-     value =  res.getString(1);
-     System.out.println(value);
-           
-     }
-     return value;
-     } */
+        }
+        return value;
+    }
+
     public ResultSet affichereleves() throws SQLException {
         String req = "SELECT * FROM `user` WHERE `roles` LIKE 'a:1:{i:0;s:10:\"ROLE_ELEVE\";}' ";
         PreparedStatement pstm = connexion.prepareStatement(req);
@@ -217,5 +179,26 @@ public class UserService {
 
         }
         return null;
+    }
+
+    public boolean login(String username, String password) throws SQLException {
+         String value = "";
+        boolean result = false;
+        String query = "Select * from user where username=?";
+        PreparedStatement prd = connexion.prepareStatement(query);
+        prd.setString(1, username);
+        ResultSet res = prd.executeQuery();
+        if (res == null) {
+            System.out.println("user does not exist");
+            return false;
+        }
+        while (res.next()) {
+            value = res.getString("password");
+            System.out.println("value : " + value);
+            System.setProperty("id", Integer.toString(res.getInt("id")));
+            System.setProperty("role", res.getString("roles"));
+        }
+        result = checkPassword(password, value);
+        return result;
     }
 }

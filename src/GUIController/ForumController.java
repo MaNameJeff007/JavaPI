@@ -85,7 +85,8 @@ public class ForumController implements Initializable {
     @FXML
     private TextField recherche;
 
-    int size=25;
+    int size = 25;
+
     /**
      * Initializes the controller class.
      */
@@ -207,10 +208,10 @@ public class ForumController implements Initializable {
                 like.setVisible(true);
                 if (!lc.rechercheLikeSujet(listesujet.getSelectionModel().getSelectedItem().getSujet_id())) {
                     like.setStyle("-fx-background-color: #77B5FE");
-                    like.setGraphic(image("src//images//dislike.png",size));
+                    like.setGraphic(image("src//images//dislike.png", size));
                 } else {
                     like.getStyleClass().add("round-red");
-                    like.setGraphic(image("src//images//like.png",size));
+                    like.setGraphic(image("src//images//like.png", size));
                 }
             } else {
                 supprimer.setVisible(true);
@@ -219,10 +220,10 @@ public class ForumController implements Initializable {
                 report.setVisible(false);
                 if (!lc.rechercheLikeSujet(listesujet.getSelectionModel().getSelectedItem().getSujet_id())) {
                     like.setStyle("-fx-background-color: #77B5FE");
-                    like.setGraphic(image("src//images//dislike.png",size));
+                    like.setGraphic(image("src//images//dislike.png", size));
                 } else {
                     like.setStyle(null);
-                    like.setGraphic(image("src//images//like.png",size));
+                    like.setGraphic(image("src//images//like.png", size));
                 }
             }
         }
@@ -290,7 +291,7 @@ public class ForumController implements Initializable {
         }
     }
 
-    public ImageView image(String s ,int w) {
+    public ImageView image(String s, int w) {
         BufferedImage b = null;
         try {
             b = ImageIO.read(new File(s));
@@ -317,17 +318,16 @@ public class ForumController implements Initializable {
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         score.setCellValueFactory(new PropertyValueFactory<>("score"));
         vues.setCellValueFactory(new PropertyValueFactory<>("vues"));
-        
-        
-        supprimer.setGraphic(image("src//images//delete.png",size));
-        modifier.setGraphic(image("src//images//edit.png",size));
-        comment.setGraphic(image("src//images//comment.png",size));
-        report.setGraphic(image("src//images//report.png",size));
-        like.setGraphic(image("src//images//like.png",size));
-        neww.setGraphic(image("src//images//new.png",size));
-        mine.setGraphic(image("src//images//mine.png",size));
-        home.setGraphic(image("src//images//home.png",size));
-        
+
+        supprimer.setGraphic(image("src//images//delete.png", size));
+        modifier.setGraphic(image("src//images//edit.png", size));
+        comment.setGraphic(image("src//images//comment.png", size));
+        report.setGraphic(image("src//images//report.png", size));
+        like.setGraphic(image("src//images//like.png", size));
+        neww.setGraphic(image("src//images//new.png", size));
+        mine.setGraphic(image("src//images//mine.png", size));
+        home.setGraphic(image("src//images//home.png", size));
+
         supprimer.setVisible(false);
         modifier.setVisible(false);
         comment.setVisible(false);

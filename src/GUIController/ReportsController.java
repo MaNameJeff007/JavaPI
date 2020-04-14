@@ -10,7 +10,7 @@ import Entities.User;
 import Services.CommentaireC;
 import Services.SignalerC;
 import Services.SujetC;
-import Services.UserC;
+import Services.UserService;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -118,7 +118,7 @@ public class ReportsController implements Initializable {
     void accept(ActionEvent event) throws SQLException, MessagingException {
         SujetC suj = new SujetC();
         CommentaireC cc = new CommentaireC();
-        UserC u = new UserC();
+        UserService u = new UserService();
         SignalerC sc = new SignalerC();
         if (listereport.getSelectionModel().getSelectedItem().getType().equals("sujet")) {
             sc.AcceptSujet(listereport.getSelectionModel().getSelectedItem().getSignaler_id(), listereport.getSelectionModel().getSelectedItem().getSujet_id());
