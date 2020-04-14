@@ -11,6 +11,8 @@ import Services.CommentaireC;
 import Services.SignalerC;
 import Services.SujetC;
 import Services.UserC;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,8 +31,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -63,6 +69,10 @@ public class ReportsController implements Initializable {
     private Button accept;
     @FXML
     private Button decline;
+    @FXML
+    private Button back;
+
+    int size = 25;
 
     private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
         try {
@@ -166,11 +176,30 @@ public class ReportsController implements Initializable {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    public ImageView image(String s, int w) {
+        BufferedImage b = null;
+        try {
+            b = ImageIO.read(new File(s));
+        } catch (IOException ex) {
+            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        WritableImage i = SwingFXUtils.toFXImage(b, null);
+        ImageView v = new ImageView(i);
+        v.setPreserveRatio(true);
+        v.setFitWidth(w);
+        return v;
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        accept.setGraphic(image("src//images//accept.png", size));
+        decline.setGraphic(image("src//images//delete.png", size));
+        back.setGraphic(image("src//images//left.png", size));
+
         sujet_id.setCellValueFactory(new PropertyValueFactory<>("sujet_id"));
         commentaire_id.setCellValueFactory(new PropertyValueFactory<>("commentaire_id"));
         type.setCellValueFactory(new PropertyValueFactory<>("type"));

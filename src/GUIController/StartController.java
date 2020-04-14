@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -27,6 +29,8 @@ public class StartController implements Initializable {
 
     @FXML
     private Pane back;
+    @FXML
+    private ImageView forum;
 
     /**
      * Initializes the controller class.
@@ -59,7 +63,9 @@ public class StartController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         affichage("/GUIInterface/Forum.fxml");
+        forum.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            affichage("/GUIInterface/Forum.fxml");
+            event.consume();
+        });
     }
-
 }
