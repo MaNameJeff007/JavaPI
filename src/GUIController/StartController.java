@@ -8,6 +8,8 @@ package GUIController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +34,8 @@ public class StartController implements Initializable {
     private Pane back;
     @FXML
     private ImageView forum;
+    @FXML
+    private ImageView profil;
     @FXML
     private Button bouton1;
     @FXML
@@ -115,7 +119,21 @@ public class StartController implements Initializable {
         bouton5.setVisible(false);
         gestionForum();
         gestionDemandes();
-
+        profil.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Profil.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setTitle("New Window");
+                stage.setScene(scene);
+                stage.show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+                event.consume();
+            } catch (IOException ex) {
+                Logger.getLogger(StartController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         bouton1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 1) {
                 affichage("/GUIInterface/acceuil.fxml");
