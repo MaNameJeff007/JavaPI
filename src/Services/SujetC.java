@@ -134,6 +134,18 @@ public class SujetC {
         return Sujet;
     }
 
+    public String gettitre(int u) throws SQLException {
+        String Sujet = "";
+
+        String req = "select * from sujet where id=" + u;
+        Statement stm = connexion.createStatement();
+        ResultSet result = stm.executeQuery(req);
+        while (result.next()) {
+            Sujet = result.getString("titre");
+        }
+        return Sujet;
+    }
+
     public ArrayList<String> getList() throws SQLException {
         ObservableList<Sujet> Sujet = FXCollections.observableArrayList();
         ArrayList<String> sujet = new ArrayList<String>();

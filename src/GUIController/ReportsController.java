@@ -123,11 +123,15 @@ public class ReportsController implements Initializable {
         if (listereport.getSelectionModel().getSelectedItem().getType().equals("sujet")) {
             sc.AcceptSujet(listereport.getSelectionModel().getSelectedItem().getSignaler_id(), listereport.getSelectionModel().getSelectedItem().getSujet_id());
             String user = u.login(suj.Createur(listereport.getSelectionModel().getSelectedItem().getSujet_id()));
-            sendMail("mohamedyassine.ghadhoune@esprit.tn", "Sujet supprimé", "votre sujet a été trop signaler");
+            String msg="";
+            msg+="votre Sujet ";
+            msg+=suj.gettitre(listereport.getSelectionModel().getSelectedItem().getSujet_id());
+            msg+=" a été trop signaler";
+            sendMail("mohamedyassine.ghadhoune@esprit.tn", "Sujet supprimé", msg);
         } else {
             sc.AcceptComm(listereport.getSelectionModel().getSelectedItem().getSignaler_id(), listereport.getSelectionModel().getSelectedItem().getCommentaire_id());
             String user = u.login(suj.Createur(listereport.getSelectionModel().getSelectedItem().getSujet_id()));
-            sendMail(user, "Commentaire supprimé", "votre commentaire a été trop signaler");
+            sendMail("mohamedyassine.ghadhoune@esprit.tn", "Commentaire supprimé", "votre commentaire a été trop signaler");
 
         }
         refresh();
@@ -143,8 +147,10 @@ public class ReportsController implements Initializable {
 
     @FXML
     public void clickItem(MouseEvent event) throws SQLException {
+        SujetC suj = new SujetC();
         if (event.getClickCount() == 1) //Checking double click
         {
+            //System.out.println(msg);
             accept.setVisible(true);
             decline.setVisible(true);
         }
