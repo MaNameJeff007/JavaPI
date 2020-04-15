@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="442.0" prefWidth="637.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.EdTech.Quiz.View">
+    <children>
+        <Label fx:id="cong" layoutX="224.0" layoutY="27.0" text="Congratulations " textFill="#eb3b3b">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="eli" layoutX="130.0" layoutY="302.0" text="Votre Type d'intelligence est : ">
+            <font>
+                <Font name="Century Gothic" size="18.0" />
+            </font>
+        </Label>
+        <JFXButton fx:id="home" layoutX="228.0" layoutY="356.0" onAction="#goToCourse" prefHeight="40.0" prefWidth="170.0" stylesheets="@QuizCSS/button.css" text="Commencer le cours">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </JFXButton>
+        <Label fx:id="Marks" layoutX="335.0" layoutY="254.0" text="/30">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="226.0" fitWidth="219.0" layoutX="205.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@QuizCSS/Icons/giphy-downsized.gif" />
+            </image>
+        </ImageView>
+        <Label layoutX="176.0" layoutY="254.0" text="Votre Score est">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="typeIntell" layoutX="398.0" layoutY="302.0" prefHeight="23.0" prefWidth="113.0" text="Label">
+             <font>
+                <Font name="Century Gothic" size="18.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
