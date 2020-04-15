@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="659.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.EdTech.HomeViewController">
+    <children>
+        <TabPane layoutX="1.0" layoutY="3.0" prefHeight="648.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="courseView" text="Gestion de cours">
+                    <content>
+                        <fx:include fx:id="courseView1" source="CourseView.fxml" />
+                    </content>
+                </Tab>
+                <Tab fx:id="testView" text="Gestion de Test">
+                    <content>
+                        <fx:include fx:id="testView2" source="TestView.fxml" />
+                    </content>
+                </Tab>
+    
+                <Tab fx:id="exerciceView" text="Gestion d'exercices">
+                    <content>
+                        <fx:include fx:id="exerciceView2" source="ExerciceView.fxml" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

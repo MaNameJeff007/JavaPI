@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.EdTech.ProfilViewController">
+   <children>
+      <SplitPane dividerPositions="0.2208994708994709" prefHeight="514.0" prefWidth="758.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="retourBtn" layoutX="30.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleRetour" text="Retour" />
+                  <Label layoutX="16.0" layoutY="155.0" text="Dernier Score" />
+                  <TextField layoutX="19.0" layoutY="184.0" prefHeight="25.0" prefWidth="127.0" />
+                  <Label layoutX="16.0" layoutY="239.0" text="Type d'intelligence :" />
+                  <TextField layoutX="19.0" layoutY="276.0" prefHeight="25.0" prefWidth="127.0" />
+                  <Button fx:id="listeCours" layoutX="22.0" layoutY="358.0" mnemonicParsing="false" onAction="#listeCoursAction" text="Liste des cours" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="465.0">
+               <children>
+                  <LineChart fx:id="lineChart" prefHeight="514.0" prefWidth="548.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.EdTech.FrontQuizController">
+   <children>
+      <TilePane layoutX="14.0" layoutY="14.0" prefHeight="378.0" prefWidth="573.0">
+         <children>
+            <Pane prefHeight="362.0" prefWidth="278.0">
+               <children>
+                  <JFXButton fx:id="profilBtn" layoutX="14.0" layoutY="126.0" onAction="#profil" prefHeight="252.0" prefWidth="245.0" text="Profil" />
+                  <Label alignment="CENTER" layoutX="96.0" layoutY="23.0" prefHeight="43.0" prefWidth="378.0" text="Bienvenue Sur l'interface des Cours" textFill="#e40606">
+                     <font>
+                        <Font name="Baskerville Old Face" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="237.0">
+               <children>
+                  <JFXButton fx:id="quizBtn" layoutX="4.0" layoutY="120.0" onAction="#quiz" prefHeight="260.0" prefWidth="260.0" text="Passer Le Quiz" />
+               </children>
+            </Pane>
+         </children>
+      </TilePane>
+   </children>
+</AnchorPane>
