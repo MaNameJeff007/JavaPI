@@ -13,7 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -23,10 +27,30 @@ import javafx.stage.Stage;
  */
 public class BacKController implements Initializable {
 
+    @FXML
+    private Pane back;
+    @FXML
+    private Pane Scolarite;
+    @FXML
+    private Button btn1;
+    @FXML
+    private Button btn2;
+    @FXML
+    private Button btn3;
+    @FXML
+    private Button btn4;
+    @FXML
+    private Button btn5;
+    @FXML
+    private Button btn6;
+    @FXML
+    private Button btn7;
+    @FXML
+    private Button btn8;
+ private int numero_panel;
     /**
      * Initializes the controller class.
      */
-    @FXML
     void sujet(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/SujetBack.fxml"));
@@ -38,7 +62,6 @@ public class BacKController implements Initializable {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
-    @FXML
     void report(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Reports.fxml"));
@@ -50,9 +73,128 @@ public class BacKController implements Initializable {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    void affichage(String x) {
+        Parent fxml;
+
+        try {
+            fxml = FXMLLoader.load(getClass().getResource(x));
+            back.getChildren().removeAll();
+            back.getChildren().setAll(fxml);
+
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+    }
+
+    void gestionScolarite() {
+        Scolarite.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //affichage("/GUIInterface/Forum.fxml");
+            btn1.setVisible(true);
+            btn2.setVisible(true);
+            btn3.setVisible(true);
+            btn4.setVisible(true);
+            btn5.setVisible(true);
+            btn6.setVisible(true);
+            btn7.setVisible(true);
+            btn8.setVisible(true);
+           
+            btn1.setText("GESTION DES CLASSES");
+            btn2.setText("GESTION DES SALLES");
+            btn3.setText("GESTION DES MATIERES");
+            btn4.setText("GESTION DES COEFFICIENTS");
+            btn5.setText("GESTION DES SEANCES");
+            btn6.setText("ELEVES ET BULLETINS");
+            btn7.setText("EMPLOIS DES ENSEIGANTS");
+            btn8.setText("CONSULTER LES STATISTIQUES");
+           
+            numero_panel = 5;
+            event.consume();
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        btn1.setVisible(false);
+            btn2.setVisible(false);
+            btn3.setVisible(false);
+            btn4.setVisible(false);
+            btn5.setVisible(false);
+            btn6.setVisible(false);
+            btn7.setVisible(false);
+            btn8.setVisible(false);
+            gestionScolarite();
+            
+            btn1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AfficherClasses.fxml");
+            }if (numero_panel == 2) {
+                 System.out.println("2");
+               // affichage("/GUIInterface/eleve.fxml");
+            }
+            if (numero_panel == 3) {
+                 System.out.println("3");
+               // affichage("/GUIInterface/Forum.fxml");
+            }
+            event.consume();
+        });
+        
+            
+            btn2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AjouterSalle.fxml");
+            }
+            event.consume();
+        });
+             
+            
+            btn3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AjouterMatiere.fxml");
+            }
+            event.consume();
+        });
+            
+             btn4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AfficherCoeff.fxml");
+            }
+            event.consume();
+        });
+             
+            
+              
+        btn5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AfficherSeance.fxml");
+            }
+            event.consume();
+        });  
+        
+         btn6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/BulletinsElv.fxml");
+            }
+            event.consume();
+        });
+         
+      btn7.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/EmploisEns.fxml");
+            }
+            event.consume();
+        });
+      
+      
+       btn8.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/MoyGStat.fxml");
+            }
+            event.consume();
+        });
+    }
+
+    @FXML
+    private void forum(ActionEvent event) {
     }
 
 }
