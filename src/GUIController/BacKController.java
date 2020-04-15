@@ -32,6 +32,8 @@ public class BacKController implements Initializable {
     @FXML
     private Pane Scolarite;
     @FXML
+    private Pane demandes;
+    @FXML
     private Button btn1;
     @FXML
     private Button btn2;
@@ -111,6 +113,23 @@ public class BacKController implements Initializable {
             event.consume();
         });
     }
+    
+    void gestionDemandes() {
+        demandes.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            btn1.setVisible(true);
+            btn2.setVisible(true);
+            btn3.setVisible(true);
+            btn4.setVisible(false);
+            btn5.setVisible(false);
+            btn6.setVisible(false);
+            btn7.setVisible(false);
+            btn1.setText("Attestation");
+            btn2.setText("Reclamation");
+            btn3.setText("Permutation");
+            numero_panel = 4;
+            event.consume();
+        });
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -123,13 +142,18 @@ public class BacKController implements Initializable {
             btn7.setVisible(false);
             btn8.setVisible(false);
             gestionScolarite();
+            gestionDemandes();
             
             btn1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AfficherClasses.fxml");
-            }if (numero_panel == 2) {
+            }
+            if (numero_panel == 2) {
                  System.out.println("2");
                // affichage("/GUIInterface/eleve.fxml");
+            }
+            if (numero_panel == 4) {
+                affichage("/GUIInterface/AfficherAttestationAdmin.fxml");
             }
             if (numero_panel == 3) {
                  System.out.println("3");
@@ -143,6 +167,9 @@ public class BacKController implements Initializable {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AjouterSalle.fxml");
             }
+            if (numero_panel == 4) {
+                affichage("/GUIInterface/AfficherReclamationAdmin.fxml");
+            }
             event.consume();
         });
              
@@ -150,6 +177,9 @@ public class BacKController implements Initializable {
             btn3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AjouterMatiere.fxml");
+            }
+            if (numero_panel == 4) {
+                affichage("/GUIInterface/AfficherPermutationAdmin.fxml");
             }
             event.consume();
         });
