@@ -13,17 +13,43 @@ import java.time.LocalDateTime;
  * @author Selim Chikh Zaouali
  */
 public class Attestation {
-    
-private int id;
-private LocalDateTime date;
-private String etat;
-private int parent;
 
-public Attestation(LocalDateTime date, String etat, int parent) {
-    this.date = date;
-    this.etat = etat;
-    this.parent = parent;
-}    
+    private int id;
+    private LocalDateTime date;
+    private String etat;
+    private int parent;
+    private String enfant;
+
+    
+
+    public Attestation(LocalDateTime date, String etat, int parent) {
+        this.date = date;
+        this.etat = etat;
+        this.parent = parent;
+    }
+
+    public Attestation(LocalDateTime date, String etat, int parent, String enfant) {
+        this.date = date;
+        this.etat = etat;
+        this.parent = parent;
+        this.enfant = enfant;
+    }
+
+    public Attestation(int id, LocalDateTime date, String etat, int parent, String enfant) {
+        this.date = date;
+        this.etat = etat;
+        this.parent = parent;
+        this.enfant = enfant;
+        this.id = id;
+    }
+
+    public void setEnfant(String enfant) {
+        this.enfant = enfant;
+    }
+
+    public String getEnfant() {
+        return enfant;
+    }
 
     public int getId() {
         return id;
@@ -56,6 +82,5 @@ public Attestation(LocalDateTime date, String etat, int parent) {
     public void setParent(int parent) {
         this.parent = parent;
     }
-
 
 }

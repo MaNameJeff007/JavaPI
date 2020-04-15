@@ -5,26 +5,26 @@
  */
 package GUIController;
 
-import Entities.Attestation;
-import javafx.scene.control.Button;
-import java.awt.event.ActionEvent;
+import Entities.Reclamation;
+import Services.ReclamationService;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import Services.AttestationService;
-import java.time.LocalDateTime;
-import java.util.Properties;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -40,19 +40,22 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Selim Chikh Zaouali
  */
-public class AfficherAttestationAdminController implements Initializable {
+public class AfficherReclamationAdminController implements Initializable {
 
     @FXML
-    private TableColumn<Attestation, LocalDateTime> date;
-    @FXML
-    private TableColumn<Attestation, String> etat;
-    @FXML
-    private TableColumn<Attestation, String> parent;
-    @FXML
-    private TableColumn<Attestation, String> nomprenom;
+    private TableView<Reclamation> tableview;
 
     @FXML
-    private TableView<Attestation> tableview;
+    private TableColumn<Reclamation, LocalDateTime> date;
+
+    @FXML
+    private TableColumn<Reclamation, String> etat;
+
+    @FXML
+    private TableColumn<Reclamation, String> details;
+
+    @FXML
+    private TableColumn<Reclamation, String> parent;
 
     @FXML
     private Button traiter;
@@ -72,15 +75,30 @@ public class AfficherAttestationAdminController implements Initializable {
         }
     }
 
-   @FXML
-         void traiterAttestation(MouseEvent event) throws SQLException, MessagingException {
-        AttestationService as = new AttestationService();
-        as.changerEtat(tableview.getSelectionModel().getSelectedItem().getId());
-        sendMail("mohamedyassine.ghadhoune@esprit.tn", "Attestation traitée", "Votre attestation a bien été traitée !");
+    @FXML
+    void supprimerReclamation(ActionEvent event) {
+        ReclamationService rs = new ReclamationService();
+        try {
+            rs.deleteReclamation(tableview.getSelectionModel().getSelectedItem().getId());
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Reclamation supprimée");
+            info.setContentText("Terminé !");
+            info.show();
+        } catch (SQLException e) {
+        }
         refresh();
     }
-    
-         private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
+
+    @FXML
+    void traiterReclamation(ActionEvent event) throws SQLException, MessagingException {
+        ReclamationService rs = new ReclamationService();
+        rs.changerEtat(tableview.getSelectionModel().getSelectedItem().getId());
+        sendMail("mohamedyassine.ghadhoune@esprit.tn", "Reclamation traitée", "Votre réclamation a bien été traitée !");
+        refresh();
+
+    }
+
+    private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
@@ -119,53 +137,44 @@ public class AfficherAttestationAdminController implements Initializable {
         }
         System.out.println("Mail envoyé");
     }
-         
-   @FXML
-    void supprimerAttestation(MouseEvent event) throws SQLException {
-        AttestationService as = new AttestationService();
-        try {
-            as.deleteAttestation(tableview.getSelectionModel().getSelectedItem().getId());
-            Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("Attestation supprimée");
-            info.setContentText("Terminé !");
-            info.show();
-        } catch (SQLException e) {
-        }
 
-        refresh();
-    }
-
-     void refresh() {
-        traiter.setVisible(false);
+    void refresh() {
         supprimer.setVisible(false);
-        AttestationService as = new AttestationService();
+        traiter.setVisible(false);
+        ReclamationService rs = new ReclamationService();
         try {
-            ArrayList<Attestation> arrayList = (ArrayList<Attestation>) as.getAllAttestations();
+            ArrayList<Reclamation> arrayList = (ArrayList<Reclamation>) rs.getAllReclamations();
             ObservableList obs = FXCollections.observableArrayList(arrayList);
             tableview.setItems(obs);
+            date.setCellValueFactory(new PropertyValueFactory<>("date"));
+            etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            details.setCellValueFactory(new PropertyValueFactory<>("details"));
+            parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
         } catch (SQLException ex) {
-            Logger.getLogger(AfficherAttestationAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        AttestationService as = new AttestationService();
+        ReclamationService rs = new ReclamationService();
         traiter.setVisible(false);
         supprimer.setVisible(false);
         try {
-            ArrayList<Attestation> arrayList = (ArrayList<Attestation>) as.getAllAttestations();
+            ArrayList<Reclamation> arrayList = (ArrayList<Reclamation>) rs.getAllReclamations();
             ObservableList obs = FXCollections.observableArrayList(arrayList);
             tableview.setItems(obs);
-            nomprenom.setCellValueFactory(new PropertyValueFactory<>("enfant"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            details.setCellValueFactory(new PropertyValueFactory<>("details"));
             parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
         } catch (SQLException ex) {
-            System.out.println("45684");
-            Logger.getLogger(AfficherAttestationAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
 }

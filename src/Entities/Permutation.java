@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * @author Selim Chikh Zaouali
  */
 public class Permutation {
+
     private int id;
     private String classe_s;
     private String raison;
@@ -19,15 +20,55 @@ public class Permutation {
     private String etat;
     private int eleve_id;
     private int parent;
-    
-public Permutation(String classe_s,String raison, LocalDateTime date, String etat, int eleve_id, int parent) {
-    this.classe_s = classe_s;
-    this.raison = raison;
-    this.date = date;
-    this.etat = etat;
-    this.eleve_id = eleve_id;
-    this.parent = parent;
-}
+    private String enfant;
+
+    public Permutation(Permutation p) {
+        this.classe_s = p.classe_s;
+        this.raison = p.raison;
+        this.date = p.date;
+        this.etat = p.etat;
+        this.eleve_id = p.eleve_id;
+        this.parent = p.parent;
+        this.enfant = p.enfant;
+    }
+
+    public Permutation(String classe_s, String raison, LocalDateTime date, String etat, int eleve_id, int parent) {
+        this.classe_s = classe_s;
+        this.raison = raison;
+        this.date = date;
+        this.etat = etat;
+        this.eleve_id = eleve_id;
+        this.parent = parent;
+    }
+
+    public Permutation(String classe_s, String raison, LocalDateTime date, String etat, int eleve_id, int parent, String enfant) {
+        this.classe_s = classe_s;
+        this.raison = raison;
+        this.date = date;
+        this.etat = etat;
+        this.eleve_id = eleve_id;
+        this.parent = parent;
+        this.enfant = enfant;
+    }
+
+    public Permutation(int id, String classe_s, String raison, LocalDateTime date, String etat, int eleve_id, int parent, String enfant) {
+        this.classe_s = classe_s;
+        this.raison = raison;
+        this.date = date;
+        this.etat = etat;
+        this.eleve_id = eleve_id;
+        this.parent = parent;
+        this.enfant = enfant;
+        this.id = id;
+    }
+
+    public void setEnfant(String enfant) {
+        this.enfant = enfant;
+    }
+
+    public String getEnfant() {
+        return enfant;
+    }
 
     public void setId(int id) {
         this.id = id;
