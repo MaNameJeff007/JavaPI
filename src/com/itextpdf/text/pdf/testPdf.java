@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 public class testPdf {
 
     
-    public void OpenPdf(int idC ) throws DocumentException
+    public void OpenPdf(String idC ) throws DocumentException
     {
              
         try {
@@ -74,12 +74,12 @@ public class testPdf {
          Paragraph p1=new Paragraph("------------------------------------------");
          p1.setAlignment(Element.ALIGN_CENTER);
         int id=e.getId();
-        int m=e.getMatiere();
+        String m=e.getMatiere();
         String j=e.getJour();
           String hdeb=e.getHdeb();
          String hfin=e.getHfin();
-         int salleId=e.getSalle();
-         int ensS=e.getEnseignant();
+         String salleId=e.getSalle();
+         String ensS=e.getEnseignant();
                  
                  
           PdfPTable table = new PdfPTable(6);
@@ -215,12 +215,12 @@ public class testPdf {
          Paragraph p1=new Paragraph("------------------------------------------");
          p1.setAlignment(Element.ALIGN_CENTER);
         int id=e.getId();
-        String m=e.getNomMatiere();
+        String m=e.getMatiere();
         String j=e.getJour();
           String hdeb=e.getHdeb();
          String hfin=e.getHfin();
-         String salleId=e.getSalleCours();
-         String ensS=e.getNiveau();
+         String salleId=e.getSalle();
+         String ensS=e.getClasse();
                  
             ServiceCoeff sco= new ServiceCoeff();     
           PdfPTable table = new PdfPTable(6);

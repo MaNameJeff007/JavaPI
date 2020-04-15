@@ -21,7 +21,7 @@ import java.net.URL;
  */
 public class BulletinPdf {
     
-    public void Bullentin(int idel,int trim,int classe) throws IOException
+    public void Bullentin(int idel,int trim,String classe) throws IOException
     {
        Desktop d=Desktop.getDesktop();
        d.browse(URI.create("http://localhost/Ecole--Edtech1/Ecole--Edtech1/web/app_dev.php/moyenne1/"+idel+"/"+trim+"/"+classe));  
