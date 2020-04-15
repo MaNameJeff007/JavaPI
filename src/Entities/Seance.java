@@ -10,96 +10,57 @@ package Entities;
  * @author dell
  */
 public class Seance {
-      private int id;
-      private String jour;
-      private String hdeb;
-      private String hfin;
-      private int enseignant;
-      private int classe;
-      private int salle;
-     private int matiere;
-     
-     private String nomMatiere;
-     private String salleCours;
-     private String nomEnseigant;
-    private String prenomomEnseigant;
-      private String Niveau;
-      
 
-    public String getNomMatiere() {
-        return nomMatiere;
+    private int id;
+    private String jour;
+    private String hdeb;
+    private String hfin;
+    private String enseignant;
+    private String classe;
+    private String salle;
+    private String matiere;
+
+    public String getEnseignant() {
+        return enseignant;
     }
 
-    public void setNomMatiere(String matiereNom) {
-        this.nomMatiere = matiereNom;
+    public void setEnseignant(String enseignant) {
+        this.enseignant = enseignant;
     }
 
-    public String getSalleCours() {
-        return salleCours;
+    public String getSalle() {
+        return salle;
     }
 
-    public void setSalleCours(String salleCours) {
-        this.salleCours = salleCours;
+    public void setSalle(String salle) {
+        this.salle = salle;
     }
 
-    public String getNomEnseigant() {
-        return nomEnseigant;
+    public Seance(int id, String jour, String hdeb, String hfin, String enseignant, String classe, String salle, String matiere) {
+        this.id = id;
+        this.jour = jour;
+        this.hdeb = hdeb;
+        this.hfin = hfin;
+        this.enseignant = enseignant;
+        this.classe = classe;
+        this.salle = salle;
+        this.matiere = matiere;
     }
 
-    public void setNomEnseigant(String nomEnseigant) {
-        this.nomEnseigant = nomEnseigant;
+    public String getMatiere() {
+        return matiere;
     }
 
-    public String getPrenomomEnseigant() {
-        return prenomomEnseigant;
+    public void setMatiere(String matiere) {
+        this.matiere = matiere;
     }
 
-    public void setPrenomomEnseigant(String prenomomEnseigant) {
-        this.prenomomEnseigant = prenomomEnseigant;
-    }
-
-    public String getNiveau() {
-        return Niveau;
-    }
-
-    public void setNiveau(String Niveau) {
-        this.Niveau = Niveau;
+    public Seance() {
     }
 
     @Override
     public String toString() {
-        return "Seance{" + "id=" + id + ", jour=" + jour + ", hdeb=" + hdeb + ", hfin=" + hfin + ", enseignant=" + enseignant + ", classe=" + classe + ", salle=" + salle + ", matiere=" + matiere + ", matiereNom=" + nomMatiere + ", salleCours=" + salleCours + ", nomEnseigant=" + nomEnseigant + ", prenomomEnseigant=" + prenomomEnseigant + ", Niveau=" + Niveau + '}';
-    }
-
-    public Seance(int id, String jour, String hdeb, String hfin, int enseignant, int classe, int salle, int matiere, String matiereNom, String salleCours, String nomEnseigant, String prenomomEnseigant, String Niveau) {
-        this.id = id;
-        this.jour = jour;
-        this.hdeb = hdeb;
-        this.hfin = hfin;
-        this.enseignant = enseignant;
-        this.classe = classe;
-        this.salle = salle;
-        this.matiere = matiere;
-        this.nomMatiere = matiereNom;
-        this.salleCours = salleCours;
-        this.nomEnseigant = nomEnseigant;
-        this.prenomomEnseigant = prenomomEnseigant;
-        this.Niveau = Niveau;
-    }
-     
-    
-    public Seance() {
-    }
-
-    public Seance(int id, String jour, String hdeb, String hfin, int enseignant, int classe, int salle, int matiere) {
-        this.id = id;
-        this.jour = jour;
-        this.hdeb = hdeb;
-        this.hfin = hfin;
-        this.enseignant = enseignant;
-        this.classe = classe;
-        this.salle = salle;
-        this.matiere = matiere;
+        return "Seance{" + "id=" + id + ", jour=" + jour + ", hdeb=" + hdeb + ", hfin=" + hfin + ", enseignant=" + enseignant + ", classe=" + classe + ", salle=" + salle + ", matiere=" + matiere + '}';
     }
 
     public int getId() {
@@ -134,38 +95,12 @@ public class Seance {
         this.hfin = hfin;
     }
 
-    public int getEnseignant() {
-        return enseignant;
-    }
-
-    public void setEnseignant(int enseignant) {
-        this.enseignant = enseignant;
-    }
-
-    public int getClasse() {
+    public String getClasse() {
         return classe;
     }
 
-    public void setClasse(int classe) {
+    public void setClasse(String classe) {
         this.classe = classe;
     }
 
-    public int getSalle() {
-        return salle;
-    }
-
-    public void setSalle(int salle) {
-        this.salle = salle;
-    }
-
-    public int getMatiere() {
-        return matiere;
-    }
-
-    public void setMatiere(int matiere) {
-        this.matiere = matiere;
-    }
-      
-      
-    
 }

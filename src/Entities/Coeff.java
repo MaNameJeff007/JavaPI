@@ -12,33 +12,28 @@ package Entities;
 public class Coeff {
    private int id;
    private int valeur;
-   private int matiere;
-    private int niveau;
+   private String matiere;
+    private String niveau;
     
-    private String nomMatiere;
-    private String NiveauEtude;
+    
 
-    public String getNomMatiere() {
-        return nomMatiere;
+    public String getNiveau() {
+        return niveau;
     }
 
-    public void setNomMatiere(String nomMatiere) {
-        this.nomMatiere = nomMatiere;
-    }
-
-    public String getNiveauEtude() {
-        return NiveauEtude;
-    }
-
-    public void setNiveauEtude(String NiveauEtude) {
-        this.NiveauEtude = NiveauEtude;
-    }
-
-    public Coeff(int valeur, int matiere, int niveau) {
-        this.valeur = valeur;
-        this.matiere = matiere;
+    public void setNiveau(String niveau) {
         this.niveau = niveau;
     }
+
+    public String getMatiere() {
+        return matiere;
+    }
+
+    public void setMatiere(String matiere) {
+        this.matiere = matiere;
+    }
+
+    
 
     public int getId() {
         return id;
@@ -56,39 +51,24 @@ public class Coeff {
         this.valeur = valeur;
     }
 
-    public int getMatiere() {
-        return matiere;
-    }
-
-    public void setMatiere(int matiere) {
-        this.matiere = matiere;
-    }
-
-    public int getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(int niveau) {
-        this.niveau = niveau;
-    }
-
-    public Coeff(int id, int valeur, int matiere, int niveau, String nomMatiere, String NiveauEtude) {
+    public Coeff(int id, int valeur, String matiere, String niveau) {
         this.id = id;
         this.valeur = valeur;
         this.matiere = matiere;
         this.niveau = niveau;
-        this.nomMatiere = nomMatiere;
-        this.NiveauEtude = NiveauEtude;
-    }
-
-    
-
-    public Coeff() {
     }
 
     @Override
     public String toString() {
-        return "Coeff{" + "id=" + id + ", valeur=" + valeur + ", matiere=" + matiere + ", niveau=" + niveau + ", nomMatiere=" + nomMatiere + ", NiveauEtude=" + NiveauEtude + '}';
+        return "Coeff{" + "id=" + id + ", valeur=" + valeur + ", matiere=" + matiere + ", niveau=" + niveau + '}';
+    }
+
+    
+   
+
+    
+
+    public Coeff() {
     }
 
    

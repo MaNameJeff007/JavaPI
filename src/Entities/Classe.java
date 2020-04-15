@@ -10,29 +10,25 @@ package Entities;
  * @author dell
  */
 public class Classe {
-    private int id;
-    private String libelle;
+    private String id;
+ private String libelle;
     private int capacite;
     private int niveau ;
+    
 
-    public Classe(int id, String libelle, int capacite, int niveau) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
-        this.libelle = libelle;
-        this.capacite = capacite;
-        this.niveau = niveau;
     }
 
     public Classe() {
     }
+   
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+   
     public String getLibelle() {
         return libelle;
     }
@@ -60,6 +56,13 @@ public class Classe {
     @Override
     public String toString() {
         return "Classe{" +"id="+this.id +"libelle = "+this.libelle+"capacite="+this.capacite+"niveau = "+this.niveau+'}';
+    }
+
+    public Classe(String id, String libelle, int capacite, int niveau) {
+        this.id = id;
+        this.libelle = libelle;
+        this.capacite = capacite;
+        this.niveau = niveau;
     }
     
     

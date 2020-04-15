@@ -11,7 +11,7 @@ package Entities;
  */
 public class Salle {
      private String libelle; 
-     private int id;
+     private String id;
 
     @Override
     public String toString() {
@@ -26,11 +26,11 @@ public class Salle {
         this.libelle = libelle;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,7 +41,7 @@ public class Salle {
         this.libelle = libelle;
     }
 
-    public Salle(String libelle, int id) {
+    public Salle(String libelle, String id) {
         this.libelle = libelle;
         this.id = id;
     }

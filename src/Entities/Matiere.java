@@ -10,15 +10,15 @@ package Entities;
  * @author dell
  */
 public class Matiere {
-      private int id;
+      private String id;
     private String nom;
     private int nbH;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -38,7 +38,7 @@ public class Matiere {
         this.nbH = nbH;
     }
 
-    public Matiere(int id, String nom, int nbH) {
+    public Matiere(String id, String nom, int nbH) {
         this.id = id;
         this.nom = nom;
         this.nbH = nbH;
