@@ -8,13 +8,18 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AjouterAttestationController">
    <children>
-      <Button fx:id="btn_ajout" layoutX="57.0" layoutY="188.0" mnemonicParsing="false" text="Ajouter" />
+      <Button fx:id="btn_ajout" layoutX="57.0" layoutY="210.0" mnemonicParsing="false" style="-fx-background-color: #FFA500;" text="Envoyer" />
       <Label layoutX="57.0" layoutY="106.0" text="Choisissez votre enfant" />
       <ComboBox fx:id="enfant" layoutX="57.0" layoutY="130.0" prefHeight="25.0" prefWidth="243.0" />
-      <Label layoutX="23.0" layoutY="23.0" prefHeight="38.0" prefWidth="349.0" text="Demander une attestation de présence" textFill="#13cd13" underline="true">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <AnchorPane prefHeight="87.0" prefWidth="600.0" style="-fx-background-color: #FFA500;">
+         <children>
+            <Label layoutX="26.0" layoutY="25.0" prefHeight="38.0" prefWidth="425.0" text="Demander une attestation de présence" textFill="#402506">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="retour" layoutX="534.0" layoutY="9.0" mnemonicParsing="false" onAction="#retour" style="-fx-background-color: c5c5c5;" text="Retour" textFill="#402506" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

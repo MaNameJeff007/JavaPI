@@ -5,21 +5,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AfficherReclamationAdminController">
+<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="526.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AfficherReclamationAdminController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="504.0" prefWidth="850.0">
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="442.0" prefWidth="545.0">
          <children>
-            <TableView fx:id="tableview" layoutX="35.0" layoutY="116.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="796.0">
+            <TableView fx:id="tableview" layoutX="38.0" layoutY="36.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="470.0">
                <columns>
                   <TableColumn fx:id="parent" prefWidth="112.0" text="ID Parent" />
-                  <TableColumn fx:id="details" minWidth="0.0" prefWidth="272.0" text="Réclamation sur" />
-                  <TableColumn fx:id="date" prefWidth="235.0" text="Date" />
-                  <TableColumn fx:id="etat" prefWidth="191.0" text="Etat" />
+                  <TableColumn fx:id="details" minWidth="0.0" prefWidth="101.0" text="Réclamation sur" />
+                  <TableColumn fx:id="date" prefWidth="159.0" text="Date" />
+                  <TableColumn fx:id="etat" prefWidth="100.0" text="Etat" />
                </columns>
             </TableView>
-            <Button fx:id="traiter" layoutX="165.0" layoutY="427.0" mnemonicParsing="false" onAction="#traiterReclamation" text="Traiter la réclamation" />
+            <Button fx:id="traiter" layoutX="68.0" layoutY="342.0" mnemonicParsing="false" onAction="#traiterReclamation" style="-fx-background-color: #90EE90;" text="Traiter la réclamation" />
+            <Button fx:id="supprimer" layoutX="225.0" layoutY="342.0" mnemonicParsing="false" onAction="#supprimerReclamation" style="-fx-background-color: #FF6347;" text="Supprimer une réclamation" />
          </children>
       </AnchorPane>
-      <Button fx:id="supprimer" layoutX="324.0" layoutY="438.0" mnemonicParsing="false" onAction="#supprimerReclamation" text="Supprimer une réclamation" />
    </children>
 </AnchorPane>

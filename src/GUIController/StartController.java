@@ -48,6 +48,9 @@ public class StartController implements Initializable {
     private int numero_panel;
 
     @FXML
+    private Pane demandes;
+
+    @FXML
     void forum(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Forum.fxml"));
@@ -87,6 +90,22 @@ public class StartController implements Initializable {
         });
     }
 
+    void gestionDemandes() {
+        demandes.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //affichage("/GUIInterface/Forum.fxml");
+            bouton1.setVisible(true);
+            bouton2.setVisible(true);
+            bouton3.setVisible(true);
+            bouton4.setVisible(false);
+            bouton5.setVisible(false);
+            bouton1.setText("Attestation");
+            bouton2.setText("Reclamation");
+            bouton3.setText("Permutation");
+            numero_panel = 5;
+            event.consume();
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bouton1.setVisible(false);
@@ -95,28 +114,35 @@ public class StartController implements Initializable {
         bouton4.setVisible(false);
         bouton5.setVisible(false);
         gestionForum();
-        
+        gestionDemandes();
+
         bouton1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 1) {
                 affichage("/GUIInterface/acceuil.fxml");
-            }if (numero_panel == 2) {
+            }
+            if (numero_panel == 2) {
                 affichage("/GUIInterface/eleve.fxml");
             }
             if (numero_panel == 3) {
                 affichage("/GUIInterface/Forum.fxml");
             }
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AfficherAttestation.fxml");
+            }
             event.consume();
         });
         bouton2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            System.out.println("2");
-
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AfficherReclamation.fxml");
+            }
             event.consume();
         });
         bouton3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            System.out.println("3");
-
+            if (numero_panel == 5) {
+                affichage("/GUIInterface/AfficherPermutation.fxml");
+            }
             event.consume();
         });
     }

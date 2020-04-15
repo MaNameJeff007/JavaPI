@@ -6,7 +6,6 @@
 package GUIController;
 
 import Entities.Reclamation;
-import zzzzzzzzz.ForumController;
 import Services.ReclamationService;
 import java.io.IOException;
 import java.net.URL;
@@ -77,7 +76,7 @@ public class AfficherReclamationController implements Initializable {
         }
     }
 
-    @FXML
+ /*   @FXML
     void retour(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
@@ -87,7 +86,7 @@ public class AfficherReclamationController implements Initializable {
         stage.setScene(scene);
         stage.show();
         ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+    }*/
 
     @FXML
     void supprimerReclamation(ActionEvent event) {
@@ -110,7 +109,7 @@ public class AfficherReclamationController implements Initializable {
             ObservableList obs = as.getOwner(Integer.parseInt(System.getProperty("id")));
             tableview.setItems(obs);
         } catch (SQLException ex) {
-            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherReclamationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

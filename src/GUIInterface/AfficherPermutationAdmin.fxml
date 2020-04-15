@@ -7,19 +7,19 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AfficherPermutationAdminController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="504.0" prefWidth="850.0">
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="415.0" prefWidth="655.0">
          <children>
-            <TableView fx:id="tableview" layoutX="35.0" layoutY="116.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="796.0">
+            <TableView fx:id="tableview" layoutX="14.0" layoutY="42.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="613.0">
                <columns>
                   <TableColumn fx:id="parent" prefWidth="67.0" text="ID Parent" />
                   <TableColumn fx:id="nomprenom" minWidth="0.0" prefWidth="187.0" text="Enfant" />
-                  <TableColumn fx:id="classe_s" prefWidth="151.0" text="Classe souhaitée" />
-                  <TableColumn fx:id="date" prefWidth="97.0" text="Date" />
-                  <TableColumn fx:id="etat" prefWidth="151.0" text="Etat" />
+                  <TableColumn fx:id="classe_s" prefWidth="124.0" text="Classe souhaitée" />
+                  <TableColumn fx:id="date" prefWidth="150.0" text="Date" />
+                  <TableColumn fx:id="etat" prefWidth="82.0" text="Etat" />
                </columns>
             </TableView>
-            <Button fx:id="traiter" layoutX="175.0" layoutY="437.0" mnemonicParsing="false" onAction="#traiterPermutation" text="Traiter la demande" />
-            <Button fx:id="supprimer" layoutX="324.0" layoutY="438.0" mnemonicParsing="false" onAction="#supprimerPermutation" text="Supprimer la demande" />
+            <Button fx:id="traiter" layoutX="51.0" layoutY="348.0" mnemonicParsing="false" onAction="#traiterPermutation" style="-fx-background-color: #90EE90;" text="Traiter la demande" />
+            <Button fx:id="supprimer" layoutX="200.0" layoutY="349.0" mnemonicParsing="false" onAction="#supprimerPermutation" style="-fx-background-color: #FF6347;" text="Supprimer la demande" />
          </children>
       </AnchorPane>
    </children>

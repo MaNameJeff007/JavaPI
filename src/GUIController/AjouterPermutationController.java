@@ -22,10 +22,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -45,6 +48,21 @@ public class AjouterPermutationController implements Initializable {
 
     @FXML
     private ComboBox<String> enfant;
+    @FXML
+    private Button retour;
+
+    @FXML
+    void retour(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Accueil");
+        stage.setScene(scene);
+        stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
+    }
 
     @FXML
     void onClick(ActionEvent event) throws SQLException {
@@ -56,13 +74,13 @@ public class AjouterPermutationController implements Initializable {
         String nomenf = val.substring(0, indexEspace);
         String prenomenf = val.substring(indexEspace + 1);
         int niveau = ps.getNiveau(nomenf, prenomenf);
-        ResultSet libelle=ps.getClasse(niveau);
-        
+        ResultSet libelle = ps.getClasse(niveau);
+
         while (libelle.next()) {
-                String libelle1 = libelle.getString("libelle");
-                classes.add(libelle1);
-            }
-        
+            String libelle1 = libelle.getString("libelle");
+            classes.add(libelle1);
+        }
+
         classe.setItems(classes);
     }
 
@@ -71,7 +89,7 @@ public class AjouterPermutationController implements Initializable {
         PermutationService ps = new PermutationService();
         Integer UserConnecte = Integer.parseInt(System.getProperty("id"));
         ObservableList<String> enfants = FXCollections.observableArrayList();
-         try {
+        try {
             ResultSet res = ps.getEnfants(UserConnecte);
 
             while (res.next()) {
@@ -84,17 +102,17 @@ public class AjouterPermutationController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(AjouterPermutationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-         btn_ajout.setOnAction(new EventHandler<ActionEvent>() {
+
+        btn_ajout.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 String classe_s = classe.getSelectionModel().getSelectedItem();
-                
+
                 try {
-                    int ideleve=ps.getIDeleve(UserConnecte);
+                    int ideleve = ps.getIDeleve(UserConnecte);
                     String vvv = enfant.getSelectionModel().getSelectedItem();
-                    ps.ajouterPermutation(new Permutation(classe_s,raison.getText(),LocalDateTime.now(), "non traitee", ideleve, UserConnecte, vvv));
+                    ps.ajouterPermutation(new Permutation(classe_s, raison.getText(), LocalDateTime.now(), "non traitee", ideleve, UserConnecte, vvv));
                 } catch (SQLException ex) {
                     Logger.getLogger(AjouterPermutationController.class.getName()).log(Level.SEVERE, null, ex);
                 }

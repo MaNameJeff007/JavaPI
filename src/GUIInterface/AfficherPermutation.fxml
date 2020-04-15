@@ -5,23 +5,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="GUIController.AfficherPermutationController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AfficherPermutationController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" prefHeight="504.0" prefWidth="850.0">
+      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" prefHeight="504.0" prefWidth="596.0">
          <children>
-            <TableView fx:id="tableview" layoutX="35.0" layoutY="116.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="796.0">
+            <TableView fx:id="tableview" layoutX="14.0" layoutY="58.0" onMouseClicked="#clickItem" prefHeight="290.0" prefWidth="560.0">
                <columns>
-                  <TableColumn fx:id="nomprenom" minWidth="0.0" prefWidth="187.0" text="Enfant" />
-                  <TableColumn fx:id="classe_s" prefWidth="151.0" text="Classe souhaitée" />
-                  <TableColumn fx:id="date" prefWidth="97.0" text="Date" />
-                  <TableColumn fx:id="etat" prefWidth="151.0" text="Etat" />
+                  <TableColumn fx:id="nomprenom" minWidth="0.0" prefWidth="154.0" text="Enfant" />
+                  <TableColumn fx:id="classe_s" prefWidth="135.0" text="Classe souhaitée" />
+                  <TableColumn fx:id="date" prefWidth="146.0" text="Date" />
+                  <TableColumn fx:id="etat" prefWidth="123.0" text="Etat" />
                </columns>
             </TableView>
-            <Button fx:id="ajouter" layoutX="175.0" layoutY="437.0" mnemonicParsing="false" onAction="#ajouterPermutation" text="Envoyer une demande" />
-            <Button fx:id="supprimer" layoutX="324.0" layoutY="438.0" mnemonicParsing="false" onAction="#supprimerPermutation" text="Supprimer demande" />
+            <Button fx:id="ajouter" layoutX="34.0" layoutY="378.0" mnemonicParsing="false" onAction="#ajouterPermutation" style="-fx-background-color: #3CB371;" text="Envoyer une demande" />
+            <Button fx:id="supprimer" layoutX="199.0" layoutY="378.0" mnemonicParsing="false" onAction="#supprimerPermutation" style="-fx-background-color: #FF6347;" text="Supprimer demande" />
          </children>
       </AnchorPane>
-      <Button fx:id="retour" layoutX="37.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" text="Retour à l'accueil" />
    </children>
 </AnchorPane>

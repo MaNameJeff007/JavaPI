@@ -30,7 +30,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import zzzzzzzzz.ForumController;
 
 /**
  * FXML Controller class
@@ -60,8 +59,8 @@ public class AfficherPermutationController implements Initializable {
     @FXML
     private Button supprimer;
 
-    @FXML
-    private Button retour;
+  /*  @FXML
+    private Button retour;*/
 
     @FXML
     public void clickItem(MouseEvent event) {
@@ -74,7 +73,7 @@ public class AfficherPermutationController implements Initializable {
         }
     }
 
-    @FXML
+  /*  @FXML
     void retour(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
@@ -85,7 +84,7 @@ public class AfficherPermutationController implements Initializable {
         stage.show();
         ((Node) (event.getSource())).getScene().getWindow().hide();
 
-    }
+    }*/
 
     void refresh() {
         supprimer.setVisible(false);
@@ -94,7 +93,7 @@ public class AfficherPermutationController implements Initializable {
             ObservableList obs = ps.getOwner(Integer.parseInt(System.getProperty("id")));
             tableview.setItems(obs);
         } catch (SQLException ex) {
-            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherPermutationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

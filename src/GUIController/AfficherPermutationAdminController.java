@@ -93,7 +93,7 @@ public class AfficherPermutationAdminController implements Initializable {
         }
         refresh();
     }
-    
+
     @FXML
     void traiterPermutation(ActionEvent event) throws SQLException, MessagingException {
         PermutationService ps = new PermutationService();
@@ -144,7 +144,7 @@ public class AfficherPermutationAdminController implements Initializable {
         }
         System.out.println("Mail envoyé");
     }
-    
+
     void refresh() {
         supprimer.setVisible(false);
         traiter.setVisible(false);
@@ -162,6 +162,7 @@ public class AfficherPermutationAdminController implements Initializable {
             Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Initializes the controller class.
      */

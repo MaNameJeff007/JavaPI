@@ -29,7 +29,10 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 public class AjouterAttestationController implements Initializable {
 
@@ -38,6 +41,22 @@ public class AjouterAttestationController implements Initializable {
 
     @FXML
     private ComboBox<String> enfant;
+
+    @FXML
+    private Button retour;
+
+    @FXML
+    void retour(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("Accueil");
+        stage.setScene(scene);
+        stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
+    }
 
     /**
      * Initializes the controller class.
@@ -73,7 +92,7 @@ public class AjouterAttestationController implements Initializable {
                     int indexEspace = val.indexOf(" ");
                     String nomenf = val.substring(0, indexEspace);
                     String prenomenf = val.substring(indexEspace + 1);
-                    String nomcomplet=prenomenf+" "+nomenf;
+                    String nomcomplet = prenomenf + " " + nomenf;
                     //int idk2 = as.getId(nomenf, prenomenf);
                     as.ajouterAttestation(new Attestation(LocalDateTime.now(), "non traitee", UserConnecte, nomcomplet));
                 } catch (SQLException ex) {

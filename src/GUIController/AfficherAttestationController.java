@@ -54,8 +54,8 @@ public class AfficherAttestationController implements Initializable {
     @FXML
     private Button ajouter;
 
-    @FXML
-    private Button retour;
+  /*  @FXML
+    private Button retour;*/
 
     @FXML
     private Button supprimer;
@@ -71,7 +71,7 @@ public class AfficherAttestationController implements Initializable {
         }
     }
 
-    @FXML
+   /* @FXML
     void retour(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
@@ -82,7 +82,7 @@ public class AfficherAttestationController implements Initializable {
         stage.show();
         ((Node) (event.getSource())).getScene().getWindow().hide();
 
-    }
+    }*/
 
     @FXML
     void supprimerAttestation(ActionEvent event) throws SQLException {
