@@ -5,26 +5,27 @@
  */
 package GUIController;
 
-import Entities.Attestation;
-import javafx.scene.control.Button;
-import java.awt.event.ActionEvent;
+import com.teknikindustries.bulksms.SMS;
+import Entities.Permutation;
+import Services.PermutationService;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import Services.AttestationService;
-import java.time.LocalDateTime;
-import java.util.Properties;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -40,22 +41,29 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Selim Chikh Zaouali
  */
-public class AfficherAttestationAdminController implements Initializable {
+public class AfficherPermutationAdminController implements Initializable {
 
     @FXML
-    private TableColumn<Attestation, LocalDateTime> date;
-    @FXML
-    private TableColumn<Attestation, String> etat;
-    @FXML
-    private TableColumn<Attestation, String> parent;
-    @FXML
-    private TableColumn<Attestation, String> nomprenom;
+    private TableView<Permutation> tableview;
 
     @FXML
-    private TableView<Attestation> tableview;
+    private TableColumn<Permutation, String> parent;
+
+    @FXML
+    private TableColumn<Permutation, String> nomprenom;
+
+    @FXML
+    private TableColumn<Permutation, String> classe_s;
+
+    @FXML
+    private TableColumn<Permutation, LocalDateTime> date;
+
+    @FXML
+    private TableColumn<Permutation, String> etat;
 
     @FXML
     private Button traiter;
+
     @FXML
     private Button supprimer;
 
@@ -72,15 +80,32 @@ public class AfficherAttestationAdminController implements Initializable {
         }
     }
 
-   @FXML
-         void traiterAttestation(MouseEvent event) throws SQLException, MessagingException {
-        AttestationService as = new AttestationService();
-        as.changerEtat(tableview.getSelectionModel().getSelectedItem().getId());
-        sendMail("mohamedyassine.ghadhoune@esprit.tn", "Attestation traitée", "Votre attestation a bien été traitée !");
+    @FXML
+    void supprimerPermutation(ActionEvent event) throws SQLException {
+        PermutationService ps = new PermutationService();
+        try {
+            ps.deletePermutation(tableview.getSelectionModel().getSelectedItem().getId());
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Permutation supprimée");
+            info.setContentText("Terminé !");
+            info.show();
+        } catch (SQLException e) {
+        }
         refresh();
     }
     
-         private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
+    @FXML
+    void traiterPermutation(ActionEvent event) throws SQLException, MessagingException {
+        PermutationService ps = new PermutationService();
+        sendMail("mohamedyassine.ghadhoune@esprit.tn", "Permutation traitée", "Votre permutation a bien été traitée !");
+        ps.permuter(tableview.getSelectionModel().getSelectedItem().getClasse_s(), tableview.getSelectionModel().getSelectedItem().getEleve_id());
+        ps.changerEtat(tableview.getSelectionModel().getSelectedItem().getId());
+        refresh();
+        //SMS sms = new SMS();
+        //sms.SendSMS("selimczaouali", "CCitsjinzu1","Votre permutation a été traitée", "93425430", "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+    }
+
+    private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
@@ -119,53 +144,45 @@ public class AfficherAttestationAdminController implements Initializable {
         }
         System.out.println("Mail envoyé");
     }
-         
-   @FXML
-    void supprimerAttestation(MouseEvent event) throws SQLException {
-        AttestationService as = new AttestationService();
-        try {
-            as.deleteAttestation(tableview.getSelectionModel().getSelectedItem().getId());
-            Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("Attestation supprimée");
-            info.setContentText("Terminé !");
-            info.show();
-        } catch (SQLException e) {
-        }
-
-        refresh();
-    }
-
-     void refresh() {
-        traiter.setVisible(false);
+    
+    void refresh() {
         supprimer.setVisible(false);
-        AttestationService as = new AttestationService();
-        try {
-            ArrayList<Attestation> arrayList = (ArrayList<Attestation>) as.getAllAttestations();
-            ObservableList obs = FXCollections.observableArrayList(arrayList);
-            tableview.setItems(obs);
-        } catch (SQLException ex) {
-            Logger.getLogger(AfficherAttestationAdminController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        AttestationService as = new AttestationService();
         traiter.setVisible(false);
-        supprimer.setVisible(false);
+        PermutationService rs = new PermutationService();
         try {
-            ArrayList<Attestation> arrayList = (ArrayList<Attestation>) as.getAllAttestations();
+            ArrayList<Permutation> arrayList = (ArrayList<Permutation>) rs.getAllPermutations();
             ObservableList obs = FXCollections.observableArrayList(arrayList);
             tableview.setItems(obs);
             nomprenom.setCellValueFactory(new PropertyValueFactory<>("enfant"));
+            classe_s.setCellValueFactory(new PropertyValueFactory<>("classe_s"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
             parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
         } catch (SQLException ex) {
-            System.out.println("45684");
-            Logger.getLogger(AfficherAttestationAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherReclamationAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        PermutationService ps = new PermutationService();
+        traiter.setVisible(false);
+        supprimer.setVisible(false);
+        try {
+            ArrayList<Permutation> arrayList = (ArrayList<Permutation>) ps.getAllPermutations();
+            ObservableList obs = FXCollections.observableArrayList(arrayList);
+            tableview.setItems(obs);
+            nomprenom.setCellValueFactory(new PropertyValueFactory<>("enfant"));
+            classe_s.setCellValueFactory(new PropertyValueFactory<>("classe_s"));
+            date.setCellValueFactory(new PropertyValueFactory<>("date"));
+            etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            parent.setCellValueFactory(new PropertyValueFactory<>("parent"));
+        } catch (SQLException ex) {
+            Logger.getLogger(AfficherPermutationAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

@@ -12,7 +12,11 @@
    <children>
       <Pane layoutX="80.0" prefHeight="560.0" prefWidth="231.0">
          <children>
-            <Button layoutX="113.0" layoutY="114.0" mnemonicParsing="false" onAction="#forum" text="forum" />
+            <Button fx:id="bouton1" layoutX="113.0" layoutY="76.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="aa" />
+            <Button fx:id="bouton2" layoutX="123.0" layoutY="124.0" mnemonicParsing="false" text="aa" />
+            <Button fx:id="bouton3" layoutX="113.0" layoutY="175.0" mnemonicParsing="false" text="aa" />
+            <Button fx:id="bouton4" layoutX="113.0" layoutY="227.0" mnemonicParsing="false" text="aa" />
+            <Button fx:id="bouton5" layoutX="123.0" layoutY="298.0" mnemonicParsing="false" text="aa" />
          </children>
       </Pane>
       <Pane fx:id="back" layoutX="311.0" prefHeight="560.0" prefWidth="696.0" />

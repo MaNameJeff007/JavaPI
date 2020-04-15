@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Entities;
+
 import java.time.LocalDateTime;
 
 /**
@@ -11,19 +12,45 @@ import java.time.LocalDateTime;
  * @author Selim Chikh Zaouali
  */
 public class Reclamation {
-    	
-private int id;
-private LocalDateTime date;
-private String etat;
-private int note;
-private int parent;
 
-public Reclamation(LocalDateTime date, String etat, int note, int parent) {
-    this.date = date;
-    this.etat = etat;
-    this.note = note;
-    this.parent = parent;
-}
+    private int id;
+    private LocalDateTime date;
+    private String etat;
+    private int note;
+    private int parent;
+    private String details;
+
+    public Reclamation(LocalDateTime date, String etat, int note, int parent) {
+        this.date = date;
+        this.etat = etat;
+        this.note = note;
+        this.parent = parent;
+    }
+
+    public Reclamation(LocalDateTime date, String etat, int note, int parent, String details) {
+        this.date = date;
+        this.etat = etat;
+        this.note = note;
+        this.parent = parent;
+        this.details = details;
+    }
+
+    public Reclamation(int id, LocalDateTime date, String etat, int note, int parent, String details) {
+        this.date = date;
+        this.etat = etat;
+        this.note = note;
+        this.parent = parent;
+        this.details = details;
+        this.id = id;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getDetails() {
+        return details;
+    }
 
     public int getId() {
         return id;
@@ -64,6 +91,5 @@ public Reclamation(LocalDateTime date, String etat, int note, int parent) {
     public void setParent(int parent) {
         this.parent = parent;
     }
-
 
 }

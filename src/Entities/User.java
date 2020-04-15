@@ -28,6 +28,7 @@ public class User {
     private String classeenseignant_id;
     private float MoyG;
     private static int workload = 5;
+    private int code;
 
     public User() {
 
@@ -211,6 +212,14 @@ public class User {
 
     public void setClasseenseignant_id(String classeenseignant_id) {
         this.classeenseignant_id = classeenseignant_id;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public static boolean checkPassword(String password_plaintext, String stored_hash) {
