@@ -107,7 +107,7 @@ ObservableList<Salle> list ;
    @FXML
     private void retourMenuA(ActionEvent event) {
           try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("menuA.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("BacK.fxml"));
             Parent root= loader.load();
             MenuAController rc= loader.getController();
             
@@ -146,7 +146,7 @@ ObservableList<Salle> list ;
                                 ac.supprimerSalle(art.getId()); //supprimer T3amlet
 
                             }
-                            try {
+                            /*try {
 
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterSalle.fxml"));
                                 Parent root = loader.load();
@@ -156,7 +156,7 @@ ObservableList<Salle> list ;
                             } catch (IOException ex) {
                                 System.out.println(ex.getMessage());
 
-                            }
+                            }*/
                         });
                        
                     }

@@ -138,7 +138,7 @@ public class AjouterMatiereController implements Initializable {
                                 ac.supprimerMatiere(art.getId()); //supprimer T3amlet
 
                             }
-                            try {
+                            /*try {
 
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterMatiere.fxml"));
                                 Parent root = loader.load();
@@ -148,7 +148,7 @@ public class AjouterMatiereController implements Initializable {
                             } catch (IOException ex) {
                                 System.out.println(ex.getMessage());
 
-                            }
+                            }*/
                         });
                        
                     }
@@ -193,7 +193,7 @@ public class AjouterMatiereController implements Initializable {
   @FXML
     private void retourMenuA(ActionEvent event) {
           try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("menuA.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("BacK.fxml"));
             Parent root= loader.load();
             MenuAController rc= loader.getController();
             

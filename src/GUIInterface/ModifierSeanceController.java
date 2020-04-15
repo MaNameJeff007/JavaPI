@@ -91,12 +91,12 @@ public class ModifierSeanceController implements Initializable {
         matiere.setValue(sa);
     }*/
        
-          classe.setValue(AfficherSeanceController.Recup.getNiveau());
-         matiere.setValue(AfficherSeanceController.Recup.getNomMatiere());
+          classe.setValue(AfficherSeanceController.Recup.getClasse());
+         matiere.setValue(AfficherSeanceController.Recup.getMatiere());
          jour.setValue(AfficherSeanceController.Recup.getJour());
          hdeb.setValue(AfficherSeanceController.Recup.getHdeb());
-         enseignant.setValue(AfficherSeanceController.Recup.getNomEnseigant());
-          salle.setValue(AfficherSeanceController.Recup.getSalleCours());
+         enseignant.setValue(AfficherSeanceController.Recup.getEnseignant());
+          salle.setValue(AfficherSeanceController.Recup.getSalle());
           
         classe.setItems(classes);
         matiere.setItems(matieres);
@@ -115,7 +115,7 @@ public class ModifierSeanceController implements Initializable {
         
           for (Matiere e:res)
     {
-        int idC=e.getId();
+        String idC=e.getId();
         String name=e.getNom();
         matieres.add(name);
     }
@@ -129,7 +129,7 @@ public class ModifierSeanceController implements Initializable {
         
           for (Salle e:res)
     {
-        int idS=e.getId();
+       String idS=e.getId();
         String salle = e.getLibelle();
         salles.add(salle);
     }
@@ -143,7 +143,7 @@ public class ModifierSeanceController implements Initializable {
         
           for (User e:res)
     {
-        int idS=e.getId();
+        String idS=String.valueOf(e.getIdentifiant());
         String nom = e.getNom();
         String pre = e.getPrenom();
         ens.add(nom);
@@ -158,7 +158,7 @@ public class ModifierSeanceController implements Initializable {
         
           for (Classe e:res)
     {
-        int idC=e.getId();
+      String idC=e.getId();
         String name=e.getLibelle();
         classes.add(name);
     }
@@ -183,7 +183,7 @@ public class ModifierSeanceController implements Initializable {
          
          for (Classe e : h)
     {
-        int idC =e.getId();
+        String idC =e.getId();
         r.setClasse(idC); 
     }
           
@@ -192,21 +192,21 @@ public class ModifierSeanceController implements Initializable {
          
          for (Matiere e : m)
     {
-        int mat =e.getId();
+        String mat =e.getId();
         r.setMatiere(mat); 
     }
          
      List<Salle> s = ac.ComboxGetIdSalle(salle.getSelectionModel().getSelectedItem());    
          for (Salle e : s)
     {
-        int sa =e.getId();
+        String sa =e.getId();
         r.setSalle(sa); 
     }
          
          List<User> uen = us.ComboxGetIdEns(enseignant.getSelectionModel().getSelectedItem());    
          for (User e : uen)
     {
-        int ens =e.getId();
+        String ens =String.valueOf(e.getIdentifiant());
         r.setEnseignant(ens); 
     }
          
@@ -237,14 +237,19 @@ public class ModifierSeanceController implements Initializable {
           r.setHfin("17:00:00");   
          }
         
-        List<User> emE= us.sEns(AfficherSeanceController.Recup.getEnseignant());
-        System.out.println(AfficherSeanceController.Recup.getEnseignant());
+         for (User e : uen)
+    {
+       String ens =String.valueOf(e.getIdentifiant());
+       List<User> emE= us.sEns(ens);
+        System.out.println(ens);
                                for ( User u : emE)
                                 {
                                String emailEns = u.getEmail();
                                System.out.println(emailEns);
-       
-        ac.modifierSeance(r,emailEns); 
+         ac.modifierSeance(r,emailEns); 
+    } 
+         
+        
                                 }
        /* ServiceUser ue = new ServiceUser();
                                  

@@ -26,7 +26,7 @@ public class MenuAdmin extends Application {
     public void start(Stage primaryStage) {
         try {
             
-            Parent root = FXMLLoader.load(getClass().getResource("menuA.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIInterface/BacK.fxml"));
               Scene scene = new Scene(root);
 
             //FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainWindowView.fxml"));

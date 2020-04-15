@@ -73,9 +73,9 @@ public class EmploisEnsController implements Initializable {
       //id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         nom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
-         libC.setCellValueFactory(new PropertyValueFactory<>("LibC"));
+         libC.setCellValueFactory(new PropertyValueFactory<>("classeenseignant_id"));
          Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
-          dateEmbauche.setCellValueFactory(new PropertyValueFactory<>("DateEmbauche"));
+          dateEmbauche.setCellValueFactory(new PropertyValueFactory<>("Date_Embauche"));
            fillcomboboxNiveau();
            addEmploiButtonToTable();
         ComboClasses.setItems(liste);
@@ -96,7 +96,7 @@ public class EmploisEnsController implements Initializable {
         
           for (Classe e:res)
     {
-        int idC=e.getId();
+        String idC=e.getId();
         String name=e.getLibelle();
         liste.add(name);
     }
@@ -109,9 +109,9 @@ public class EmploisEnsController implements Initializable {
        // Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
          nom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         prenom.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
-         libC.setCellValueFactory(new PropertyValueFactory<>("LibC"));
+         libC.setCellValueFactory(new PropertyValueFactory<>("classeenseignant_id"));
          Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
-          dateEmbauche.setCellValueFactory(new PropertyValueFactory<>("DateEmbauche"));
+          dateEmbauche.setCellValueFactory(new PropertyValueFactory<>("Date_Embauche"));
         ServiceUser ac =new ServiceUser();
         
     
@@ -123,7 +123,7 @@ public class EmploisEnsController implements Initializable {
     @FXML
     private void retourMenuA(ActionEvent event) {
           try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("menuA.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("BacK.fxml"));
             Parent root= loader.load();
             MenuAController rc= loader.getController();
             
@@ -152,7 +152,7 @@ public class EmploisEnsController implements Initializable {
                                     testPdf serv = new  testPdf();
                             try {
                                 //serv.SelectSeance(Recup.getId());
-                                serv.OpenPdfEns(Recup.getId());
+                                serv.OpenPdfEns(Recup.getIdentifiant());
                                 if (Desktop.isDesktopSupported()) {
             try {
                 File myFile = new File("C:\\Users\\dell\\Documents\\NetBeansProjects\\EcoleTest_Java\\test.pdf");

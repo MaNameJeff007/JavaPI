@@ -7,6 +7,7 @@ package GUIInterface;
 
 import GUIInterface.AfficherClassesController;
 import Entities.Classe;
+import GUIController.BacKController;
 import Services.ServiceClasse;
 import Utils.JavaMail;
 import java.io.IOException;
@@ -16,11 +17,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 /**
@@ -105,15 +109,16 @@ public class AjouterClasseController implements Initializable {
  }
     
     @FXML
-    private void retourafficher(ActionEvent event) {
-          try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("AfficherClasses.fxml"));
-            Parent root= loader.load();
-            AfficherClassesController rc= loader.getController();            
-            Retour.getScene().setRoot(root);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());;
-        }
+    private void retourafficher(ActionEvent event) throws IOException {
+          FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("BacK.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        
+        stage.setScene(scene);
+        stage.show();
+        stage.toBack();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
         
     } 
     

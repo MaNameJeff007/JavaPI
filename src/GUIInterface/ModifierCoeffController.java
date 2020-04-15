@@ -78,7 +78,7 @@ final ObservableList<String> matieres = FXCollections.observableArrayList();
     }
         // matiere.setPromptText("jjjjj");
         matiere.setItems(matieres);
-        matiere.setValue(AfficherCoeffController.Recup.getNomMatiere());
+        matiere.setValue(AfficherCoeffController.Recup.getMatiere());
        //niveau.setValue(AfficherCoeffController.Recup.getNiveau());
          
     }    
@@ -90,7 +90,7 @@ final ObservableList<String> matieres = FXCollections.observableArrayList();
         
           for (Matiere e:res)
     {
-        int idC=e.getId();
+        String idC=e.getId();
         String name=e.getNom();
         matieres.add(name);
     }
@@ -103,7 +103,7 @@ final ObservableList<String> matieres = FXCollections.observableArrayList();
         
           for (Classe e:res)
     {
-        int idC=e.getId();
+        String idC=e.getId();
         String name=e.getLibelle();
         liste.add(name);
     }
@@ -125,13 +125,13 @@ final ObservableList<String> matieres = FXCollections.observableArrayList();
          List<Classe> h= sr.ComboxGetIdClasse(niveau.getSelectionModel().getSelectedItem());
          for (Classe e : h)
     {
-        int idC =e.getId();
+        String idC =e.getId();
         r.setNiveau(idC); 
     }
           List<Matiere> m= sr.ComboxGetIdMatiere(matiere.getSelectionModel().getSelectedItem());
          for (Matiere e : m)
     {
-        int mat =e.getId();
+        String mat =e.getId();
         r.setMatiere(mat); 
     }
          r.setId(AfficherCoeffController.Recup.getId());

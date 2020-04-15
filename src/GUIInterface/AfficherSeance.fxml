@@ -4,14 +4,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="516.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.AfficherSeanceController">
+<AnchorPane id="AnchorPane" prefHeight="523.0" prefWidth="758.0" stylesheets="@../CSS/StyleForum.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.AfficherSeanceController">
    <children>
-      <TableView fx:id="SeancesTab" layoutX="24.0" layoutY="104.0" onKeyReleased="#testAff" prefHeight="272.0" prefWidth="575.0">
+      <TableView fx:id="SeancesTab" layoutX="20.0" layoutY="137.0" onKeyReleased="#testAff" prefHeight="292.0" prefWidth="646.0">
         <columns>
           <TableColumn fx:id="nomEnseigant" prefWidth="102.0" text="NomEnseigant" />
             <TableColumn fx:id="Niveau" prefWidth="46.0" text="Niveau" />
@@ -22,15 +24,19 @@
             <TableColumn fx:id="Hfin" prefWidth="58.0" text="Hfin" />
         </columns>
       </TableView>
-      <Text fx:id="SeancesTitle" layoutX="162.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AFFICHER SEANCES DE COURS" wrappingWidth="248.505859375">
+      <Text fx:id="SeancesTitle" layoutX="210.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AFFICHER SEANCES DE COURS" wrappingWidth="248.505859375">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="RechLabel" layoutX="423.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classe:" wrappingWidth="53.501953125" />
-      <ComboBox fx:id="ComboClasses" layoutX="466.0" layoutY="40.0" onAction="#recher" prefHeight="25.0" prefWidth="95.0" />
-      <Line endX="122.0" layoutX="300.0" layoutY="65.0" startX="-151.0" />
-      <Button fx:id="Ajouter" layoutX="395.0" layoutY="389.0" mnemonicParsing="false" onAction="#redirectionAjSeance" text="Ajouter une nouvelle séance" />
-      <Button fx:id="Retour" layoutX="49.0" layoutY="40.0" mnemonicParsing="false" onAction="#retourMenuA" prefHeight="25.0" prefWidth="62.0" text="Retour" />
+      <Text fx:id="RechLabel" layoutX="504.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classe:" wrappingWidth="53.501953125" />
+      <ComboBox fx:id="ComboClasses" layoutX="558.0" layoutY="64.0" onAction="#recher" prefHeight="25.0" prefWidth="95.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" />
+      <Line endX="122.0" layoutX="335.0" layoutY="88.0" startX="-151.0" />
+      <Button fx:id="Ajouter" layoutX="438.0" layoutY="462.0" mnemonicParsing="false" onAction="#redirectionAjSeance" prefHeight="35.0" prefWidth="215.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="Ajouter une nouvelle séance" />
+      <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="438.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icons8-add-64.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

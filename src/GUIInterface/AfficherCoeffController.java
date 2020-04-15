@@ -68,7 +68,7 @@ public class AfficherCoeffController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        // Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         niveau.setCellValueFactory(new PropertyValueFactory<>("Niveau"));
-        matiere.setCellValueFactory(new PropertyValueFactory<>("NomMatiere"));
+        matiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
         valeur.setCellValueFactory(new PropertyValueFactory<>("Valeur"));
         addButtonUpdateToTable();
         delete();
@@ -82,7 +82,7 @@ public class AfficherCoeffController implements Initializable {
     private void testAff(KeyEvent event) {
         //Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         niveau.setCellValueFactory(new PropertyValueFactory<>("Niveau"));
-        matiere.setCellValueFactory(new PropertyValueFactory<>("NomMatiere"));
+        matiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
         valeur.setCellValueFactory(new PropertyValueFactory<>("Valeur"));
         
         ServiceCoeff ac= new  ServiceCoeff();
@@ -97,8 +97,11 @@ public class AfficherCoeffController implements Initializable {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("AjouterCoeff.fxml"));
             Parent root= loader.load();
             AjouterCoeffController rc= loader.getController();
-            
-            AjouterCoeff.getScene().setRoot(root);
+             Scene sc = new Scene(root);
+                               Stage second=new Stage();
+                               second.setScene(sc);
+                               second.show();
+           // AjouterCoeff.getScene().setRoot(root);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());;
         }
@@ -130,7 +133,7 @@ public class AfficherCoeffController implements Initializable {
                                 ac.supprimerCoeff(art.getId()); //supprimer T3amlet
 
                             }
-                            try {
+                           /* try {
 
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherCoeff.fxml"));
                                 Parent root = loader.load();
@@ -140,7 +143,7 @@ public class AfficherCoeffController implements Initializable {
                             } catch (IOException ex) {
                                 System.out.println(ex.getMessage());
 
-                            }
+                            }*/
                         });
                        
                     }
@@ -222,7 +225,7 @@ public class AfficherCoeffController implements Initializable {
   @FXML
     private void retourMenuA(ActionEvent event) {
           try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("menuA.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("BacK.fxml"));
             Parent root= loader.load();
             MenuAController rc= loader.getController();
             

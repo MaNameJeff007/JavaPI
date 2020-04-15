@@ -95,7 +95,7 @@ public class AfficherSeanceController implements Initializable {
         
           for (Classe e:res)
     {
-        int idC=e.getId();
+       String idC=e.getId();
         String name=e.getLibelle();
         liste.add(name);
     }
@@ -105,10 +105,10 @@ public class AfficherSeanceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        // Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        nomEnseigant.setCellValueFactory(new PropertyValueFactory<>("NomEnseigant"));
-         Niveau.setCellValueFactory(new PropertyValueFactory<>("Niveau"));
-        SalleCours.setCellValueFactory(new PropertyValueFactory<>("SalleCours"));
-        nomMatiere.setCellValueFactory(new PropertyValueFactory<>("NomMatiere"));
+        nomEnseigant.setCellValueFactory(new PropertyValueFactory<>("Enseignant"));
+         Niveau.setCellValueFactory(new PropertyValueFactory<>("Classe"));
+        SalleCours.setCellValueFactory(new PropertyValueFactory<>("Salle"));
+        nomMatiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
         Jour.setCellValueFactory(new PropertyValueFactory<>("Jour"));
         Hdeb.setCellValueFactory(new PropertyValueFactory<>("Hdeb"));
         Hfin.setCellValueFactory(new PropertyValueFactory<>("Hfin"));
@@ -127,7 +127,7 @@ public class AfficherSeanceController implements Initializable {
   @FXML
     private void retourMenuA(ActionEvent event) {
           try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("menuA.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("BacK.fxml"));
             Parent root= loader.load();
             MenuAController rc= loader.getController();
             
@@ -143,10 +143,10 @@ public class AfficherSeanceController implements Initializable {
     public void recher(ActionEvent event) {
          
         //Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        nomEnseigant.setCellValueFactory(new PropertyValueFactory<>("NomEnseigant"));
-        Niveau.setCellValueFactory(new PropertyValueFactory<>("Niveau"));
-        SalleCours.setCellValueFactory(new PropertyValueFactory<>("SalleCours"));
-        nomMatiere.setCellValueFactory(new PropertyValueFactory<>("NomMatiere"));
+        nomEnseigant.setCellValueFactory(new PropertyValueFactory<>("Enseignant"));
+         Niveau.setCellValueFactory(new PropertyValueFactory<>("Classe"));
+        SalleCours.setCellValueFactory(new PropertyValueFactory<>("Salle"));
+        nomMatiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
         Jour.setCellValueFactory(new PropertyValueFactory<>("Jour"));
         Hdeb.setCellValueFactory(new PropertyValueFactory<>("Hdeb"));
         Hfin.setCellValueFactory(new PropertyValueFactory<>("Hfin"));
@@ -168,8 +168,11 @@ public class AfficherSeanceController implements Initializable {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("AjouterSeance.fxml"));
             Parent root= loader.load();
            AjouterSeanceController rc= loader.getController();
-            
-            Ajouter.getScene().setRoot(root);
+            Scene sc = new Scene(root);
+                               Stage second=new Stage();
+                               second.setScene(sc);
+                               second.show();
+            //Ajouter.getScene().setRoot(root);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());;
         }
@@ -270,7 +273,7 @@ public class AfficherSeanceController implements Initializable {
                              
 
                             }
-                            try {
+                            /*try {
 
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherSeance.fxml"));
                                 Parent root = loader.load();
@@ -280,7 +283,7 @@ public class AfficherSeanceController implements Initializable {
                             } catch (IOException ex) {
                                 System.out.println(ex.getMessage());
 
-                            }
+                            }*/
                         });
                        
                     }
@@ -310,10 +313,10 @@ public class AfficherSeanceController implements Initializable {
     @FXML
     private void testAff(KeyEvent event) {
         // Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        nomEnseigant.setCellValueFactory(new PropertyValueFactory<>("NomEnseigant"));
-        Niveau.setCellValueFactory(new PropertyValueFactory<>("Niveau"));
-        SalleCours.setCellValueFactory(new PropertyValueFactory<>("SalleCours"));
-        nomMatiere.setCellValueFactory(new PropertyValueFactory<>("NomMatiere"));
+       nomEnseigant.setCellValueFactory(new PropertyValueFactory<>("Enseignant"));
+         Niveau.setCellValueFactory(new PropertyValueFactory<>("Classe"));
+        SalleCours.setCellValueFactory(new PropertyValueFactory<>("Salle"));
+        nomMatiere.setCellValueFactory(new PropertyValueFactory<>("Matiere"));
         Jour.setCellValueFactory(new PropertyValueFactory<>("Jour"));
         Hdeb.setCellValueFactory(new PropertyValueFactory<>("Hdeb"));
         Hfin.setCellValueFactory(new PropertyValueFactory<>("Hfin"));

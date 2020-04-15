@@ -4,12 +4,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="452.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.AfficherClassesController">
+<AnchorPane id="AnchorPane" prefHeight="515.0" prefWidth="712.0" stylesheets="@../CSS/StyleForum.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.AfficherClassesController">
    <children>
       <TableView id="showclass" fx:id="tableClasses" layoutX="45.0" layoutY="109.0" onKeyReleased="#testAff" prefHeight="296.0" prefWidth="513.0">
         <columns>
@@ -18,8 +20,7 @@
             <TableColumn fx:id="niveau" prefWidth="153.0" text="Niveau" />
         </columns>
       </TableView>
-      <Button id="rc" fx:id="RetourC" layoutX="45.0" layoutY="28.0" mnemonicParsing="false" onAction="#retourMenuA" text="Retour" />
-      <Button fx:id="AjouterC" layoutX="592.0" layoutY="320.0" mnemonicParsing="false" onAction="#redirectionAjC" text="Ajouter " />
+      <Button fx:id="AjouterC" layoutX="570.0" layoutY="430.0" mnemonicParsing="false" onAction="#redirectionAjC" prefHeight="34.0" prefWidth="102.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="Ajouter " textAlignment="RIGHT" />
       <Text fx:id="listeC" layoutX="197.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTE DES CLASSES" wrappingWidth="231.1015625">
          <font>
             <Font size="18.0" />
@@ -28,5 +29,15 @@
       <TextField fx:id="RechC" layoutX="493.0" layoutY="28.0" onAction="#recher" />
       <Text fx:id="libR" layoutX="420.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechercher:" />
       <Line fx:id="line" endX="100.0" layoutX="275.0" layoutY="54.0" startX="-100.0" />
+      <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="570.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icons8-add-64.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="99.0" fitWidth="21.0" layoutX="617.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icons8-search-64.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

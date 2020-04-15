@@ -89,10 +89,10 @@ public class BulletinsElvController implements Initializable {
         //Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         Nom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         Prenom.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
-         libC.setCellValueFactory(new PropertyValueFactory<>("LibC"));
+          libC.setCellValueFactory(new PropertyValueFactory<>("Classeeleve_id"));
          // NomParent.setCellValueFactory(new PropertyValueFactory<>("NomParent"));
         // PrenomParent.setCellValueFactory(new PropertyValueFactory<>("PrenomParent"));
-         DateInscription.setCellValueFactory(new PropertyValueFactory<>("DateInscription"));
+         DateInscription.setCellValueFactory(new PropertyValueFactory<>("Date_Inscription"));
         // EmailParent.setCellValueFactory(new PropertyValueFactory<>("EmailParent"));
          
      
@@ -115,7 +115,7 @@ public class BulletinsElvController implements Initializable {
      @FXML
     private void retourMenuA(ActionEvent event) {
           try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("menuA.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("BacK.fxml"));
             Parent root= loader.load();
             MenuAController rc= loader.getController();
             
@@ -131,11 +131,11 @@ public class BulletinsElvController implements Initializable {
       // Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         Nom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         Prenom.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
-        libC.setCellValueFactory(new PropertyValueFactory<>("LibC"));
+        libC.setCellValueFactory(new PropertyValueFactory<>("Classeeleve_id"));
        // NomParent.setCellValueFactory(new PropertyValueFactory<>("NomParent"));
         // PrenomParent.setCellValueFactory(new PropertyValueFactory<>("PrenomParent"));
       
-         DateInscription.setCellValueFactory(new PropertyValueFactory<>("DateInscription"));
+         DateInscription.setCellValueFactory(new PropertyValueFactory<>("Date_Inscription"));
        //  EmailParent.setCellValueFactory(new PropertyValueFactory<>("EmailParent"));
          
         ServiceUser ac =new ServiceUser();
@@ -151,7 +151,7 @@ public class BulletinsElvController implements Initializable {
         
           for (Classe e:res)
     {
-        int idC=e.getId();
+        String idC=e.getId();
         String name=e.getLibelle();
         liste.add(name);
     }
@@ -164,12 +164,12 @@ public class BulletinsElvController implements Initializable {
        // Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
         Nom.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         Prenom.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
-         libC.setCellValueFactory(new PropertyValueFactory<>("LibC"));
+          libC.setCellValueFactory(new PropertyValueFactory<>("Classeeleve_id"));
         
         //NomParent.setCellValueFactory(new PropertyValueFactory<>("NomParent"));
        //  PrenomParent.setCellValueFactory(new PropertyValueFactory<>("PrenomParent"));
      
-         DateInscription.setCellValueFactory(new PropertyValueFactory<>("DateInscription"));
+         DateInscription.setCellValueFactory(new PropertyValueFactory<>("Date_Inscription"));
         // EmailParent.setCellValueFactory(new PropertyValueFactory<>("EmailParent"));
          
         ServiceUser ac =new ServiceUser();
@@ -192,8 +192,7 @@ public class BulletinsElvController implements Initializable {
                 final TableCell<User, Void> cell = new TableCell<User, Void>() {
 
                     private final Button btn = new Button("B 1 ");
-                    //private final Button btn1 = new Button("B 2 ");
-                    //private final Button btn2 = new Button("B 3 ");
+                   
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -203,7 +202,7 @@ public class BulletinsElvController implements Initializable {
                                     BulletinPdf serv = new  BulletinPdf();
                             
                             try {
-                                serv.Bullentin(Recup.getId(),1,Recup.getClasseeleve_id());
+                                serv.Bullentin(Recup.getIdentifiant(),1,Recup.getClasseeleve_id());
                                 //serv.SelectSeance(Recup.getId());
                                 //serv.OpenPdf(Recup.getId());
                             } catch (IOException ex) {
@@ -253,7 +252,7 @@ public class BulletinsElvController implements Initializable {
                                     BulletinPdf serv = new  BulletinPdf();
                             
                             try {
-                                serv.Bullentin(Recup.getId(),2,Recup.getClasseeleve_id());
+                                serv.Bullentin(Recup.getIdentifiant(),2,Recup.getClasseeleve_id());
                                
                             } catch (IOException ex) {
                                 Logger.getLogger(BulletinsElvController.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,7 +302,7 @@ public class BulletinsElvController implements Initializable {
                                     BulletinPdf serv = new  BulletinPdf();
                             
                             try {
-                                serv.Bullentin(Recup.getId(),3,Recup.getClasseeleve_id());
+                                serv.Bullentin(Recup.getIdentifiant(),3,Recup.getClasseeleve_id());
                                
                             } catch (IOException ex) {
                                 Logger.getLogger(BulletinsElvController.class.getName()).log(Level.SEVERE, null, ex);
