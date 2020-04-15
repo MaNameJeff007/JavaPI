@@ -125,7 +125,8 @@ public class ParentnotesController implements Initializable {
         ObservableList<String> matieres = FXCollections.observableArrayList();
         fillMatieres(matieres);
         matiere.setItems(matieres);
-        matiere.setValue(matieres.get(0));    
+        matiere.setValue(matieres.get(0));
+        
     }    
 
     @FXML
@@ -156,13 +157,16 @@ public class ParentnotesController implements Initializable {
         
       try
       {
-        ResultSet resultsmatieres=NS.afficherMatieres();     
+        ResultSet resultsmatieres=NS.affichermatieredesnotes(id);
+        if(!resultsmatieres.isBeforeFirst() )
+        {
+          matieres.add("rien a afficher");  
+        }
         
+        else
         while(resultsmatieres.next())
         {
-            int id = resultsmatieres.getInt("id"); 
-            String nom=resultsmatieres.getString("nom"); 
-            String id_matiere = String.valueOf(id); 
+            String nom=resultsmatieres.getString("matiere.nom"); 
             matieres.add(nom);
         }
       }

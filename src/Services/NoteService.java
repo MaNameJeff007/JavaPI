@@ -114,6 +114,14 @@ public class NoteService
         return rs;
     }
     
+    public ResultSet affichermatieredesnotes(int ideleve) throws SQLException
+    {
+        String req = "Select DISTINCT notes.eleve_id, matiere.nom FROM notes INNER JOIN matiere ON matiere.id=notes.matiere WHERE notes.eleve_id='"+ideleve+"'";
+        PreparedStatement pstm = connexion.prepareStatement(req);
+        ResultSet rs = pstm.executeQuery(req);
+        return rs;
+    }
+    
     public void afficherNotes() throws SQLException
     {
         String req = "SELECT * FROM notes";
@@ -144,9 +152,9 @@ public class NoteService
         return rs;
     }
     
-    public ResultSet fetchNotes2() throws SQLException
+    public ResultSet fetchNotes2(String idprof) throws SQLException
     {
-        String req = "SELECT notes.id, notes.type, notes.id_trimestre, notes.enseignant_id, notes.eleve_id, notes.matiere, notes.valeur, user.prenom, user.nom, matiere.nom FROM `notes` INNER JOIN matiere ON notes.matiere=matiere.id INNER JOIN user ON notes.eleve_id=user.id ORDER BY notes.type ASC";
+        String req = "SELECT notes.id, notes.type, notes.id_trimestre, notes.enseignant_id, notes.eleve_id, notes.matiere, notes.valeur, user.prenom, user.nom, matiere.nom FROM `notes` INNER JOIN matiere ON notes.matiere=matiere.id INNER JOIN user ON notes.eleve_id=user.id WHERE enseignant_id='"+idprof+"' ORDER BY notes.type ASC";
         PreparedStatement pstm = connexion.prepareStatement(req);
         ResultSet rs = pstm.executeQuery(req);  
         return rs;

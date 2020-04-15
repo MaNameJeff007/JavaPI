@@ -28,8 +28,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import Services.UserService;
-import javafx.scene.control.DateCell;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -66,7 +64,7 @@ public class FormajoutabsencesController implements Initializable {
         
         try
         {
-            ResultSet resultseleves=US.affichereleves();
+            ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
              while(resultseleves.next())
             {
                 int id = resultseleves.getInt("id");
@@ -107,7 +105,7 @@ public class FormajoutabsencesController implements Initializable {
         int hd=Integer.valueOf(heuredebut.getText());
         int hf=Integer.valueOf(heurefin.getText());
         boolean etat=true;
-        String enseignant_id="6";
+        String enseignant_id=System.getProperty("id");
         Absence A=new Absence(j, dateAbs, hd, hf, etat, enseignant_id, id_eleve);
         boolean b=false;
         try

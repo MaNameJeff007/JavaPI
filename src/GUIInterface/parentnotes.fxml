@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="635.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.ParentnotesController">
+<AnchorPane id="AnchorPane" prefHeight="748.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.ParentnotesController">
    <children>
-      <TableView fx:id="table" layoutX="-1.0" layoutY="-1.0" prefHeight="252.0" prefWidth="736.0">
+      <TableView fx:id="table" layoutX="17.0" prefHeight="252.0" prefWidth="736.0">
         <columns>
           <TableColumn fx:id="col_type" prefWidth="221.0" text="Type" />
             <TableColumn fx:id="col_trimestre" prefWidth="150.0" text="Trimestre" />
@@ -24,12 +24,12 @@
           <TableColumn fx:id="col_Id" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
         </columns>
       </TableView>
-      <Button fx:id="boutton_retour" layoutX="9.0" layoutY="592.0" mnemonicParsing="false" onAction="#retour" prefHeight="31.0" prefWidth="183.0" style="-fx-background-color: orange;" text="Retour" />
-      <BorderPane layoutX="14.0" layoutY="308.0" prefHeight="273.0" prefWidth="707.0" style="-fx-border-color: green;">
+      <Button fx:id="boutton_retour" layoutX="12.0" layoutY="705.0" mnemonicParsing="false" onAction="#retour" prefHeight="31.0" prefWidth="183.0" style="-fx-background-color: orange;" text="Retour" />
+      <BorderPane layoutX="14.0" layoutY="308.0" prefHeight="386.0" prefWidth="724.0" style="-fx-border-color: green;">
          <center>
-            <LineChart fx:id="Line_Chart" BorderPane.alignment="CENTER">
+            <LineChart fx:id="Line_Chart" prefHeight="384.0" prefWidth="768.0" BorderPane.alignment="CENTER">
               <xAxis>
-                <NumberAxis autoRanging="false" label="Trimestre" lowerBound="1.0" side="BOTTOM" upperBound="3.0" />
+                <NumberAxis autoRanging="false" label="Trimestre" lowerBound="1.0" prefHeight="24.0" prefWidth="626.0" side="BOTTOM" upperBound="3.0" />
               </xAxis>
               <yAxis>
                 <NumberAxis autoRanging="false" label="Note" side="LEFT" upperBound="20.0" />

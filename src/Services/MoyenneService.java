@@ -205,6 +205,15 @@ public class MoyenneService
   }
   
   
+  public ResultSet affichermatieredesmoyennes(int ideleve) throws SQLException
+  {
+      String req = "Select DISTINCT moyennes.eleve_id, matiere.nom FROM moyennes INNER JOIN matiere ON matiere.id=moyennes.matiere WHERE moyennes.eleve_id='"+ideleve+"' ";
+      PreparedStatement pstm = connexion.prepareStatement(req);
+      ResultSet rs = pstm.executeQuery(req);
+      return rs;
+  }
+  
+  
   
   
 }

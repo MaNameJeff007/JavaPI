@@ -97,9 +97,9 @@ public class AbsenceService
         } 
     }
     
-    public ResultSet fetchAbsences() throws SQLException
+    public ResultSet fetchAbsences(String idprof) throws SQLException
     {
-       String req = "SELECT absences.id, absences.dateabs, absences.justification, absences.heuredebut, absences.heurefin, absences.etat, absences.enseignant_id, absences.eleve_id, user.prenom, user.nom FROM `absences` INNER JOIN user ON absences.eleve_id=user.id ORDER BY absences.eleve_id ASC";
+       String req = "SELECT absences.id, absences.dateabs, absences.justification, absences.heuredebut, absences.heurefin, absences.etat, absences.enseignant_id, absences.eleve_id, user.prenom, user.nom FROM `absences` INNER JOIN user ON absences.eleve_id=user.id WHERE enseignant_id='"+idprof+"' ORDER BY absences.eleve_id ASC";
        PreparedStatement pstm = connexion.prepareStatement(req);
        ResultSet rs = pstm.executeQuery(req); 
        return rs;

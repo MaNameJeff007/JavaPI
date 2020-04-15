@@ -41,7 +41,8 @@ public class LoginController implements Initializable {
     
     
     @FXML
-    void Login(ActionEvent event) throws IOException, SQLException {
+    void Login(ActionEvent event) throws IOException, SQLException 
+    {
        // try {
             UserService ser = new UserService();
            if(ser.login(username.getText(), mdp.getText())){
@@ -64,7 +65,6 @@ public class LoginController implements Initializable {
         info.setContentText("ghalet");
         info.show();
             }
-
     }
     
     

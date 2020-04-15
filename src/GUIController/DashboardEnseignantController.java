@@ -234,7 +234,7 @@ public class DashboardEnseignantController implements Initializable {
       
       try
       {
-       ResultSet rs= AS.fetchAbsences();
+       ResultSet rs= AS.fetchAbsences(System.getProperty("id"));
        while(rs.next())
        {
           int identifiant = rs.getInt(1);
@@ -263,7 +263,7 @@ public class DashboardEnseignantController implements Initializable {
       
       try
       {
-          ResultSet rs=SS.afficherSanctions();
+          ResultSet rs=SS.afficherSanctions(System.getProperty("id"));
           while (rs.next())
           {
            int id = rs.getInt("sanctions.id");
@@ -292,7 +292,7 @@ public class DashboardEnseignantController implements Initializable {
       
       try
       {
-       ResultSet rs=NS.fetchNotes2();
+       ResultSet rs=NS.fetchNotes2(System.getProperty("id"));
        while(rs.next())
        {
            int id=rs.getInt(1);

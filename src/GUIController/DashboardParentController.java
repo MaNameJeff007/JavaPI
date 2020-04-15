@@ -54,15 +54,14 @@ public class DashboardParentController implements Initializable {
     
     
     private ObservableList<User> data_eleves;
-    private int id_parent;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) 
-    {
-        id_parent=8;
+    {  
+        
         data_eleves=FXCollections.observableArrayList();
         showEleves();
         col_id_eleve.setCellValueFactory(new PropertyValueFactory<>("identifiant"));
@@ -72,6 +71,7 @@ public class DashboardParentController implements Initializable {
         
         table_eleves.setItems(null);
         table_eleves.setItems(data_eleves);
+      
     }
 
 
@@ -81,17 +81,17 @@ public class DashboardParentController implements Initializable {
       
       try
       {
-       ResultSet rs= US.selectelevesduparent(id_parent);
+       ResultSet rs= US.selectelevesduparent(Integer.valueOf(System.getProperty("id")));
        
        while(rs.next())
        {
-          int id = rs.getInt(1);
+          int ide = rs.getInt(1);
           String prenom = rs.getString(2);
           String nom = rs.getString(3);
           String id_classe = rs.getString(4);
           String classe_niveau = rs.getString(5);
           String classe=classe_niveau +" 'annee "+id_classe;
-          data_eleves.add(new User(id, prenom, nom, classe));
+          data_eleves.add(new User(ide, prenom, nom, classe));
        }    
       }
       catch(SQLException e)

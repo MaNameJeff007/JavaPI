@@ -62,7 +62,7 @@ public class FormajoutsanctionController implements Initializable {
         
         try
         {
-            ResultSet resultseleves=US.affichereleves();
+            ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
             while(resultseleves.next())
             {
                 int id = resultseleves.getInt("id");
@@ -103,7 +103,7 @@ public class FormajoutsanctionController implements Initializable {
         String p=punition.getValue();
         String j=justification.getValue();
         LocalDate dateAbs=date.getValue();
-        String enseignant_id="6";
+        String enseignant_id=System.getProperty("id");
         Sanction S=new Sanction(j, dateAbs, p, false, enseignant_id, id_eleve);
         
         try

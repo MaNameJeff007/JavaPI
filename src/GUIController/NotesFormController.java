@@ -67,7 +67,7 @@ public class NotesFormController implements Initializable {
       try
       {
         ResultSet resultsmatieres=NS.afficherMatieres();
-        ResultSet resultseleves=US.affichereleves();
+        ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
         
         
         while(resultsmatieres.next())
@@ -111,7 +111,7 @@ public class NotesFormController implements Initializable {
         String nom_matiere;
         String nom_eleve;
         String email_parent=null;
-        String email_prof="mohamedaminejrad1@gmail.com";
+        String email_prof=System.getProperty("email");
         
         Boolean flag = Character.isDigit(mt.charAt(1));
         if(flag) 
@@ -144,7 +144,7 @@ public class NotesFormController implements Initializable {
         
         UserService US=new UserService();
         NoteService NS=new NoteService();
-        Note N=new Note(t, tri, "6", id_eleve, mt, v);
+        Note N=new Note(t, tri, System.getProperty("id"), id_eleve, mt, v);
         boolean b=false;
         String sujet="Mise a jour note:";
         String m="Note de type "+t+" pour la matiere "+nom_matiere+" ajoutee a votre enfant: "+nom_eleve;

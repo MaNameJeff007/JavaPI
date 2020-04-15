@@ -58,9 +58,9 @@ public class SanctionService
         pstm.executeUpdate();   
     }
     
-     public ResultSet afficherSanctions() throws SQLException
+     public ResultSet afficherSanctions(String idprof) throws SQLException
     {
-       String req = "SELECT sanctions.id, sanctions.enseignant_id, sanctions.eleve_id, sanctions.date_sanction, sanctions.raisonsanction, sanctions.etat, sanctions.punition, user.prenom, user.nom FROM `sanctions` INNER JOIN user ON user.id=sanctions.eleve_id ORDER BY sanctions.eleve_id ASC";
+       String req = "SELECT sanctions.id, sanctions.enseignant_id, sanctions.eleve_id, sanctions.date_sanction, sanctions.raisonsanction, sanctions.etat, sanctions.punition, user.prenom, user.nom FROM `sanctions` INNER JOIN user ON user.id=sanctions.eleve_id WHERE enseignant_id='"+idprof+"' ORDER BY sanctions.eleve_id ASC";
        PreparedStatement pstm = connexion.prepareStatement(req);
        ResultSet rs = pstm.executeQuery(req);
        return rs;

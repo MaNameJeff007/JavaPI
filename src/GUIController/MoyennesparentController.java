@@ -78,6 +78,8 @@ public class MoyennesparentController implements Initializable {
     public static void setIdeleve(int ideleve) {
         MoyennesparentController.ideleve = ideleve;
     }
+    @FXML
+    private Button Stats;
 
 
     
@@ -129,18 +131,20 @@ public class MoyennesparentController implements Initializable {
     
     private void fillMatieres(ObservableList<String> matieres)
     {
-      NoteService NS=new NoteService();
+      MoyenneService MS=new MoyenneService();
         
       try
       {
-        ResultSet resultsmatieres=NS.afficherMatieres();     
+        ResultSet resultsmatieres=MS.affichermatieredesmoyennes(ideleve);     
+        if(!resultsmatieres.isBeforeFirst() )
+        {
+          matieres.add("rien a afficher");  
+        }
         
+        else
         while(resultsmatieres.next())
         {
-            int id = resultsmatieres.getInt("id"); 
-            String nom=resultsmatieres.getString("nom"); 
-            String id_matiere = String.valueOf(id); 
-            //String insert=id_matiere+"-"+nom;
+            String nom=resultsmatieres.getString("matiere.nom"); 
             matieres.add(nom);
         }
       }
@@ -188,6 +192,5 @@ public class MoyennesparentController implements Initializable {
            linechart_moyennes.getData().add(dataSeries);
         }
         catch(SQLException e){}     
-    }
-    
+    }    
 }
