@@ -7,24 +7,24 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="428.0" prefWidth="728.0" stylesheets="@../CSS/style_dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.DashboardEnseignantController">
+<AnchorPane id="AnchorPane" prefHeight="428.0" prefWidth="728.0" style="-fx-background-color: #778899;" stylesheets="@../CSS/style_dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.DashboardEnseignantController">
    <children>
-      <TabPane fx:id="TabPane" prefHeight="435.0" prefWidth="728.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="TabPane" prefHeight="435.0" prefWidth="763.0" style="-fx-background-color: #778899;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tab_abs" text="Absences">
+          <Tab fx:id="tab_abs" style="-fx-background-color: #778899;" text="Absences">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="728.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="593.0">
                      <children>
-                        <TableView fx:id="tableau_abs" prefHeight="347.0" prefWidth="725.0">
+                        <TableView fx:id="tableau_abs" prefHeight="347.0" prefWidth="764.0">
                            <columns>
-                              <TableColumn fx:id="col_id_abs" prefWidth="39.0" text="ID" visible="false" />
-                              <TableColumn fx:id="col_date_abs" prefWidth="111.0" text="Date_Abs" />
+                              <TableColumn fx:id="col_date_abs" prefWidth="150.0" text="Date_Abs" />
                               <TableColumn fx:id="col_heure_debut_abs" prefWidth="120.0" text="H_Debut" />
                               <TableColumn fx:id="col_heure_fin_abs" prefWidth="141.0" text="H_Fin" />
                               <TableColumn fx:id="col_eleveid_abs" prefWidth="132.0" text="Eleve" />
                               <TableColumn fx:id="col_justification_abs" prefWidth="138.0" text="Justification" />
                               <TableColumn fx:id="col_etat_abs" prefWidth="82.0" text="Etat" />
                               <TableColumn fx:id="col_enseignantid_abs" minWidth="0.0" prefWidth="0.0" text="Enseignant_ID" visible="false" />
+                              <TableColumn fx:id="col_id_abs" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                            </columns>
                         </TableView>
                         <Button fx:id="ajouter_abs" layoutX="4.0" layoutY="354.0" mnemonicParsing="false" onAction="#ajouterAbsence" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: green;" text="Ajouter" textFill="WHITE" />
@@ -34,19 +34,19 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tab_sanctions" text="Sanctions">
+            <Tab fx:id="tab_sanctions" style="-fx-background-color: #778899;" text="Sanctions">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableau_sanctions" prefHeight="345.0" prefWidth="728.0">
+                        <TableView fx:id="tableau_sanctions" prefHeight="345.0" prefWidth="763.0">
                           <columns>
                             <TableColumn fx:id="col_id_sanction" prefWidth="75.0" text="ID" visible="false" />
                             <TableColumn fx:id="col_date_sanction" prefWidth="167.0" text="Date" />
                               <TableColumn fx:id="col_raisonsanction_sanction" prefWidth="155.0" text="Raison_sanction" />
                               <TableColumn fx:id="col_punition_sanction" prefWidth="159.0" text="Punition" />
                               <TableColumn fx:id="col_eleveid_sanction" prefWidth="133.0" text="Eleve" />
-                              <TableColumn fx:id="col_etat_sanction" prefWidth="113.0" text="etat" />
-                              <TableColumn fx:id="col_enseignantid_sanction" minWidth="0.0" prefWidth="0.0" text="Enseignant_ID" />
+                              <TableColumn fx:id="col_etat_sanction" prefWidth="148.0" text="etat" />
+                              <TableColumn fx:id="col_enseignantid_sanction" maxWidth="35.0" minWidth="0.0" prefWidth="0.0" text="Enseignant_ID" visible="false" />
                           </columns>
                         </TableView>
                         <Button fx:id="ajouter_sanction" layoutX="4.0" layoutY="357.0" mnemonicParsing="false" onAction="#AjouterSanction" prefHeight="31.0" prefWidth="104.0" style="-fx-background-color: green;" text="Ajouter" textFill="WHITE" />
@@ -56,21 +56,21 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab fx:id="tab_notes" text="Notes">
+          <Tab fx:id="tab_notes" style="-fx-background-color: #778899;" text="Notes">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <AnchorPane id="AnchorPane" prefHeight="404.0" prefWidth="734.0">
                            <children>
-                              <TableView fx:id="tableau_notes" layoutX="-1.0" layoutY="-1.0" prefHeight="346.0" prefWidth="735.0">
+                              <TableView fx:id="tableau_notes" layoutX="-1.0" layoutY="-1.0" prefHeight="346.0" prefWidth="763.0">
                                  <columns>
-                                    <TableColumn fx:id="col_id_note" prefWidth="55.0" text="ID" visible="false" />
                                     <TableColumn fx:id="col_type_note" prefWidth="140.0" text="Type" />
-                                    <TableColumn fx:id="col_trimestre_note" prefWidth="75.0" text="Trimestre" />
-                                    <TableColumn fx:id="col_enseignantid_note" prefWidth="128.0" text="Enseignant_ID" />
-                                    <TableColumn fx:id="col_eleveid_note" prefWidth="122.0" text="Eleve" />
-                                    <TableColumn fx:id="col_matiere_note" prefWidth="138.0" text="Matiere" />
-                                    <TableColumn fx:id="col_valeur_note" prefWidth="131.0" text="Valeur" />
+                                    <TableColumn fx:id="col_trimestre_note" prefWidth="145.0" text="Trimestre" />
+                                    <TableColumn fx:id="col_eleveid_note" prefWidth="155.0" text="Eleve" />
+                                    <TableColumn fx:id="col_matiere_note" prefWidth="145.0" text="Matiere" />
+                                    <TableColumn fx:id="col_valeur_note" prefWidth="177.0" text="Valeur" />
+                                    <TableColumn fx:id="col_enseignantid_note" maxWidth="118.0" minWidth="0.0" prefWidth="0.0" text="Enseignant_ID" visible="false" />
+                                    <TableColumn fx:id="col_id_note" maxWidth="168.0" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                                  </columns>
                               </TableView>
                               <Button fx:id="modifier_note" layoutX="102.0" layoutY="355.0" mnemonicParsing="false" onAction="#ModifierNote" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: orange;" text="Modifier" textFill="#282626" />
@@ -83,17 +83,17 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tab_moyennes" text="Moyennes">
+            <Tab fx:id="tab_moyennes" style="-fx-background-color: #778899;" text="Moyennes">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableau_moyennes" prefHeight="348.0" prefWidth="728.0">
+                        <TableView fx:id="tableau_moyennes" prefHeight="348.0" prefWidth="763.0">
                            <columns>
                               <TableColumn fx:id="col_id_moyenne" prefWidth="114.0" style="-fx-alignement: CENTER-LEFT;" text="ID" visible="false" />
                               <TableColumn fx:id="col_trimestre_moyenne" minWidth="9.0" prefWidth="206.0" style="-fx-alignement: CENTER-LEFT;" text="Trimestre" />
-                              <TableColumn fx:id="col_eleveid_moyenne" minWidth="8.0" prefWidth="147.0" style="-fx-alignement: CENTER-LEFT;" text="Eleve" />
-                              <TableColumn fx:id="col_matiere_moyenne" minWidth="0.0" prefWidth="162.0" style="-fx-alignement: CENTER-LEFT;" text="Matiere" />
-                              <TableColumn fx:id="col_moyenne_moyenne" minWidth="7.0" prefWidth="212.0" style="-fx-alignement: CENTER-LEFT;" text="Moyenne" />
+                              <TableColumn fx:id="col_eleveid_moyenne" minWidth="8.0" prefWidth="179.0" style="-fx-alignement: CENTER-LEFT;" text="Eleve" />
+                              <TableColumn fx:id="col_matiere_moyenne" minWidth="0.0" prefWidth="190.0" style="-fx-alignement: CENTER-LEFT;" text="Matiere" />
+                              <TableColumn fx:id="col_moyenne_moyenne" minWidth="7.0" prefWidth="187.0" style="-fx-alignement: CENTER-LEFT;" text="Moyenne" />
                            </columns>
                         </TableView>
                         <Button fx:id="recalcul_moyenne" layoutX="14.0" layoutY="356.0" mnemonicParsing="false" onAction="#recalculerMoyenne" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: green;" text="Re-calcul" textFill="WHITE" />

@@ -147,7 +147,7 @@ public class NotesFormController implements Initializable {
         Note N=new Note(t, tri, System.getProperty("id"), id_eleve, mt, v);
         boolean b=false;
         String sujet="Mise a jour note:";
-        String m="Note de type "+t+" pour la matiere "+nom_matiere+" ajoutee a votre enfant: "+nom_eleve;
+        String m="Note de ce type " + t +" pour la matiere "+nom_matiere+" ajoutee a votre enfant: "+nom_eleve;
         int id_parent=0;
         
         try
@@ -178,7 +178,7 @@ public class NotesFormController implements Initializable {
                     catch(Exception e){}
                 }
                 else
-                {a.setContentText("Note de type pour la matiere "+N.getMatiere()+" du trimestre "+N.getTrimestre()+" pour l'eleve d'id "+N.getEleve_id()+" existe deja.");}
+                {a.setContentText("Note de type "+t+" pour la matiere "+N.getMatiere()+" du trimestre "+N.getTrimestre()+" pour l'eleve d'id "+N.getEleve_id()+" existe deja.");}
                 
                 a.showAndWait();
                 // show the dialog
