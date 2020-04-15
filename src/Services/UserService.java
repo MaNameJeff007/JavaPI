@@ -253,9 +253,24 @@ public class UserService {
         }
         while (res.next()) {
             value = res.getString("password");
-            System.out.println("value : " + value);
-            System.setProperty("id", Integer.toString(res.getInt("id")));
-            System.setProperty("role", res.getString("roles"));
+            String role=res.getString("roles");
+            
+            if(role.contains("ENSEIGNANT"))
+            {
+             System.setProperty("classeenseignant_id", res.getString("classeenseignant_id"));  
+            }
+            else if(role.contains("PARENT"))
+            {
+               
+            }
+            else
+            {
+             System.setProperty("classeeleve_id", res.getString("classeeleve_id"));   
+            }
+            String id=Integer.toString(res.getInt("id"));   
+            System.setProperty("id", id);
+            System.setProperty("role", role);         
+            System.setProperty("email", res.getString("email"));
         }
         result = checkPassword(password, value);
         return result;
