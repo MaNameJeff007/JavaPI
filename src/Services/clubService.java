@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import BD.DbConnection;
+import BD.Database;
 import java.util.function.Predicate;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -26,7 +26,7 @@ public class clubService {
     Connection connexion;
 
     public clubService() {
-        connexion = DbConnection.getInstance().getConnexion();
+        connexion = Database.getInstance().getConnexion();
     }
 
 //    public void ajouterClub(Club c) throws SQLException {

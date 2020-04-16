@@ -49,7 +49,10 @@ public class BacKController implements Initializable {
     private Button btn7;
     @FXML
     private Button btn8;
- private int numero_panel;
+    @FXML
+    private Pane buttonPane;
+    private int numero_panel;
+
     /**
      * Initializes the controller class.
      */
@@ -99,7 +102,7 @@ public class BacKController implements Initializable {
             btn6.setVisible(true);
             btn7.setVisible(true);
             btn8.setVisible(true);
-           
+
             btn1.setText("GESTION DES CLASSES");
             btn2.setText("GESTION DES SALLES");
             btn3.setText("GESTION DES MATIERES");
@@ -108,12 +111,12 @@ public class BacKController implements Initializable {
             btn6.setText("ELEVES ET BULLETINS");
             btn7.setText("EMPLOIS DES ENSEIGANTS");
             btn8.setText("CONSULTER LES STATISTIQUES");
-           
+
             numero_panel = 5;
             event.consume();
         });
     }
-    
+
     void gestionDemandes() {
         demandes.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             btn1.setVisible(true);
@@ -134,36 +137,35 @@ public class BacKController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btn1.setVisible(false);
-            btn2.setVisible(false);
-            btn3.setVisible(false);
-            btn4.setVisible(false);
-            btn5.setVisible(false);
-            btn6.setVisible(false);
-            btn7.setVisible(false);
-            btn8.setVisible(false);
-            gestionScolarite();
-            gestionDemandes();
-            
-            btn1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        btn2.setVisible(false);
+        btn3.setVisible(false);
+        btn4.setVisible(false);
+        btn5.setVisible(false);
+        btn6.setVisible(false);
+        btn7.setVisible(false);
+        btn8.setVisible(false);
+        gestionScolarite();
+        gestionDemandes();
+
+        btn1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AfficherClasses.fxml");
             }
             if (numero_panel == 2) {
-                 System.out.println("2");
-               // affichage("/GUIInterface/eleve.fxml");
+                System.out.println("2");
+                // affichage("/GUIInterface/eleve.fxml");
             }
             if (numero_panel == 4) {
                 affichage("/GUIInterface/AfficherAttestationAdmin.fxml");
             }
             if (numero_panel == 3) {
-                 System.out.println("3");
-               // affichage("/GUIInterface/Forum.fxml");
+                System.out.println("3");
+                // affichage("/GUIInterface/Forum.fxml");
             }
             event.consume();
         });
-        
-            
-            btn2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        btn2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AjouterSalle.fxml");
             }
@@ -172,9 +174,8 @@ public class BacKController implements Initializable {
             }
             event.consume();
         });
-             
-            
-            btn3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        btn3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AjouterMatiere.fxml");
             }
@@ -183,39 +184,36 @@ public class BacKController implements Initializable {
             }
             event.consume();
         });
-            
-             btn4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        btn4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AfficherCoeff.fxml");
             }
             event.consume();
         });
-             
-            
-              
+
         btn5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AfficherSeance.fxml");
             }
             event.consume();
-        });  
-        
-         btn6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        });
+
+        btn6.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/BulletinsElv.fxml");
             }
             event.consume();
         });
-         
-      btn7.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        btn7.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/EmploisEns.fxml");
             }
             event.consume();
         });
-      
-      
-       btn8.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+        btn8.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/MoyGStat.fxml");
             }
@@ -225,6 +223,40 @@ public class BacKController implements Initializable {
 
     @FXML
     private void forum(ActionEvent event) {
+    }
+
+    @FXML
+    void EdTech(ActionEvent event) throws IOException {
+        /*
+         FXMLLoader fxmlLoader = new FXMLLoader();
+         fxmlLoader.setLocation(getClass().getResource("/GUIInterface/HomeView.fxml"));
+         Scene scene = new Scene(fxmlLoader.load());
+         Stage stage = new Stage();
+         stage.setTitle("New Window");
+         stage.setScene(scene);
+         stage.show();
+         ((Node) (event.getSource())).getScene().getWindow().hide();*/
+        buttonPane.setMaxWidth(50);
+        affichage("/GUIInterface/EdTech/TestView.fxml");
+    }
+
+    public void testAction(ActionEvent event) throws IOException {
+        System.out.println("HERE ");
+        buttonPane.setMaxWidth(50);
+
+        affichage("/GUIInterface/EdTech/TestView.fxml");
+    }
+
+    public void ExerciceAction(ActionEvent event) throws IOException {
+        buttonPane.setMaxWidth(50);
+
+        affichage("/GUIInterface/EdTech/ExerciceView.fxml");
+    }
+
+    public void CourseAction(ActionEvent event) throws IOException {
+        buttonPane.setMaxWidth(50);
+
+        affichage("/GUIInterface/EdTech/CourseView.fxml");
     }
 
 }

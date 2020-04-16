@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="527.0" prefWidth="735.0" stylesheets="@../CSS/StyleForum.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIInterface.AfficherCoeffController">
+   <children>
+      <TableView fx:id="ListeCoeff" layoutX="63.0" layoutY="148.0" onKeyReleased="#testAff" prefHeight="269.0" prefWidth="617.0" stylesheets="@../CSS/StyleForum.css">
+        <columns>
+          <TableColumn fx:id="niveau" prefWidth="67.0" text="Niveau " />
+            <TableColumn fx:id="matiere" prefWidth="103.0" text="NomMatiere" />
+            <TableColumn fx:id="valeur" prefWidth="54.0" text="Valeur" />
+        </columns>
+      </TableView>
+      <Button fx:id="AjouterCoeff" layoutX="521.0" layoutY="462.0" mnemonicParsing="false" onAction="#redirectionAjC" prefHeight="36.0" prefWidth="167.0" text="Ajouter Coefficient" />
+      <Text fx:id="TitreCoeffs" layoutX="180.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTE DES COEFFICIENTS MATIERES" textAlignment="CENTER" wrappingWidth="318.775390625">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Line endX="166.775390625" endY="-1.482421875" layoutX="342.0" layoutY="92.0" startX="-152.0" startY="-1.482421875" />
+      <ImageView fitHeight="43.0" fitWidth="29.0" layoutX="521.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icons8-add-64.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

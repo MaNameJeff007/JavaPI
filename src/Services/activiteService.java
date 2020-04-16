@@ -6,7 +6,7 @@
 package Services;
 
 import java.sql.*;
-import BD.DbConnection;
+import BD.Database;
 import Entities.Activite;
 
 /**
@@ -18,7 +18,7 @@ public class activiteService {
     Connection connexion;
 
     public activiteService() {
-        connexion = DbConnection.getInstance().getConnexion();
+        connexion = Database.getInstance().getConnexion();
     }
 
     public void ajouterActivite(Activite a) throws SQLException {

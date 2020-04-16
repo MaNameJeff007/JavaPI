@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import BD.DbConnection;
+import BD.Database;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class ReclamationService {
     Connection connexion;
 
     public ReclamationService() {
-        connexion = DbConnection.getInstance().getConnexion();
+        connexion = Database.getInstance().getConnexion();
     }
 
     public void ajouterReclamation(Reclamation r) throws SQLException {
