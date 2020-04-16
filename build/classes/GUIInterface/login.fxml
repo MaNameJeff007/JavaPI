@@ -8,11 +8,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.LoginController">
    <children>
-      <Button layoutX="248.0" layoutY="235.0" mnemonicParsing="false" onAction="#Login" text="Button" />
-      <TextField fx:id="username" layoutX="200.0" layoutY="111.0" />
-      <Label layoutX="134.0" layoutY="115.0" text="username" />
-      <Label layoutX="134.0" layoutY="179.0" text="password" />
-      <Label fx:id="fLabel" layoutX="372.0" layoutY="252.0" text="Label" />
-      <PasswordField fx:id="mdp" layoutX="200.0" layoutY="175.0" />
+      <Pane fx:id="back" prefHeight="400.0" prefWidth="600.0" styleClass="bg-black-style" stylesheets="@../CSS/StyleForum.css">
+         <children>
+            <Button layoutX="199.0" layoutY="237.0" mnemonicParsing="false" onAction="#Login" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="login" />
+            <TextField fx:id="username" layoutX="199.0" layoutY="112.0" />
+            <Label layoutX="127.0" layoutY="116.0" text="username" />
+            <Label layoutX="127.0" layoutY="177.0" text="password" />
+            <PasswordField fx:id="mdp" layoutX="199.0" layoutY="173.0" />
+            <Button layoutX="291.0" layoutY="237.0" mnemonicParsing="false" onAction="#register" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="register" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

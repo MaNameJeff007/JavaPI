@@ -7,7 +7,7 @@ package Services;
 
 import Entities.Classe;
 import Entities.User;
-import Utils.ConnexionBD;
+import BD.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +21,7 @@ import java.util.List;
  * @author dell
  */
 public class ServiceUser {
-      Connection c=ConnexionBD.getinstance().getcnx();
+      Connection c=Database.getInstance().getConnexion();
       
       public ArrayList< User> afficherEns1 (){
         

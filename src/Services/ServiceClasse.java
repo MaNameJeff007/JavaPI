@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package Services;
+import BD.Database;
 import Entities.Classe;
-import Utils.ConnexionBD;
 import java.awt.AWTException;
 import java.awt.TrayIcon;
 import java.net.MalformedURLException;
@@ -25,7 +25,7 @@ import javafx.event.Event;
  * @author dell
  */
 public class ServiceClasse {
-     Connection c=ConnexionBD.getinstance().getcnx();
+     Connection c=Database.getInstance().getConnexion();
      
      
      public List< Classe> afficherClasse (){

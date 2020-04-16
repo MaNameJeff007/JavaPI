@@ -25,14 +25,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.jfree.chart.ChartFactory;
+/*import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.DefaultPieDataset;*/
 
 /**
  * FXML Controller class
@@ -130,7 +130,7 @@ public class MoyGStatController implements Initializable {
                         float e3 = (float) it2.next();
                         for (Iterator it3 = p4.iterator(); it3.hasNext();) {
                             float e4 = (float) it3.next();
-                            DefaultPieDataset pieDataset = new DefaultPieDataset();
+                           /* DefaultPieDataset pieDataset = new DefaultPieDataset();
                             pieDataset.setValue("Moyennes inférieures à 10", e1);
                             pieDataset.setValue("Moyennes entre 10 et 12 ", e2);
                             pieDataset.setValue("Moyennes entre 13 et 15 ", e3);
@@ -140,7 +140,7 @@ public class MoyGStatController implements Initializable {
                             PiePlot3D P = (PiePlot3D) chart.getPlot();
                             ChartFrame frame = new ChartFrame("pie chart", chart);
                             frame.setVisible(true);
-                            frame.setSize(800, 550);
+                            frame.setSize(800, 550);*/
                         }
                     }
                 }
@@ -170,7 +170,7 @@ public class MoyGStatController implements Initializable {
                     for (Iterator it2 = p3.iterator(); it2.hasNext();) {
                         float e3 = (float) it2.next();
 
-                        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                       /* DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                         dataset.setValue(e1, "Moyennes inférieures à 10", "moyennes");
                         dataset.setValue(e2, "Moyennes entre 10 et 14 ", "moyennes");
                         dataset.setValue(e3, "Moyennes supérieures à 14 ", "moyennes");
@@ -181,7 +181,7 @@ public class MoyGStatController implements Initializable {
                         P.setRangeGridlinePaint(Color.BLACK);
                         ChartFrame frame = new ChartFrame("pie chart", chart);
                         frame.setVisible(true);
-                        frame.setSize(800, 550);
+                        frame.setSize(800, 550);*/
 
                     }
                 }
@@ -211,7 +211,7 @@ public class MoyGStatController implements Initializable {
                     for (Iterator it2 = p3.iterator(); it2.hasNext();) {
                         float e3 = (float) it2.next();
 
-                        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                       /* DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                         dataset.setValue(e1, "Moyennes inférieures à 10", "moyennes");
                         dataset.setValue(e2, "Moyennes entre 10 et 14 ", "moyennes");
                         dataset.setValue(e3, "Moyennes supérieures à 14 ", "moyennes");
@@ -222,7 +222,7 @@ public class MoyGStatController implements Initializable {
                         P.setRangeGridlinePaint(Color.BLACK);
                         ChartFrame frame = new ChartFrame("pie chart", chart);
                         frame.setVisible(true);
-                        frame.setSize(800, 550);
+                        frame.setSize(800, 550);*/
 
                     }
                 }
@@ -252,7 +252,7 @@ public class MoyGStatController implements Initializable {
                     for (Iterator it2 = p3.iterator(); it2.hasNext();) {
                         float e3 = (float) it2.next();
 
-                        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                        /*DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                         dataset.setValue(e1, "Moyennes inférieures à 10", "moyennes");
                         dataset.setValue(e2, "Moyennes entre 10 et 14 ", "moyennes");
                         dataset.setValue(e3, "Moyennes supérieures à 14 ", "moyennes");
@@ -263,7 +263,7 @@ public class MoyGStatController implements Initializable {
                         P.setRangeGridlinePaint(Color.BLACK);
                         ChartFrame frame = new ChartFrame("pie chart", chart);
                         frame.setVisible(true);
-                        frame.setSize(800, 550);
+                        frame.setSize(800, 550);*/
 
                     }
                 }

@@ -8,7 +8,7 @@ package Services;
 import Entities.Classe;
 import Entities.Matiere;
 import Entities.Coeff;
-import Utils.ConnexionBD;
+import BD.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +26,7 @@ import javafx.scene.control.Alert;
  */
 public class ServiceCoeff {
 
-    Connection c = ConnexionBD.getinstance().getcnx();
+    Connection c = Database.getInstance().getConnexion();
 
     public List< Classe> ComboxGetLibClasse(String id) {
         ArrayList< Classe> myList = new ArrayList();

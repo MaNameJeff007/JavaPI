@@ -8,6 +8,11 @@ package Services;
 import java.sql.*;
 import BD.Database;
 import Entities.Activite;
+import Entities.Club;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -22,14 +27,15 @@ public class activiteService {
     }
 
     public void ajouterActivite(Activite a) throws SQLException {
-        String req = "INSERT INTO `activity` (`id`, `user_id`, `nomActivite`, `typeActivite`, `vote`) VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement pstm = connexion.prepareStatement(req);
-        pstm.setInt(1, a.getId());
-        pstm.setInt(2, a.getUser_id());
-        pstm.setString(3, a.getNomActivite());
-        pstm.setString(4, a.getTypeActivite());
-        pstm.setInt(5, a.getVote());
-        pstm.executeUpdate();
+
+        String req = "insert into activity ( user_id, NomClub, nomActivite, typeActivite, vote) values ('" + a.getUser_id() + "','" + a.getNomClub() + "','" + a.getNomActivite() + "','" + a.getTypeActivite() + "','" + a.getVote() + "')";
+        Statement st;
+        try {
+            st = connexion.createStatement();
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            Logger.getLogger(clubService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void supprimerActivite(int id) throws SQLException {
@@ -39,27 +45,82 @@ public class activiteService {
         pstm.executeUpdate();
     }
 
-    public void modifierActivite(int id, Activite a) throws SQLException {
-        String req = "UPDATE `activity` SET vote = ? where id = ?";
+    public void modifierActivite(Activite a) throws SQLException {
+
+        String req = "UPDATE `activity` SET NomClub= ?,nomActivite = ?,typeActivite=? where id = ?";
+
         PreparedStatement pstm = connexion.prepareStatement(req);
-        pstm.setString(1, a.getNomActivite());
-        pstm.setInt(2, a.getVote());
+        pstm.setString(1, a.getNomClub());
+        pstm.setString(2, a.getNomActivite());
+        pstm.setString(3, a.getTypeActivite());
+        pstm.setInt(4, a.getId());
         pstm.executeUpdate();
+
     }
 
-    public void afficherActivite() throws SQLException {
-        String req = "SELECT * FROM activity";
-        PreparedStatement pstm = connexion.prepareStatement(req);
-        ResultSet rs = pstm.executeQuery(req);
-        System.out.print("\n");
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            int user_id = rs.getInt("user_id");
-            String nomActivite = rs.getString("nomActivite");
-            String typeActivite = rs.getString("typeActivite");
-            int vote = rs.getInt("vote");
+    public ObservableList<Activite> afficherActivite() {
 
-            System.out.format("%s, %s, %s, %s, %s=\n", id, user_id, nomActivite, typeActivite, vote);
+        ObservableList<Activite> mylist = FXCollections.observableArrayList();
+        String req = " select * from activity ";
+        Statement st;
+        try {
+            st = connexion.createStatement();
+            ResultSet resultat = st.executeQuery(req);
+
+            while (resultat.next()) {
+                int id = resultat.getInt("id");
+                int user_id = resultat.getInt("user_id");
+                String Nom_Club = resultat.getString("NomClub");
+                String nomActivite = resultat.getString("nomActivite");
+                String typeActivite = resultat.getString("typeActivite");
+                int vote = resultat.getInt("vote");
+                Activite c = new Activite(id, user_id, Nom_Club, nomActivite, typeActivite, vote);
+                mylist.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(clubService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return mylist;
     }
+
+    public ObservableList<String> GetClubNameForComboACT() {
+        ObservableList<String> mylist = FXCollections.observableArrayList();
+        String req = "SELECT nomclub FROM club";
+        Statement st;
+        try {
+            st = connexion.createStatement();
+            ResultSet resultat = st.executeQuery(req);
+
+            while (resultat.next()) {
+                String nomClub = resultat.getString("nomclub");
+
+                mylist.add(nomClub);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(clubService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mylist;
+    }
+    public ObservableList<String> GetEventsNameForComboACT() {
+        ObservableList<String> mylist = FXCollections.observableArrayList();
+        String req = "SELECT nomclub FROM club";
+        Statement st;
+        try {
+            st = connexion.createStatement();
+            ResultSet resultat = st.executeQuery(req);
+
+            while (resultat.next()) {
+                String nomClub = resultat.getString("nomclub");
+
+                mylist.add(nomClub);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(clubService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mylist;
+    }
+
 }

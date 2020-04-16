@@ -5,13 +5,13 @@
  */
 package Services;
 
+import BD.Database;
 import Entities.Classe;
 import Entities.Coeff;
 import Entities.Matiere;
 import Entities.Salle;
 import Entities.Seance;
 import Entities.User;
-import Utils.ConnexionBD;
 import Utils.JavaMail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +32,7 @@ import javafx.scene.control.Alert;
  */
 public class ServiceSeance {
 
-    Connection c = ConnexionBD.getinstance().getcnx();
+    Connection c = Database.getInstance().getConnexion();
 
     public void modifierSeance(Seance r, String emailEns) {
         String requete = "UPDATE seance SET enseignant_id=? , classe_id=? , salle_id=? , matiere_id=? , jour =? , hdeb=?, hfin =? "

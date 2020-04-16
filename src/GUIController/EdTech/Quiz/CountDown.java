@@ -2,9 +2,9 @@ package GUIController.EdTech.Quiz;
 
 import GUIController.EdTech.JavaQuizController;
 import java.io.IOException;
-import eu.hansolo.tilesfx.Tile;
+/*import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.Tile.SkinType;
-import eu.hansolo.tilesfx.TileBuilder;
+import eu.hansolo.tilesfx.TileBuilder;*/
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -19,9 +19,9 @@ public class CountDown {
     private static final int SECONDS_PER_HOUR = 3600;
     private static final int SECONDS_PER_MINUTE = 60;
 
-    private Tile hours;
+    /*private Tile hours;
     private Tile minutes;
-    private Tile seconds;
+    private Tile seconds;*/
     private Duration duration;
     private long lastTimerCall;
     private AnimationTimer timer;
@@ -31,9 +31,9 @@ public class CountDown {
 
     public HBox setCountdown() {
 
-        hours = createTile("00");
+        /*hours = createTile("00");
         minutes = createTile("0");
-        seconds = createTile("0");
+        seconds = createTile("0");*/
 
         one1 = new Label(":");
         one1.setMaxHeight(50);
@@ -69,15 +69,15 @@ public class CountDown {
 
                     }
 
-                    hours.setDescription("00");
+                    /*hours.setDescription("00");
                     minutes.setDescription(String.format("%02d", m));
-                    seconds.setDescription(String.format("%02d", s));
+                    seconds.setDescription(String.format("%02d", s));*/
                     lastTimerCall = now;
                 }
             }
         };
 
-        pane = new HBox(hours, one1, minutes, two2, seconds);
+        //pane = new HBox(hours, one1, minutes, two2, seconds);
         pane.setPadding(new Insets(10));
 
         timer.start();
@@ -91,7 +91,7 @@ public class CountDown {
         JavaQuizController.getInstance().submit();
     }
 
-    private Tile createTile(final String TEXT) {
+    /*private Tile createTile(final String TEXT) {
         return TileBuilder.create().skinType(SkinType.CHARACTER)
                 .minSize(10, 10)
                 .maxSize(40, 40)
@@ -100,6 +100,6 @@ public class CountDown {
                 .backgroundColor(Color.TRANSPARENT)
                 .textColor(Color.BLACK)
                 .build();
-    }
+    }*/
 
 }

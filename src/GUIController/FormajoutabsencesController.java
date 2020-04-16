@@ -62,7 +62,7 @@ public class FormajoutabsencesController implements Initializable {
         
         UserService US=new UserService();
         
-        try
+        /*try
         {
             ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
              while(resultseleves.next())
@@ -81,7 +81,7 @@ public class FormajoutabsencesController implements Initializable {
             justification.setValue(justifications.get(0));
         }
         
-        catch(SQLException e){}
+        catch(SQLException e){}*/
     }    
 
     @FXML

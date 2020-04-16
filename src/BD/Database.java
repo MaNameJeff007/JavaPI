@@ -17,7 +17,7 @@ public class Database {
     
     private static Database instance;
     private Connection connexion;
-    private String url = "JDBC:mysql://localhost/workshop";
+    private String url = "JDBC:mysql://localhost/projet";
     private String user = "root";
     private String password = "";
 

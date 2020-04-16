@@ -6,7 +6,7 @@
 package GUIController.EdTech;
 
 import Entities.FosUser;
-import com.qoppa.pdfViewer.PDFViewerBean;
+//import com.qoppa.pdfViewer.PDFViewerBean;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Array;

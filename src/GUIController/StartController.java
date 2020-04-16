@@ -35,6 +35,10 @@ public class StartController implements Initializable {
     @FXML
     private ImageView forum;
     @FXML
+    private Pane demandes;
+    @FXML
+    private Pane club;
+    @FXML
     private ImageView profil;
     @FXML
     private Button bouton1;
@@ -51,22 +55,6 @@ public class StartController implements Initializable {
      */
     private int numero_panel;
 
-    @FXML
-    private Pane demandes;
-
-    @FXML
-    void forum(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Forum.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("New Window");
-        stage.setScene(scene);
-        stage.show();
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-
-    }
-
     void affichage(String x) {
         Parent fxml;
 
@@ -80,16 +68,46 @@ public class StartController implements Initializable {
         }
     }
 
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+FXMLLoader fxmlLoader = new FXMLLoader();
+              fxmlLoader.setLocation(getClass().getResource("/GUIInterface/login.fxml"));
+          System.clearProperty("role");
+          System.clearProperty("id");
+          System.clearProperty("email");
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+    }
+
     void gestionForum() {
         forum.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             //affichage("/GUIInterface/Forum.fxml");
             bouton1.setVisible(true);
-            bouton2.setVisible(true);
-            bouton3.setVisible(true);
+            bouton2.setVisible(false);
+            bouton3.setVisible(false);
             bouton4.setVisible(false);
             bouton5.setVisible(false);
             bouton1.setText("Forum");
             numero_panel = 3;
+            event.consume();
+        });
+    }
+
+    void gestionclub() {
+        club.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //affichage("/GUIInterface/Forum.fxml");
+            bouton1.setVisible(true);
+            bouton2.setVisible(true);
+            bouton3.setVisible(false);
+            bouton4.setVisible(false);
+            bouton5.setVisible(false);
+            bouton1.setText("club");
+            bouton2.setText("evenement");
+            numero_panel = 6;
             event.consume();
         });
     }
@@ -118,6 +136,7 @@ public class StartController implements Initializable {
         bouton4.setVisible(false);
         bouton5.setVisible(false);
         gestionForum();
+        gestionclub();
         gestionDemandes();
         profil.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
@@ -147,12 +166,18 @@ public class StartController implements Initializable {
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AfficherAttestation.fxml");
             }
+            if (numero_panel == 6) {
+                affichage("/GUIInterface/FrontEventViews.fxml");
+            }
             event.consume();
         });
         bouton2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
             if (numero_panel == 5) {
                 affichage("/GUIInterface/AfficherReclamation.fxml");
+            }
+            if (numero_panel == 6) {
+                affichage("/GUIInterface/FrontActiviteViews.fxml");
             }
             event.consume();
         });

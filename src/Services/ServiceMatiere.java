@@ -6,13 +6,13 @@
 package Services;
 
 
+import BD.Database;
 import Entities.Classe;
 import Entities.Matiere;
 
 
 
 
-import Utils.ConnexionBD;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +41,7 @@ import javafx.util.Callback;
  * @author dell
  */
 public class ServiceMatiere {
- Connection c=ConnexionBD.getinstance().getcnx();
+ Connection c=Database.getInstance().getConnexion();
     
     
     public List<Matiere> afficherMatieres (){

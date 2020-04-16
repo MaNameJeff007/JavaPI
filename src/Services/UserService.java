@@ -243,6 +243,7 @@ public class UserService {
     public boolean login(String username, String password) throws SQLException {
         String value = "";
         boolean result = false;
+        
         String query = "Select * from user where username=?";
         PreparedStatement prd = connexion.prepareStatement(query);
         prd.setString(1, username);
@@ -254,25 +255,25 @@ public class UserService {
         while (res.next()) {
             value = res.getString("password");
             String role=res.getString("roles");
-
+System.out.println("1");
             if(role.contains("ENSEIGNANT"))
-            {
+            {System.out.println("2");
              System.setProperty("classeenseignant_id", res.getString("classeenseignant_id"));
             }
             else if(role.contains("PARENT"))
             {
 
             }
-            else
-            {
-             System.setProperty("classeeleve_id", res.getString("classeeleve_id"));
+            else if(res.getInt("classeeleve_id")!=0)
+            {System.out.println("4");
+             System.setProperty("classeeleve_id", Integer.toString(res.getInt("classeeleve_id")));
             }
-            String id=Integer.toString(res.getInt("id"));
-            System.setProperty("id", id);
-            System.setProperty("role", role);
-            System.setProperty("email", res.getString("email"));
+            String id=Integer.toString(res.getInt("id"));System.out.println("5");
+            System.setProperty("id", id);System.out.println("6");
+            System.setProperty("role", role);System.out.println("7");
+            System.setProperty("email", res.getString("email"));System.out.println("8");
         }
-        result = checkPassword(password, value);
+        result = checkPassword(password, value);System.out.println("aaa");
         return result;
     }
 
@@ -529,10 +530,6 @@ public ArrayList< User> afficherEns1 (){
         }
         
         return myList;
-    }
-
-    public ResultSet affichereleves(String property) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 

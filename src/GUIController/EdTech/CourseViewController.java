@@ -31,10 +31,6 @@ import javafx.util.Callback;
 import static jdk.nashorn.internal.objects.NativeArray.map;
 import Entities.Course;
 import Services.CourseService;
-import java.awt.AWTException;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
 import java.util.ArrayList;
 
 /**
@@ -61,9 +57,9 @@ public class CourseViewController implements Initializable {
     @FXML
     private Button BrowseButton;
     @FXML
-    private AnchorPane anchorPane;    String fileName = "";
+    private AnchorPane anchorPane;
 
-
+    String fileName = "";
 
     /**
      * Initializes the controller class.
@@ -103,9 +99,6 @@ public class CourseViewController implements Initializable {
                 if (i == 0) {
                     col.setVisible(false);
                 }
-                if (i==rs.getMetaData().getColumnCount()-1){
-                    col.setVisible(false);
-                }
                 /*
                 if (i == rs.getMetaData().getColumnCount()-1) {
                     col.setVisible(false);
@@ -121,25 +114,26 @@ public class CourseViewController implements Initializable {
         data = FXCollections.observableArrayList();
         try {
             CourseService c = new CourseService();
-            ResultSet rs = c.getAllCoursesResultSet();
+            List<Course> rs = c.getAllCourses();
             /**
              * ******************************
              * Data added to ObservableList * ******************************
              */
             {
                 //Iterate Row
-             while (rs.next()) {
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+                ObservableList<Course> row = FXCollections.observableArrayList();
+                for (int i = 1; i <= rs.size(); i++) {
                     //Iterate Column
-                    row.add(rs.getString(i));
+                   // System.out.println("test : "+rs.getString(i));
+                    /* 
+                    String course = String.format("%d,%s,%s,%s,%s",rs.getInt("id"),rs.getString("nom")
+                     ,rs.getString("description"),rs.getString("contenu"),rs.getInt("type_intelligence")
+                     ,rs.getInt("niveau"));*/
+                    //row.add(course);
+                    row.add(rs.get(i));
                 }
                 System.out.println("Row [1] added " + row);
                 data.add(row);
-
-            }
-              
 
             }
             /*          CourseService cs = new CourseService();
@@ -165,7 +159,7 @@ public class CourseViewController implements Initializable {
                         nomText.setText(cours[1]);
                         descText.setText(cours[2]);
                         typeText.setText(cours[4]);
-                       
+                        contenuText.setText(cours[3]);
 
                     }
                 });
@@ -182,7 +176,7 @@ public class CourseViewController implements Initializable {
         // I really don't recommend using a single handler like this,
         // but it will work
         int type;
-        type = Integer.parseInt(typeText.getText().trim());
+        type = Integer.parseInt(typeText.getText());
         if (fileName == "") {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Erreur");
@@ -196,8 +190,6 @@ public class CourseViewController implements Initializable {
         try {
             cs.AjouterCourse(c);
             System.out.println("here");
-         
-             displayTray();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -238,15 +230,7 @@ public class CourseViewController implements Initializable {
         id2 = Integer.parseInt(id);
         type = Integer.parseInt(typeText.getText().trim());
 
-           if (fileName == "") {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Veuillez choisir un fichier SVP");
-            alert.setContentText("Le contenu est obligatoire");
-
-            alert.showAndWait();
-        }
-        Course c = new Course(id2, nomText.getText(), descText.getText(), fileName, type, 2);
+        Course c = new Course(id2, nomText.getText(), descText.getText(), contenuText.getText(), type, 2);
 
         try {
             cs.UpdateCourse(c);
@@ -254,8 +238,6 @@ public class CourseViewController implements Initializable {
             System.out.println(e);
         }
         RefreshTable();
-        
-       
     }
 
     @FXML
@@ -305,25 +287,5 @@ public class CourseViewController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-    
-    
-    public void displayTray() throws AWTException {
-        //Obtain only one instance of the SystemTray object
-        SystemTray tray = SystemTray.getSystemTray();
-
-        //If the icon is a file
-        java.awt.Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
-        //Alternative (if the icon is on the classpath):
-        //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
-
-        TrayIcon trayIcon = new TrayIcon(image, "Cours créé");
-        //Let the system resize the image if needed
-        trayIcon.setImageAutoSize(true);
-        //Set tooltip text for the tray icon
-        trayIcon.setToolTip("System tray icon demo");
-        tray.add(trayIcon);
-
-        trayIcon.displayMessage("nouveau cours ajouté", "nouveau cours ajouté", TrayIcon.MessageType.INFO);
     }
 }

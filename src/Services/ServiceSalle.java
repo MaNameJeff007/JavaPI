@@ -6,8 +6,8 @@
 package Services;
 
 
+import BD.Database;
 import Entities.Salle;
-import Utils.ConnexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ import javafx.scene.control.Alert;
  * @author dell
  */
 public class ServiceSalle {
-    Connection c=ConnexionBD.getinstance().getcnx();
+    Connection c=Database.getInstance().getConnexion();
     
     
     public List< Salle> afficherSalles (){

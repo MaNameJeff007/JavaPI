@@ -52,7 +52,7 @@ public class PDFViewerController implements Initializable {
         }
         model = new PdfModel(path);
         pagination.setPageCount(model.numPages(path));
-        pagination.setPageFactory(index -> new ImageView(model.getImage(index)));
+        //pagination.setPageFactory(index -> new ImageView(model.getImage(index)));
 
     }
 

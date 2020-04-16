@@ -60,7 +60,7 @@ public class FormajoutsanctionController implements Initializable {
         
         UserService US=new UserService();
         
-        try
+       /* try
         {
             ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
             while(resultseleves.next())
@@ -73,7 +73,7 @@ public class FormajoutsanctionController implements Initializable {
                 eleves.add(insert);
             }  
         }
-        catch(SQLException e){}
+        catch(SQLException e){}*/
         
         eleve.setItems(eleves);
         punition.setItems(punitions);

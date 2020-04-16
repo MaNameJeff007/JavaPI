@@ -9,7 +9,7 @@ import Entities.Bulletin;
 import Entities.Classe;
 import Entities.Coeff;
 import Entities.User;
-import Utils.ConnexionBD;
+import BD.Database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +27,7 @@ import javafx.scene.control.Alert;
  * @author dell
  */
 public class ServiceBulletin {
- Connection c=ConnexionBD.getinstance().getcnx();
+ Connection c=Database.getInstance().getConnexion();
      
  
  

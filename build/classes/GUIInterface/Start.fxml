@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.StartController">
    <children>
-      <Pane layoutX="80.0" prefHeight="560.0" prefWidth="231.0">
+      <Pane layoutX="80.0" prefHeight="560.0" prefWidth="231.0" styleClass="mid" stylesheets="@../CSS/Style.css">
          <children>
             <Button fx:id="bouton1" layoutX="37.0" layoutY="34.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="aa" />
             <Button fx:id="bouton2" layoutX="37.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="aa" />
@@ -26,6 +26,7 @@
                   <Image url="@../images/profile.png" />
                </image>
             </ImageView>
+            <Button layoutX="37.0" layoutY="516.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="92.0" text="logout" />
          </children>
       </Pane>
       <Pane fx:id="back" layoutX="311.0" prefHeight="560.0" prefWidth="696.0" />
@@ -48,7 +49,11 @@
                   <Text layoutX="12.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="demandes" />
                </children></Pane>
             <Pane layoutY="400.0" prefHeight="80.0" prefWidth="80.0" styleClass="espaceE" stylesheets="@../CSS/Style.css" />
-            <Pane layoutY="480.0" prefHeight="80.0" prefWidth="80.0" styleClass="espaceF" stylesheets="@../CSS/Style.css" />
+            <Pane fx:id="club" layoutY="480.0" prefHeight="80.0" prefWidth="80.0" styleClass="espaceF" stylesheets="@../CSS/Style.css">
+               <children>
+                  <Text layoutX="11.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="evenement" />
+                  <Text layoutX="16.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club &amp;" />
+               </children></Pane>
          </children>
       </AnchorPane>
    </children>

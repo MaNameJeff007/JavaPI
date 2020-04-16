@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUIController;
 
 import Services.UserService;
@@ -24,53 +23,65 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 
 /**
  * FXML Controller class
  *
  * @author admin
  */
-
 public class LoginController implements Initializable {
 
-    @FXML private TextField username;
-    @FXML private PasswordField mdp;
-    @FXML private Label fLabel;
-    
-    
     @FXML
-    void Login(ActionEvent event) throws IOException, SQLException 
-    {
-       // try {
-            UserService ser = new UserService();
-           if(ser.login(username.getText(), mdp.getText())){
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                if(System.getProperty("role").contains("ELEVE")){
+    private TextField username;
+    @FXML
+    private PasswordField mdp;
+    @FXML
+    private Label fLabel;
+
+
+    @FXML
+    void Login(ActionEvent event) throws IOException, SQLException {
+        // try {
+        UserService ser = new UserService();
+        if (ser.login(username.getText(), mdp.getText())) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            if (System.getProperty("role").contains("ELEVE")) {
                 fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Start.fxml"));
-                }
-                else{
-                    fxmlLoader.setLocation(getClass().getResource("/GUIInterface/BacK.fxml"));
-                }
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
-                stage.setTitle("New Window");
-                stage.setScene(scene);
-                stage.show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
             } else {
-               Alert info = new Alert(Alert.AlertType.INFORMATION);
-        info.setTitle("mdp");
-        info.setContentText("ghalet");
-        info.show();
+                fxmlLoader.setLocation(getClass().getResource("/GUIInterface/BacK.fxml"));
             }
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+        } else {
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("mdp");
+            info.setContentText("ghalet");
+            info.show();
+        }
+
     }
-    
-    
+
+    @FXML
+    void register(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/GUIInterface/Register.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("New Window");
+        stage.setScene(scene);
+        stage.show();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
-    
+
+    }
+
 }

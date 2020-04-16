@@ -6,6 +6,7 @@
 package GUIController;
 
 import Entities.Club;
+import Entities.User;
 import Services.clubService;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,15 +15,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,8 +44,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * FXML Controller class
@@ -56,29 +65,21 @@ public class ClubViewsController implements Initializable {
 
     FileChooser fc1 = new FileChooser();
     File selectedFile1 = new File("");
-
-    @FXML
-    private Button addclub;
     @FXML
     private Button retour;
-
     @FXML
     private TextField id_club_d;
-    @FXML
-    private TextField nom_Respondable;
+
     @FXML
     private TextField nom_club_d;
     @FXML
     private TextField nom_image;
-
     @FXML
     private Text deco;
     @FXML
     private Label idE;
     @FXML
     private TableView<Club> tableview;
-    @FXML
-    private ComboBox<String> affcat;
     @FXML
     private TableColumn<Club, String> id_club;
     @FXML
@@ -87,61 +88,71 @@ public class ClubViewsController implements Initializable {
     private TableColumn<Club, String> nom_club;
     @FXML
     private TableColumn<Club, String> image_club;
-
     @FXML
     private ComboBox<String> Responsable__d;
     @FXML
     private Button image1;
-
     @FXML
     private Button modifierclub;
     @FXML
     private Button supprimer;
     @FXML
     private TextField rech;
-    private ObservableList<Club> data = FXCollections.observableArrayList();
+    
+
     @FXML
     private Label cheminimage1;
     @FXML
     private ImageView imageviewer1;
-    clubService cs = new clubService();
+    private clubService cs = new clubService();
 
     /**
      * Initializes the controller class.
      */
     Connection connexion;
+    @FXML
+    private Button ajoutClub;
+    @FXML
+    private VBox clubBTN;
+    @FXML
+    private Label eventBTN;
+    @FXML
+    private Label activiteBTN;
+    @FXML
+    private Text deco1;
+    @FXML
+    private Button FrontEventBTN;
+    @FXML
+    private Button FrontActiviterBTN;
 
     @FXML
-    private void ajoutClub(ActionEvent Club) throws SQLException, IOException {
+    private void ajoutClub(ActionEvent Club) throws SQLException, IOException, MessagingException {
         controleClub();
-        ObservableList<Club> club = FXCollections.observableArrayList();
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Vouler vous vraiment ajouter ce club ?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
 
-            //   String clubBox = id_club_d.getText();
-            String responsableBox = nom_Respondable.getText();
+            String str = Responsable__d.getValue();
+            String[] nomprenom = str.split(" ");
+            //  String responsableBox = nom_Respondable.getText();
             String nom_club = nom_club_d.getText();
             String nomImage = nom_image.getText();
-            //  int id_club = Integer.parseInt(clubBox);
-            int responsable = Integer.parseInt(responsableBox);
-//            int idClub = 0;
-//            List<Club> list = ClubType.AfficherCategorie();
-//            String image1 = cheminimage1.getText();
-            clubService cp = new clubService();
+            System.out.println(cs.getUserPerNomEtPrenom(nomprenom[0], nomprenom[1]));
+            int responsable = cs.getUserPerNomEtPrenom(nomprenom[0], nomprenom[1]);
             Club c = new Club();
-            // c.setId(12);
+            refreshDataTable();
+
             c.setUser_id(1);
             c.setNomclub(nom_club);
             c.setNom_image(nomImage);
-            cp.ajouterClub(c);
-            for (Club cb : cs.afficher()) {
-                club.add(cb);
-                data = cp.afficher();
-                tableview.setItems(club);
-            }
+            cs.ajouterClub(c);
+           refreshDataTable();
         }
+        String mailmsg = "We are " + nom_club_d.getText() + " club managed by " + Responsable__d.getValue() + " stay tuned for our events and activities !";
+        String mailtitle = "Join our new Club" + nom_club_d.getText();
+        sendMail("mohamedturki125@gmail.com", mailtitle, mailmsg);
     }
 
     @Override
@@ -150,7 +161,123 @@ public class ClubViewsController implements Initializable {
         Id_User.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         nom_club.setCellValueFactory(new PropertyValueFactory<>("nomclub"));
         image_club.setCellValueFactory(new PropertyValueFactory<>("nom_image"));
+ 
+        
+       refreshDataTable();
 
+        try {
+            fillComboBox();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClubViewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void fillComboBox() throws SQLException {
+        clubService as = new clubService();
+        ObservableList<String> user = as.GetEnsForCombo();
+        Responsable__d.setItems(user);
+    }
+
+    @FXML
+    private void image1(ActionEvent event) throws FileNotFoundException, IOException {
+        File dest = new File("D:\\wamp64\\www\\imagesPi");
+        fc1.setInitialDirectory(new File("C:\\Users\\Mohamed Turki\\Pictures"));
+        selectedFile1 = fc1.showOpenDialog(null);
+        FileUtils.copyFileToDirectory(selectedFile1, dest);
+
+        File newFile1 = new File("D:\\wamp64\\www\\imagesPi\\" + selectedFile1.getName());
+
+        FileInputStream input1 = new FileInputStream(newFile1);
+        Image image1 = new Image(input1);
+        nom_image.setText(newFile1.getName());
+        imageviewer1.setImage(image1);
+    }
+
+    private void controleClub() {
+        try {
+            if (Responsable__d.getValue().equals("Responsable")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de Saisie");
+                alert.setHeaderText("Erreur");
+                alert.setContentText("Veuillez saisir une description valide");
+                Optional<ButtonType> result = alert.showAndWait();
+            } else if (nom_club_d.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de Saisie");
+                alert.setHeaderText("Erreur");
+                alert.setContentText("Veuillez saisir une description valide");
+                Optional<ButtonType> result = alert.showAndWait();
+            } else if (nom_image.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de Saisie");
+                alert.setHeaderText("Erreur");
+                alert.setContentText("Veuillez saisir une description valide");
+                Optional<ButtonType> result = alert.showAndWait();
+            }
+//            else if (cheminimage1.getText().equals("")) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Erreur de Saisie");
+//                alert.setHeaderText("Erreur");
+//                alert.setContentText("Veuillez selectionner une image");
+//                Optional<ButtonType> result = alert.showAndWait();
+//            }
+        } catch (Exception e) {
+            System.out.println("Verifier vos champs");
+        }
+    }
+
+    @FXML
+    private void retour(ActionEvent event
+    ) {
+    }
+
+    @FXML
+    private void deco(MouseEvent event
+    ) {
+    }
+
+    @FXML
+    private void clikedtableview(MouseEvent event) throws SQLException, FileNotFoundException {
+        clubService as = new clubService();
+
+        if (tableview.getSelectionModel().getSelectedIndex() != -1) {
+            Club c = tableview.getItems().get(tableview.getSelectionModel().getSelectedIndex());
+            User u = as.getUserPerId(c.getUser_id());
+            id_club_d.setText(String.valueOf(c.getId()));
+            Responsable__d.setValue(u.getNom() + " " + u.getPrenom());
+            nom_club_d.setText(String.valueOf(c.getNomclub()));
+            nom_image.setText(c.getNom_image());
+            File file = new File("D:\\wamp64\\www\\imagesPi\\" + c.getNom_image());
+            imageviewer1.setImage(new Image(file.toURI().toString()));
+        }
+
+    }
+
+    @FXML
+    private void modifierClub(ActionEvent event) throws SQLException {
+        String str = Responsable__d.getValue();
+        String[] xx = str.split(" ");
+        int responsable = cs.getUserPerNomEtPrenom(xx[0], xx[1]);
+        Club c = new Club();
+        c.setId(Integer.parseInt(id_club_d.getText()));
+        c.setUser_id(responsable);
+        c.setNomclub(nom_club_d.getText());
+        c.setNom_image(nom_image.getText());
+        cs.modifierNomClub(c);
+        ClearALLInput();
+        refreshDataTable();
+    }
+
+    private void ClearALLInput() {
+        id_club_d.setText("");
+        Responsable__d.setValue("Responsable");
+        nom_club_d.setText("");
+        nom_image.setText("");
+    }
+
+    private void refreshDataTable() {
+        ObservableList<Club> data = FXCollections.observableArrayList();
         for (Club c : cs.afficher()) {
             data.add(c);
         }
@@ -178,124 +305,6 @@ public class ClubViewsController implements Initializable {
         tableview.setItems(filteredData);
     }
 
-//    public void fillComboBox() {
-//        final ObservableList options = FXCollections.observableArrayList();
-//        ComboBox comboBox = new ComboBox(options);
-//        comboBox.setMaxHeight(30);
-//        HBox hbox = new HBox(5);
-//        options.clear();
-//        try {
-//            ResultSet cb = connexion.createStatement().executeQuery("SELECT nom,prenom FROM user");
-//            while (cb.next()) {
-//                options.add(cb.getString("nom")+" "+cb.getString("prenom"));
-//            }
-//
-//            cb.close();
-//        } catch (SQLException ex) {
-//            System.out.println("error");
-////            Logger.getLogger(UserInfoApp.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    @FXML
-    private void image1(ActionEvent event) throws FileNotFoundException, IOException {
-        File dest = new File("G:\\xamppp\\htdocs\\PIDEV\\WEB\\PIDEV\\web\\devis\\");
-
-        fc1.setInitialDirectory(new File("C:\\"));
-        selectedFile1 = fc1.showOpenDialog(null);
-//        FileUtils.copyFileToDirectory(selectedFile1, dest);
-
-        File newFile1 = new File("G:\\xamppp\\htdocs\\PIDEV\\WEB\\PIDEV\\web\\devis\\" + selectedFile1.getName());
-
-        FileInputStream input1 = new FileInputStream(newFile1);
-        Image image1 = new Image(input1);
-        cheminimage1.setText(newFile1.getName());
-        imageviewer1.setImage(image1);
-    }
-
-    @FXML
-    private void controleClub() {
-
-        if (nom_Respondable.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de Saisie");
-            alert.setHeaderText("Erreur");
-            alert.setContentText("Veuillez saisir une description valide");
-            Optional<ButtonType> result = alert.showAndWait();
-        } else if (nom_club_d.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de Saisie");
-            alert.setHeaderText("Erreur");
-            alert.setContentText("Veuillez saisir une description valide");
-            Optional<ButtonType> result = alert.showAndWait();
-        } else if (nom_image.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de Saisie");
-            alert.setHeaderText("Erreur");
-            alert.setContentText("Veuillez saisir une description valide");
-            Optional<ButtonType> result = alert.showAndWait();
-        }
-
-//else if (cheminimage1.getText().equals("")) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Erreur de Saisie");
-//            alert.setHeaderText("Erreur");
-//            alert.setContentText("Veuillez selectionner une image");
-//            Optional<ButtonType> result = alert.showAndWait();
-//        }
-    }
-
-    @FXML
-    private void retour(ActionEvent event
-    ) {
-    }
-
-    @FXML
-    private void deco(MouseEvent event
-    ) {
-    }
-
-    @FXML
-    private void clikedtableview(MouseEvent event) {
-        if (tableview.getSelectionModel().getSelectedIndex() != -1) {
-            Club c = tableview.getItems().get(tableview.getSelectionModel().getSelectedIndex());
-            id_club_d.setText(String.valueOf(c.getId()));
-            nom_Respondable.setText(String.valueOf(c.getUser_id()));
-            nom_club_d.setText(String.valueOf(c.getNomclub()));
-            nom_image.setText(String.valueOf(c.getNom_image()));
-        }
-
-    }
-
-    @FXML
-    private void modifierClub(ActionEvent event) throws SQLException {
-        clubService cp = new clubService();
-        Club c = new Club();
-        c.setId(Integer.parseInt(id_club_d.getText()));
-        c.setUser_id(Integer.parseInt(nom_Respondable.getText()));
-        c.setNomclub(nom_club_d.getText());
-        c.setNom_image(nom_image.getText());
-        cp.modifierNomClub(c);
-        ClearALLInput();
-        refreshDataTable();
-    }
-
-    private void ClearALLInput() {
-        id_club_d.setText("");
-        nom_Respondable.setText("");
-        nom_club_d.setText("");
-        nom_image.setText("");
-    }
-
-    private void refreshDataTable() {
-        clubService cp = new clubService();
-        ObservableList<Club> club = FXCollections.observableArrayList();
-        for (Club cb : cs.afficher()) {
-            club.add(cb);
-            data = cp.afficher();
-            tableview.setItems(club);
-        }
-    }
-
     @FXML
     private void supprimer(ActionEvent event) throws SQLException {
         String id = id_club_d.getText();
@@ -312,23 +321,127 @@ public class ClubViewsController implements Initializable {
             alert.setContentText("Vouler vous vraiment supprimer ce club ?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                ObservableList<Club> club = FXCollections.observableArrayList();
                 clubService cc = new clubService();
                 cc.supprimerClub(Integer.valueOf(id));
                 clubService cp = new clubService();
                 Club c = new Club();
                 cp.supprimerClub(c.getId());
                 id_club_d.setText("");
-                nom_Respondable.setText("");
+                Responsable__d.setValue("Responsable");
+
                 nom_club_d.setText("");
                 nom_image.setText("");
-                data.clear();
-                for (Club cb : cs.afficher()) {
-                    club.add(cb);
-                    data = cp.afficher();
-                    tableview.setItems(club);
-                }
+                ClearALLInput();
+                refreshDataTable();
             }
+        }
+    }
+
+    @FXML
+    private void clubbtnAc(MouseEvent event) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIInterface/clubViews.fxml"));
+            Scene scene = new Scene(root);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(scene);
+            app_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubViewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void eventBTNAc(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIInterface/EventViews.fxml"));
+            Scene scene = new Scene(root);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(scene);
+            app_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubViewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void activiteBTNac(MouseEvent event) {
+        try {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIInterface/ActiviteViews.fxml"));
+            Scene scene = new Scene(root);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(scene);
+            app_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubViewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static Message prepareMessage(Session session, String from, String recepient, String subj, String desc) {
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject(subj);
+            message.setText(desc);
+            return message;
+        } catch (Exception ex) {
+            System.out.println("error send");
+        }
+        return null;
+    }
+
+    public static void sendMail(String recepient, String subj, String desc) throws MessagingException {
+        System.out.println("Préparation du mail");
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+
+        String from = "kastishm@gmail.com";
+        String mdp = "med852med852";
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, mdp);
+            }
+        });
+
+        Message message = prepareMessage(session, from, recepient, subj, desc);
+        try {
+            Transport.send(message);;
+        } catch (MessagingException ex) {
+            System.out.println(ex);
+        }
+        System.out.println("Mail envoyé");
+    }
+
+    @FXML
+    private void FrontEventBTNAction(ActionEvent event) {
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIInterface/FrontEventViews.fxml"));
+            Scene scene = new Scene(root);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(scene);
+            app_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubViewsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void FrontActiviterBTNAction(ActionEvent event) {
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIInterface/FrontActiviteViews.fxml"));
+            Scene scene = new Scene(root);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(scene);
+            app_stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ClubViewsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

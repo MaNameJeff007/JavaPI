@@ -17,6 +17,7 @@ public class Activite {
     private int user_id;
     private String nomActivite;
     private String typeActivite;
+    private String NomClub;
     private int vote;
 
     public Activite(int id, int user_id, String nomActivite, String typeActivite, int vote) {
@@ -25,6 +26,26 @@ public class Activite {
         this.nomActivite = nomActivite;
         this.typeActivite = typeActivite;
         this.vote = vote;
+    }
+
+    public String getNomClub() {
+        return NomClub;
+    }
+
+    public void setNomClub(String NomClub) {
+        this.NomClub = NomClub;
+    }
+
+    public Activite(int id, int user_id, String nomActivite, String typeActivite, String NomClub, int vote) {
+        this.id = id;
+        this.user_id = user_id;
+        this.nomActivite = nomActivite;
+        this.typeActivite = typeActivite;
+        this.NomClub = NomClub;
+        this.vote = vote;
+    }
+
+    public Activite() {
     }
 
     public int getId() {

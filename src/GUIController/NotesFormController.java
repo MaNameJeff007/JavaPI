@@ -67,7 +67,7 @@ public class NotesFormController implements Initializable {
       try
       {
         ResultSet resultsmatieres=NS.afficherMatieres();
-        ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
+       // ResultSet resultseleves=US.affichereleves(System.getProperty("classeenseignant_id"));
         
         
         while(resultsmatieres.next())
@@ -79,7 +79,7 @@ public class NotesFormController implements Initializable {
             matieres.add(insert);
         }
         
-        while(resultseleves.next())
+        /*while(resultseleves.next())
         {
             int id = resultseleves.getInt("id");
             String nom=resultseleves.getString("nom");
@@ -87,7 +87,7 @@ public class NotesFormController implements Initializable {
             String id_eleve = String.valueOf(id);
             String insert=id_eleve+"-"+prenom+" "+nom;
             eleves.add(insert);
-        }
+        }*/
         
       }
       catch(SQLException e){}

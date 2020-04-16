@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author hp
  */
 public class ConnexionBD {
-    private static String url="jdbc:mysql://localhost:3306/projet";
+    private static String url="jdbc:mysql://localhost/projet";
     private static String usr="root";
     private static String pwd="";
     private static Connection cnx;

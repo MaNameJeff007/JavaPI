@@ -5,7 +5,9 @@
  */
 package Entities;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,29 +19,56 @@ public class Evenement {
 
     private int id;
     private int club_id;
+    private String nom_club;
     private String nom_evenement;
-    private LocalDate heure_debut;
-    private LocalDate heure_fin;
-//    public Club[] c;
-//    private Set<Club> listClub = new HashSet<Club>();
+    private String image_evenement;
+    private Date heure_debut;
+    private Date heure_fin;
 
-    
-    
-//    public Set<Club> getListClub() {
-//        return listClub;
-//    }
-//
-//    public void setListClub(Set<Club> listClub) {
-//        this.listClub= listClub;
-//    }
-//
-//    public void addUser(Club club) {
-//        this.listClub.add(club);
-//    }
-//
-//    public void removeClub(Club club) {
-//        this.listClub.remove(club);
-//    }
+    public Evenement() {
+    }
+
+
+    public Evenement(int id, String nom_club, String nom_evenement, Date heure_debut, Date heure_fin) {
+        this.id = id;
+        this.nom_club = nom_club;
+        this.nom_evenement = nom_evenement;
+        this.heure_debut = heure_debut;
+        this.heure_fin = heure_fin;
+    }
+
+    public String getImage_evenement() {
+        return image_evenement;
+    }
+
+    public void setImage_evenement(String image_evenement) {
+        this.image_evenement = image_evenement;
+    }
+
+    public String getNom_club() {
+        return nom_club;
+    }
+
+    public void setNom_club(String nom_club) {
+        this.nom_club = nom_club;
+    }
+
+    public Date getHeure_debut() {
+        return heure_debut;
+    }
+
+    public void setHeure_debut(Date heure_debut) {
+        this.heure_debut = heure_debut;
+    }
+
+    public Date getHeure_fin() {
+        return heure_fin;
+    }
+
+    public void setHeure_fin(Date heure_fin) {
+        this.heure_fin = heure_fin;
+    }
+
     public int getId() {
         return id;
     }
@@ -56,36 +85,12 @@ public class Evenement {
         this.club_id = club_id;
     }
 
-    public LocalDate getHeure_debut() {
-        return heure_debut;
-    }
-
-    public void setHeure_debut(LocalDate heure_debut) {
-        this.heure_debut = heure_debut;
-    }
-
-    public Evenement(int id, int club_id, String nom_evenement, LocalDate heure_debut, LocalDate heure_fin) {
-        this.id = id;
-        this.club_id = club_id;
-        this.nom_evenement = nom_evenement;
-        this.heure_debut = heure_debut;
-        this.heure_fin = heure_fin;
-    }
-
     public String getNom_evenement() {
         return nom_evenement;
     }
 
     public void setNom_evenement(String nom_evenement) {
         this.nom_evenement = nom_evenement;
-    }
-
-    public LocalDate getHeure_fin() {
-        return heure_fin;
-    }
-
-    public void setHeure_fin(LocalDate heure_fin) {
-        this.heure_fin = heure_fin;
     }
 
     @Override

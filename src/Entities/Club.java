@@ -16,22 +16,32 @@ public class Club {
 
     private int id;
     private int user_id;
+    private String nom_resp;
+
+  
     private String nomclub;
     private String nom_image;
 //    private Set<User> listUser = new HashSet<User>();
 
-    public Club(int id, int user_id, String nomclub, String nom_image) {
+    public Club(int id, int user_id, String nomclub, String nom_image,String nom_resp) {
         this.id = id;
         this.user_id = user_id;
         this.nomclub = nomclub;
         this.nom_image = nom_image;
+        this.nom_resp=nom_resp;
     }
 
     public Club() {
     }
 
 
+  public String getNom_resp() {
+        return nom_resp;
+    }
 
+    public void setNom_resp(String nom_resp) {
+        this.nom_resp = nom_resp;
+    }
 //    public Set<User> getListUser() {
 //        return listUser;
 //    }
