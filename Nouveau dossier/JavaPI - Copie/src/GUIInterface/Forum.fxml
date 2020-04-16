@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="553.0" prefWidth="692.0" stylesheets="@../CSS/StyleForum.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.ForumController">
+   <children>
+      <Button fx:id="neww" layoutX="517.0" layoutY="31.0" mnemonicParsing="false" onAction="#addSujet" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="new" />
+      <TableView fx:id="listesujet" focusTraversable="false" layoutX="22.0" layoutY="100.0" onMouseClicked="#clickItem" prefHeight="312.0" prefWidth="639.0">
+        <columns>
+            <TableColumn fx:id="titre" prefWidth="102.0" text="titre" />
+            <TableColumn fx:id="date" prefWidth="116.0" text="date" />
+            <TableColumn fx:id="description" prefWidth="299.0" text="description" />
+            <TableColumn fx:id="score" prefWidth="71.0" text="score" />
+            <TableColumn fx:id="vues" prefWidth="50.0" text="vues" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="mine" layoutX="609.0" layoutY="31.0" mnemonicParsing="false" onAction="#mine" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="mine" />
+      <Button fx:id="home" layoutX="38.0" layoutY="30.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="94.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="home" />
+      <Button fx:id="supprimer" layoutX="184.0" layoutY="484.0" mnemonicParsing="false" onAction="#supprimer" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="supprimer" />
+      <Button fx:id="modifier" layoutX="69.0" layoutY="484.0" mnemonicParsing="false" onAction="#modifSujet" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="modifier" />
+      <Button fx:id="comment" layoutX="321.0" layoutY="484.0" mnemonicParsing="false" onAction="#comment" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="comment" />
+      <Button fx:id="like" layoutX="468.0" layoutY="484.0" mnemonicParsing="false" onAction="#like" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="like" />
+      <Button fx:id="report" layoutX="566.0" layoutY="484.0" mnemonicParsing="false" onAction="#report" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="report" />
+      <TextField fx:id="recherche" layoutX="197.0" layoutY="31.0" onKeyReleased="#rechercher" prefHeight="25.0" prefWidth="237.0" promptText="recherche" />
+   </children>
+</AnchorPane>

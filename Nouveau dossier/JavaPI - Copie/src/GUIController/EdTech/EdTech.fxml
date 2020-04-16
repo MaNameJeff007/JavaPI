@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+  <Pane prefHeight="560.0" prefWidth="165.0">
+               <children>
+                  <JFXButton fx:id="courseBtn" layoutY="14.0" prefHeight="170.0" prefWidth="165.0" text="Course" />
+                  <JFXButton fx:id="testBtn" layoutX="14.0" layoutY="204.0" prefHeight="170.0" prefWidth="147.0" text="Test" />
+                  <JFXButton fx:id="quizBtn" layoutX="5.0" layoutY="380.0" prefHeight="180.0" prefWidth="157.0" text="Quiz" />
+               </children>
+             
+               <children>
+                  <Pane layoutX="-70.0" prefHeight="560.0" prefWidth="235.0" />
+               </children>
+        </Pane>

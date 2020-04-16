@@ -1,0 +1,95 @@
+
+/*******************************************************************************
+ *                                                                             *
+ * root Scene                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+.root {
+    -fx-background-color: #404040;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ * Label                                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.label {
+    -fx-text-fill: #d9d9d9;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ * Button                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+
+/* This is for default behaviour */
+.button {
+    -fx-padding: 5 22 5 22;   
+    -fx-background-radius: 0;
+
+    -fx-background-color: #d9d9d9;
+
+    -fx-text-fill: black;
+}
+
+/* For when mouse hovers on the button */
+.button:hover {
+    -fx-background-color: #c7c7c7;
+}
+
+/* When the cursor presses it */
+.button:pressed {
+  -fx-background-color: #a6a6a6;
+}
+
+/* When the button is the last one pressed */
+.button:focused {
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:disabled {
+    -fx-opacity: 1;
+}
+
+/* This is applied to make a button green */
+.correct {
+    -fx-background-color: #006600;
+}
+
+/* This is applied to make a button red */
+.wrong {
+    -fx-background-color: #660000;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ * Dialog Panes                                                                *
+ *                                                                             *
+ ******************************************************************************/
+
+.dialog-pane > .header-panel {
+    -fx-background-color: #404040;
+}
+
+.dialog-pane {
+    -fx-background-color: #d9d9d9;
+}
+
+.dialog-pane > .content {
+    -fx-text-fill: #404040;
+}
+
+.dialog-pane .button {
+    -fx-text-fill: #d9d9d9;
+    -fx-background-color: #404040;
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #737373;
+}

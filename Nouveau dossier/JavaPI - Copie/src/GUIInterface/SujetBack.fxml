@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.SujetBackController">
+   <children>
+      <TableView fx:id="listesujet" focusTraversable="false" layoutX="88.0" layoutY="104.0" onMouseClicked="#clickItem" prefHeight="254.0" prefWidth="637.0" stylesheets="@../CSS/StyleForum.css">
+         <columns>
+            <TableColumn fx:id="titre" prefWidth="98.0" text="titre" />
+            <TableColumn fx:id="date" prefWidth="115.0" text="date" />
+            <TableColumn fx:id="description" prefWidth="293.0" text="description" />
+            <TableColumn fx:id="score" prefWidth="77.0" text="score" />
+            <TableColumn fx:id="vues" prefWidth="53.0" text="vues" />
+         </columns>
+      </TableView>
+      <Button fx:id="supprimer" layoutX="327.0" layoutY="382.0" mnemonicParsing="false" onAction="#supprimer" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="supprimer" />
+      <TextField fx:id="recherche" layoutX="223.0" layoutY="48.0" onKeyReleased="#rechercher" prefHeight="25.0" prefWidth="368.0" promptText="recherche" stylesheets="@../CSS/StyleForum.css" />
+      <Button fx:id="comment" layoutX="144.0" layoutY="382.0" mnemonicParsing="false" onAction="#comment" prefHeight="25.0" prefWidth="87.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="comment" />
+      <Button fx:id="back" layoutX="57.0" layoutY="48.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="87.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="back" />
+   </children>
+</AnchorPane>
