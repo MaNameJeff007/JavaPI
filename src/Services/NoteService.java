@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import BD.Database;
+import BD.DbConnection;
 
 /**
  *
@@ -22,7 +22,7 @@ public class NoteService
    
     public NoteService() 
     {
-       connexion=Database.getInstance().getConnexion();
+       connexion=DbConnection.getInstance().getConnexion();
     }
     
     public boolean ajouterNote(Note n) throws SQLException 

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import BD.Database;
+import BD.DbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -30,7 +30,7 @@ public class AttestationService {
     Connection connexion;
 
     public AttestationService() {
-        connexion = Database.getInstance().getConnexion();
+        connexion = DbConnection.getInstance().getConnexion();
     }
 
     public void ajouterAttestation(Attestation a) throws SQLException {

@@ -7,7 +7,7 @@ package Services;
 
 import java.sql.*;
 import java.time.LocalDate;
-import BD.Database;
+import BD.DbConnection;
 import Entities.Evenement;
 
 /**
@@ -19,7 +19,7 @@ public class evenementService {
     Connection connexion;
 
     public evenementService() {
-        connexion = Database.getInstance().getConnexion();
+        connexion = DbConnection.getInstance().getConnexion();
     }
 
     public void ajouterEvenement(Evenement e) throws SQLException {

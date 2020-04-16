@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import BD.Database;
+import BD.DbConnection;
 
 /**
  *
@@ -23,7 +23,7 @@ public class AbsenceService
    
     public AbsenceService() 
     {
-       connexion=Database.getInstance().getConnexion();
+       connexion=DbConnection.getInstance().getConnexion();
     }
     
     public boolean verifierAbsence(Absence a) throws SQLException

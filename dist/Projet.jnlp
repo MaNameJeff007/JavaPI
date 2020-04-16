@@ -8,39 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Projet.jar" size="26048094" download="eager" />
-    <jar href="lib\Medusa-11.3.jar" size="1517026" download="eager" />
-    <jar href="lib\TrayTester.jar" size="52070" download="eager" />
-    <jar href="lib\bcrypt-0.9.0.jar" size="41104" download="eager" />
-    <jar href="lib\commons-logging-1.2-javadoc.jar" size="158448" download="eager" />
-    <jar href="lib\commons-logging-1.2.jar" size="61829" download="eager" />
-    <jar href="lib\controlsfx-8.0.1.jar" size="296347" download="eager" />
-    <jar href="lib\controlsfx-8.40.14.jar" size="1215643" download="eager" />
-    <jar href="lib\controlsfx-samples-8.40.14.jar" size="725707" download="eager" />
-    <jar href="lib\fontbox-2.0.19.jar" size="1561265" download="eager" />
-    <jar href="lib\fxsampler-1.0.10.jar" size="30882" download="eager" />
-    <jar href="lib\gnujaxp.jar" size="231445" download="eager" />
-    <jar href="lib\guava-23.0.jar" size="2614708" download="eager" />
-    <jar href="lib\iText-2.1.5.jar" size="1117661" download="eager" />
-    <jar href="lib\itextpdf-5.1.0.jar" size="1614453" download="eager" />
-    <jar href="lib\jBCrypt-0.4.1.jar" size="17570" download="eager" />
-    <jar href="lib\jPDFViewer.v2019R1.08.jar" size="4544807" download="eager" />
-    <jar href="lib\java-mail-1.4.4.jar" size="494975" download="eager" />
+    <jar href="Projet.jar" size="51602" download="eager" />
     <jar href="lib\javax.mail.jar" size="434923" download="eager" />
-    <jar href="lib\jcommon-1.0.17.jar" size="309920" download="eager" />
-    <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
-    <jar href="lib\jfreechart-1.0.14-experimental.jar" size="13420" download="eager" />
-    <jar href="lib\jfreechart-1.0.14-swt.jar" size="72656" download="eager" />
-    <jar href="lib\jfreechart-1.0.14.jar" size="1461633" download="eager" />
-    <jar href="lib\jfx-autocomplete-textfield-0.0.1.jar" size="28514" download="eager" />
-    <jar href="lib\junit.jar" size="121070" download="eager" />
-    <jar href="lib\mail-1.4.4.jar" size="494924" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
-    <jar href="lib\mysql-connector-java-5.1.48.jar" size="1006956" download="eager" />
-    <jar href="lib\pdfbox-2.0.19.jar" size="2715618" download="eager" />
-    <jar href="lib\servlet.jar" size="80054" download="eager" />
-    <jar href="lib\swtgraphics2d.jar" size="15581" download="eager" />
-    <jar href="lib\tilesfx-1.5.2.jar" size="1472287" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Projet" >
     <param name="requiredFXVersion" value="8.0+"/>

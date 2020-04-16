@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="552.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AfficherSujetController">
+<AnchorPane id="AnchorPane" prefHeight="514.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AfficherSujetController">
    <children>
       <Label fx:id="titre" layoutX="42.0" layoutY="14.0" prefHeight="38.0" prefWidth="230.0" text="Label">
          <font>
@@ -20,20 +20,20 @@
          </font>
       </Label>
       <Label fx:id="date" layoutX="47.0" layoutY="72.0" text="Label" />
-      <Button fx:id="home" layoutX="537.0" layoutY="41.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="85.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="home" />
-      <TextArea fx:id="comm" layoutX="103.0" layoutY="404.0" prefHeight="108.0" prefWidth="394.0" stylesheets="@../CSS/StyleForum.css" />
-      <Label layoutX="26.0" layoutY="429.0" text="commentaire" />
-      <Button fx:id="post" layoutX="517.0" layoutY="417.0" mnemonicParsing="false" onAction="#PostComm" prefHeight="25.0" prefWidth="61.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="post" />
-      <TableView fx:id="listecommentaire" layoutX="14.0" layoutY="147.0" onMouseClicked="#clickItem" prefHeight="233.0" prefWidth="509.0" stylesheets="@../CSS/StyleForum.css">
+      <Button layoutX="504.0" layoutY="28.0" mnemonicParsing="false" onAction="#home" text="home" />
+      <TextArea fx:id="comm" layoutX="110.0" layoutY="370.0" prefHeight="108.0" prefWidth="394.0" />
+      <Label layoutX="33.0" layoutY="387.0" text="commentaire" />
+      <Button layoutX="517.0" layoutY="375.0" mnemonicParsing="false" onAction="#PostComm" text="post" />
+      <TableView fx:id="listecommentaire" layoutX="14.0" layoutY="147.0" onMouseClicked="#clickItem" prefHeight="200.0" prefWidth="494.0">
         <columns>
           <TableColumn fx:id="datecomm" prefWidth="131.0" text="date" />
-            <TableColumn fx:id="textecomm" prefWidth="296.0" text="Commentaire" />
-            <TableColumn fx:id="likescomm" prefWidth="81.0" text="likes" />
+            <TableColumn fx:id="textecomm" prefWidth="275.0" text="Commentaire" />
+            <TableColumn fx:id="likescomm" prefWidth="87.0" text="likes" />
         </columns>
       </TableView>
-      <Button fx:id="supprimer" layoutX="561.0" layoutY="147.0" mnemonicParsing="false" onAction="#supprimer" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="supprimer" />
-      <Button fx:id="modifier" layoutX="566.0" layoutY="199.0" mnemonicParsing="false" onAction="#modifComm" onMouseClicked="#clickItem" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="modifier" />
-      <Button fx:id="like" layoutX="569.0" layoutY="264.0" mnemonicParsing="false" onAction="#like" prefHeight="25.0" prefWidth="56.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="like" />
-      <Button fx:id="report" layoutX="566.0" layoutY="324.0" mnemonicParsing="false" onAction="#report" prefHeight="25.0" prefWidth="61.0" styleClass="round-red" stylesheets="@../CSS/StyleForum.css" text="report" />
+      <Button fx:id="supprimer" layoutX="525.0" layoutY="172.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer" />
+      <Button fx:id="modifier" layoutX="525.0" layoutY="213.0" mnemonicParsing="false" onAction="#modifComm" onMouseClicked="#clickItem" text="modifier" />
+      <Button fx:id="like" layoutX="525.0" layoutY="257.0" mnemonicParsing="false" onAction="#like" text="like" />
+      <Button fx:id="report" layoutX="525.0" layoutY="297.0" mnemonicParsing="false" onAction="#report" text="report" />
    </children>
 </AnchorPane>
