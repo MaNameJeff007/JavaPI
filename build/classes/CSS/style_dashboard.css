@@ -1,0 +1,10 @@
+.column-header
+{
+    -fx-background-color: #6495ED; 
+    -fx-border-color: white;
+}
+
+.table-row-cell
+{
+    -fx-background-color: #87CEFA;
+}

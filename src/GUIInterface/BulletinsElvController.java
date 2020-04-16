@@ -12,7 +12,6 @@ import Services.ServiceBulletin;
 import Services.ServiceClasse;
 import Services.ServiceCoeff;
 import Services.ServiceUser;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.BulletinPdf;
 import com.itextpdf.text.pdf.testPdf;
 import java.awt.Desktop;

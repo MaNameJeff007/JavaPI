@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController.AbsencesparentController">
+   <children>
+      <TableView fx:id="tableau_abs" prefHeight="345.0" prefWidth="725.0">
+         <columns>
+            <TableColumn fx:id="col_date_abs" prefWidth="111.0" text="Date_Abs" />
+            <TableColumn fx:id="col_heure_debut_abs" prefWidth="159.0" text="H_Debut" />
+            <TableColumn fx:id="col_heure_fin_abs" prefWidth="146.0" text="H_Fin" />
+            <TableColumn fx:id="col_justification_abs" prefWidth="153.0" text="Justification" />
+            <TableColumn fx:id="col_etat_abs" prefWidth="155.0" text="Etat" />
+            <TableColumn fx:id="col_enseignantid_abs" minWidth="0.0" prefWidth="121.0" text="Enseignant_ID" visible="false" />
+            <TableColumn fx:id="col_eleveid_abs" minWidth="0.0" prefWidth="121.0" text="Eleve_ID" visible="false" />
+            <TableColumn fx:id="col_id_abs" minWidth="0.0" prefWidth="39.0" text="ID" visible="false" />
+         </columns>
+      </TableView>
+      <Button fx:id="boutton_retour" layoutX="48.0" layoutY="355.0" mnemonicParsing="false" onAction="#retour" prefHeight="31.0" prefWidth="145.0" style="-fx-background-color: orange;" text="Retour" />
+   </children>
+</AnchorPane>

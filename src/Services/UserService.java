@@ -530,6 +530,10 @@ public ArrayList< User> afficherEns1 (){
         
         return myList;
     }
+
+    public ResultSet affichereleves(String property) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
 
 }

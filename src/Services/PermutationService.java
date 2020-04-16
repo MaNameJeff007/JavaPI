@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import BD.DbConnection;
+import BD.Database;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class PermutationService {
     Connection connexion;
 
     public PermutationService() {
-        connexion = DbConnection.getInstance().getConnexion();
+        connexion = Database.getInstance().getConnexion();
     }
 
     public ObservableList<Permutation> getOwner(int u) throws SQLException {

@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import BD.DbConnection;
+import BD.Database;
 import java.lang.Math; 
 import Entities.Note;
 
@@ -24,7 +24,7 @@ public class MoyenneService
    
   public  MoyenneService() 
   {
-     connexion=DbConnection.getInstance().getConnexion();
+     connexion=Database.getInstance().getConnexion();
   }
   
   public boolean validermoyenne(Note N) throws SQLException 
